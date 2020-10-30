@@ -15,11 +15,9 @@ Including another URLconf
 """
 from django.views.generic import TemplateView
 from django.urls import path
+from . import views
 
-app_name = "read_books"
 
 urlpatterns = [
-    path(
-    "", TemplateView.as_view(template_name="read_books/home.html"),name ="home",
-    )
+    path('', views.search, name='home'),
 ]
