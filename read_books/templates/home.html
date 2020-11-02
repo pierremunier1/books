@@ -6,7 +6,9 @@ test
 {% endblock title %}
 
 
-{% block nav %}
+{% block header %}
+ 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <div class="masthead">
     <div class="masthead-bg"></div>
@@ -15,19 +17,32 @@ test
         <div class="col-12 my-auto">
           <div class="masthead-content text-white py-5 py-md-0">
             <h1 class="mb-3">Books!</h1>
-            <form id="usertext-form">
-            <div class="form">
-              <input type="search" class="form-control" placeholder="search a book..." aria-label="search a book..." id="usertext"aria-describedby="submit-button">
-              <div class="input-group-append">
-                <button class="btn btn-secondary" type="button" id="submit"> Search!</button>
+            <form class="form-group w-20 auto" method='get' action="{% url "results" %}">
+              <div class="input-group input-group-newsletter">
+                <input type="text" id="query" class="form-control" placeholder="enter category" aria-describedby="search">
+                <div class="input-group-append">
+                <button class="btn btn-secondary"id="submit-button">Search!</button>
               </div>
-            </div>
             </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-{% endblock nav %}
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script>
+        $(function () {
+            $(".auto").autocomplete({
+            source: '{% url 'search_autocomplete' %}',
+            minLength: 3
+            });
+        });
+        </script>
+
+
+{% endblock header %}
 

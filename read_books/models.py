@@ -21,7 +21,7 @@ class Category(models.Model):
 class BookManager(models.Manager):
     """manager find product substitutes"""
 
-    def search_sub(self, book_name):
+    def search_book(self, book_name):
         """check if substitutes exists in database"""
 
         book = Book.objects.filter(
@@ -29,11 +29,7 @@ class BookManager(models.Manager):
             Q(author__icontains=book_name
               ))[:1].get()
 
-        substitutes = Book.objects.filter(
-            category=book.category
-        ).order_by("author")[:9]
-
-        return book, substitutes
+        return book
 
     def get_detail(self, book_id):
         """get detail of product"""
