@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 test
 {% endblock title %}
+
+
+{% block nav %}
+
+  <div class="masthead">
+    <div class="masthead-bg"></div>
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-12 my-auto">
+          <div class="masthead-content text-white py-5 py-md-0">
+            <h1 class="mb-3">Books!</h1>
+            <form id="usertext-form">
+            <div class="form">
+              <input type="search" class="form-control" placeholder="search a book..." aria-label="search a book..." id="usertext"aria-describedby="submit-button">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" id="submit"> Search!</button>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock nav %}
+
