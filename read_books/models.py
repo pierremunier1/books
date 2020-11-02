@@ -77,8 +77,6 @@ class Book(models.Model):
 class Substitute(models.Model):
     """substitute model"""
 
-    customuser = models.ForeignKey(
-        'users.CustomUser', on_delete=models.CASCADE)
     book_original = models.ForeignKey(Book,
                                          on_delete=models.CASCADE, related_name='book_original')
     book_substitute = models.ForeignKey(Book,

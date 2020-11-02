@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     firstname = models.CharField(max_length=150)
     email = models.EmailField(_('email address'), unique=True)
     saved = models.ManyToManyField(
-        'products.Product',
-        through='products.Substitute',
-        through_fields=('customuser', 'product_original','product_substitute'),
+        'books.Book',
+        through='books.Substitute',
+        through_fields=('customuser', 'book_original','book_substitute'),
         )
