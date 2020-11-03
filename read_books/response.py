@@ -4,33 +4,69 @@ import requests
 from random import choice
 import os
 
+class Parser:
+    """class contains method to parse the user text input form"""
+
+    def __init__(self, analyse):
+        """initialising attribute"""
+
+        self.analyse = analyse
+
+    def parse(self):
+        """method analyse the text and transform if necessary"""
+
+        # switch to lower case
+        self.analyse = self.analyse.lower()
+       
+        # remove accent
+        self.analyse = ''.join((c for c in unicodedata.normalize
+                                ('NFD', self.analyse)
+                                if unicodedata.category(c) != 'Mn')
+                               )
+
+        # remove punctuation
+        self.analyse = re.sub(r"[.!,;?\']", " ", self.analyse).split()
+
+        # to convert the list to string.
+        self.analyse = ' '.join(self.analyse)
+
+        return self.analyse
+
 
 class GoogleApi:
     """classe contains method for geocoding api"""
 
-    def __init__(self, userQuery):
-        """initializing instance attributes"""
+    def __init__(self,userquery):
 
-        self.user_query = userQuery
-        self.book = str
-
+        self.query = userquery
+        self.book  = str
+  
     def get_books(self):
+    
         """method retrieve books"""
-
+        
         payload = {
-            'intitle': self.user_query,
+            'q': self.query,
             'key': os.environ.get('API_KEY_BACK')}
         result = requests.get(
-            'https://www.googleapis.com/books/v1/volumes?q=',
+            'https://www.googleapis.com/books/v1/volumes?',
             params=payload)
         google_books = result.json()
-        status = google_books['status']
-        print(google_books)
+        
+        self.book = (google_books['items'][0]['volumeInfo']['description'])
+        
+        return self.book
 
-        if status == 'OK':
-            self.book = (
-                google_books
-                )
-    
-            return self.book
-        return '','',''
+
+class Response:
+
+    def response_front(query):
+
+        analyse = Parser(query)
+        userquery = analyse.parse()
+        query_book = GoogleApi(userquery)
+        book = query_book.get_books()
+
+        result = { book }
+
+        return result

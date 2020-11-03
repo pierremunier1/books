@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from read_books.response import GoogleApi
+from read_books.response import GoogleApi, Response
 from django.http import JsonResponse
 from read_books.models import Book
 
@@ -10,37 +10,21 @@ def search(request):
 
     return render(request, "home.html")
 
-def search_autocomplete(request):
-    """autocomplete research in database"""
-    books = list()
-    if 'term' in request.GET:
-        qs = (
-            Book.objects.filter(
-                category_name__icontains=request.GET.get('term')
-                )[:5] or  
-            Book.objects.filter(
-                author__icontains=request.GET.get('term')
-                )[:5]
-            )
-        for book in qs:
-            books.append(book.product_name)
-    return JsonResponse(books, safe=False)
-
 def result(request):
-    """show result page"""
-
+    """autocomplete research in database"""
+    
     query = request.GET.get('query')
+    
+    user_text = Response.response_front(query)
 
-    try:
-        book = Book.objects.search_book(query)
-    except Book.DoesNotExist:
-        messages.info(request, "Book indisponible")
-        return redirect("result")
+    book = {
+        'book': user_text
+    }
 
-    return render(
-        request,
+    return render(request,
         "home.html",
         {
-            "book": book,
+            "book": book
         }
     )
+

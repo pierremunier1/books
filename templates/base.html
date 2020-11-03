@@ -22,17 +22,20 @@
   <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
   <link href="{% static 'css/coming-soon.min.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
 
+
+  {% block content%}
   <div class="overlay"></div>
   <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
     <source src="{% static 'mp4/bg.mp4' %}" type="video/mp4">
   </video>
-
+  {% endblock content%}
   {% block header %}
   <div class="masthead">
     <div class="masthead-bg"></div>
@@ -55,9 +58,10 @@
     </div>
   </div>
   {% endblock header %}
-
+ 
 
   <div class="social-icons">
+   
     <ul class="list-unstyled text-center mb-0">
       <li class="list-unstyled-item">
         <a href="#">
