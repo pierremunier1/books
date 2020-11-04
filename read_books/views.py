@@ -15,16 +15,20 @@ def result(request):
     
     query = request.GET.get('query')
     
-    user_text = Response.response_front(query)
+    book, book_title = Response.response_front(query)
 
     book = {
-        'book': user_text
+        'book': book,
+        'book_title': book_title
     }
+
+    print(book)
 
     return render(request,
         "home.html",
         {
-            "book": book
+            "book": book,
+            
         }
     )
 

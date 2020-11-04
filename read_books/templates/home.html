@@ -5,34 +5,61 @@
 Book
 {% endblock title %}
 
+<div class="container">
+                <div class="row h-50">
+                  <div class="col-5 my-auto">
+                  <div class="nav">
+                  </div>
+
 
 {% block header %}
 
-  <div class="masthead">
-    <div class="masthead-bg"></div>
-    <div class="container h-100">
-      <div class="row h-100">
-        <div class="col-12 my-auto">
-          <div class="masthead-content text-white py-5 py-md-0">
-            <h1 class="mb-3">Books!</h1>
-            <form class="input" method='get' action="{% url "results" %}">
-              <div class="input-group input-group-newsletter">
-                <input type="text" name="query" class="form-control auto" placeholder="enter category" aria-describedby="search">
-                <div class="input-group-append">
-                <button class="btn btn-secondary"id="submit-button">Search!</button>
+
+ 
+            <div class="container text-left align-items-center">
+                <div class="row h-50">
+                <div class="col-md-4">
+                <h1>Books</h1>
+                </div>
+                <div class="col-md-6">
+                
+                </div>
+                <div class="col-md-4">
+                </div>
+            <div class="container text-justify align-items-center">
+                <div class="row h-50">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-6">
+                <h3>{{book.book_title}}</h3>
+                </div>
+                <div class="col-md-4">
+                </div>
               </div>
-            </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-    </div>
-    </div>
-  </div>
-  </div>
-  
+              </div>
+              <div class="container">
+                
+                <div class="row h-50">
+                  <div class="col-4 my-auto">
+                    <form class="input" method='get' action="{% url "results" %}">
+                      <div class="input-group input-group-newsletter">
+                        <input type="text" name="query" class="form-control auto" placeholder="enter category" aria-describedby="search">
+                        <div class="input-group-append">
+                          <button class="btn btn-secondary"id="submit-button">Search!</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                
+                  <div class="book col-md-6 text-justify">
+                  {{book.book}}
+                  </div>
+                </div>
+                </div>
+              </div>
+             
+              
+
 {% endblock header %}
 
 {% block content%}

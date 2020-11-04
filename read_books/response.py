@@ -54,8 +54,9 @@ class GoogleApi:
         google_books = result.json()
         
         self.book = (google_books['items'][0]['volumeInfo']['description'])
+        self.book_title = (google_books['items'][0]['volumeInfo']['title'])
         
-        return self.book
+        return  self.book,self.book_title
 
 
 class Response:
@@ -65,8 +66,6 @@ class Response:
         analyse = Parser(query)
         userquery = analyse.parse()
         query_book = GoogleApi(userquery)
-        book = query_book.get_books()
+        book, book_title = query_book.get_books()
 
-        result = { book }
-
-        return result
+        return book,book_title
