@@ -3,6 +3,8 @@ import unicodedata
 import requests
 from random import choice
 import os
+from . import config
+
 
 class Parser:
     """class contains method to parse the user text input form"""
@@ -41,6 +43,7 @@ class GoogleApi:
         self.query = userquery
         self.book  = str
   
+    
     def get_books(self):
     
         """method retrieve books"""
@@ -48,17 +51,36 @@ class GoogleApi:
         payload = {
             'q': self.query,
             'key': os.environ.get('API_KEY_BACK')}
+            
         result = requests.get(
             'https://www.googleapis.com/books/v1/volumes?',
             params=payload)
         google_books = result.json()
-        
-        self.book = (google_books['items'][0]['volumeInfo']['description'])
-        self.book_title = (google_books['items'][0]['volumeInfo']['title'])
-        
-        return  self.book,self.book_title
 
+        books_title = []
+        books_desc = []
+        books_author = []
+        books_date = []
 
+        for book in google_books['items']:
+                   
+                    if not all(tag in book['volumeInfo']for tag in config.FILTER):
+                        continue
+                    self.book = (book['volumeInfo']['description'])
+                    self.book_title = (book['volumeInfo']['title'])
+                    self.book_author = book['volumeInfo']['authors'][0]
+                    self.book_date = (book['volumeInfo']['publishedDate'])
+                
+                    result = self.book_author,self.book_date
+
+                    books_title.append(self.book_title)
+                    books_desc.append(self.book)
+                    books_author.append(self.book_author)
+                    books_date.append(self.book_date)
+        
+        return books_title,books_desc,books_author,books_date
+        
+                   
 class Response:
 
     def response_front(query):
@@ -66,6 +88,12 @@ class Response:
         analyse = Parser(query)
         userquery = analyse.parse()
         query_book = GoogleApi(userquery)
-        book, book_title = query_book.get_books()
+        books_title,books_desc,books_author,books_date = query_book.get_books()
 
-        return book,book_title
+        result = {
+            'title': books_title,
+            'response': books_desc
+            }
+
+
+        return result

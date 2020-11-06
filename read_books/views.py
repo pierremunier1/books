@@ -10,25 +10,30 @@ def search(request):
 
     return render(request, "home.html")
 
-def result(request):
+def search_autocomplete(request):
     """autocomplete research in database"""
-    
-    query = request.GET.get('query')
-    
-    book, book_title = Response.response_front(query)
+    books = list()
 
-    book = {
-        'book': book,
-        'book_title': book_title
-    }
+    if 'term' in request.GET:
+        qs = (
+            Response.response_front(
+                request.GET.get('term'))
+                )
+        for book in qs:
+            books.append(qs)
 
-    print(book)
+    return JsonResponse(books[0]['title'],safe=False)
 
-    return render(request,
-        "home.html",
-        {
-            "book": book,
-            
-        }
-    )
+def result(request):
+
+    if request.is_ajax:
+        
+        query = request.POST.get('query')
+
+        book = Response.response_front(query)
+
+        result = {'response':(book['response'][0])}
+
+        return JsonResponse(result,safe=False)
+
 

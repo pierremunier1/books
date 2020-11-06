@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-
+<body>
 {% block title %}
-Book
+Books
 {% endblock title %}
 
 <div class="container">
@@ -13,56 +13,86 @@ Book
 
 
 {% block header %}
-
-
- 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="{% static '/js/index.js' %}"></script>
             <div class="container text-left align-items-center">
                 <div class="row h-50">
                 <div class="col-md-4">
-                <h1>Books</h1>
+                <h1>Books.</h1>
                 </div>
                 <div class="col-md-6">
                 
                 </div>
                 <div class="col-md-4">
                 </div>
-            <div class="container text-justify align-items-center">
+            <div class="container align-items-center">
                 <div class="row h-50">
                 <div class="col-md-4">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 text-center">
                 <h3>{{book.book_title}}</h3>
                 </div>
                 <div class="col-md-4">
                 </div>
               </div>
+              
+                <div class="row h-10">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-6 text-center">
+                
+                </div>
+                <div class="col-md-4">
+                </div>
               </div>
-              <div class="container">
+              </div>
+              <div class="container align-items-center">
                 
                 <div class="row h-50">
                   <div class="col-4 my-auto">
-                    <form class="input" method='get' action="{% url "results" %}">
+                    <form class="input" id="usertext-form" method='GET'>
+                    {% csrf_token %}
                       <div class="input-group input-group-newsletter">
-                        <input type="text" name="query" class="form-control auto" placeholder="enter category" aria-describedby="search">
+                        <input type="text" name="query" class="form-control auto" placeholder="enter category" aria-describedby="search" autocomplete="off">
+                        {% csrf_token %}
                         <div class="input-group-append">
-                          <button class="btn btn-secondary"id="submit-button">Search!</button>
+                          <button class="btn btn-secondary"id="submit">Search!</button>
+                           
                         </div>
                       </div>
                     </form>
                   </div>
                 
-                  <div class="book col-md-6 text-justify">
-                  {{book.book}}
+                  <div class="book col-md-6 text-justify my-auto">
+                  <div class="imessages" id="imessages"> 
+                  
                   </div>
+                  <div class="book text-right my-auto">
+                  <h6>{{book.book_author}} {{book.book_date}}<h6>
+                  </div>
+                  </div>
+                   
                 </div>
                 </div>
               </div>
              
-              
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+       <script>inputForm();</script>
+        <script>
+        $(function () {
+            $(".auto").autocomplete({
+            source: '{% url 'search_autocomplete' %}',
+            minLength: 3,
+            dataType: "json",
+          
+            });
+        });
+        </script>
 
 {% endblock header %}
 
 {% block content%}
  
 {% endblock content%}
-
+</body>

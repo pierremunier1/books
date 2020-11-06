@@ -21,5 +21,8 @@ from django.views.generic.base import TemplateView
 urlpatterns = [
     path('', views.search, name='home'),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('home.html', views.result, name='results'),
+    path('ajax', views.result, name='result'),
+    path('search_autocomplete', views.search_autocomplete, name='search_autocomplete')
+    #path('home.html', views.list_books, name='list_books'),
+    
 ]
