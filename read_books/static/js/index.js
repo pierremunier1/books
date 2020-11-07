@@ -15,19 +15,34 @@ function inputForm() {
           .then(response => response.json())
     
           .then(function (json) {console.log
-              let query ={ 
+              let query ={
+
+                  title:json["title"],
                   response:json["response"],
+                  picture:json["picture"]
+                  
               };
-              
-          let newDiv_2 = document.createElement("imessages");
-            newDiv_2.innerHTML = ["Voici un article lié à ce lieu..."]+query["response"]+(
-              '<a href="'+query["url"]+'">-En savoir plus sur Wikipedia.</a>'
-            );
-            newDiv_2.className = "from-them";
-            document.getElementById("imessages").appendChild(newDiv_2);
-            let div = document.getElementById("imessages");
-            div.scrollTop = div.scrollHeight;
-        
+          
+          let newDiv_2 = document.createElement("div");
+            
+          newDiv_2.innerHTML = query["title"];
+          newDiv_2.className = "imessages-title";
+          document.getElementById("imessages-title").appendChild(newDiv_2);
+          
+
+          
+          let newDiv_3 = document.createElement("div");
+            
+          newDiv_3.innerHTML = query["response"];
+          newDiv_3.className = "imessages-description";
+          document.getElementById("imessages-description").appendChild(newDiv_3);
+
+          let newDiv_4 = document.createElement("div");
+            
+          newDiv_4.innerHTML = "<img class=imessages-picture src=" + query["picture"] + "</img>";
+          newDiv_4.className = "imessages-picture";
+          document.getElementById("imessages-picture").appendChild(newDiv_4);
+          
         });
 })
 }

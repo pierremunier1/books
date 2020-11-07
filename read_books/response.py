@@ -61,6 +61,7 @@ class GoogleApi:
         books_desc = []
         books_author = []
         books_date = []
+        books_pic = []
 
         for book in google_books['items']:
                    
@@ -70,15 +71,15 @@ class GoogleApi:
                     self.book_title = (book['volumeInfo']['title'])
                     self.book_author = book['volumeInfo']['authors'][0]
                     self.book_date = (book['volumeInfo']['publishedDate'])
-                
-                    result = self.book_author,self.book_date
+                    self.book_pic = (book['volumeInfo']['imageLinks']['thumbnail'])
 
                     books_title.append(self.book_title)
                     books_desc.append(self.book)
                     books_author.append(self.book_author)
                     books_date.append(self.book_date)
+                    books_pic.append(self.book_pic)
         
-        return books_title,books_desc,books_author,books_date
+        return books_title,books_desc,books_author,books_date,books_pic
         
                    
 class Response:
@@ -88,11 +89,12 @@ class Response:
         analyse = Parser(query)
         userquery = analyse.parse()
         query_book = GoogleApi(userquery)
-        books_title,books_desc,books_author,books_date = query_book.get_books()
+        books_title,books_desc,books_author,books_date, books_pic = query_book.get_books()
 
         result = {
             'title': books_title,
-            'response': books_desc
+            'response': books_desc,
+            'picture': books_pic
             }
 
 

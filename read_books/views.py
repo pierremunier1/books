@@ -27,12 +27,17 @@ def search_autocomplete(request):
 def result(request):
 
     if request.is_ajax:
-        
+
         query = request.POST.get('query')
 
         book = Response.response_front(query)
+        #print(book)
 
-        result = {'response':(book['response'][0])}
+        result = {
+                  'title':(book['title'][0]),
+                  'response':(book['response'][0]),
+                  'picture':(book['picture'][0]),
+                   }
 
         return JsonResponse(result,safe=False)
 
