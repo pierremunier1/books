@@ -33,7 +33,7 @@ function inputForm() {
           
           let newDiv_3 = document.createElement("div");
             
-          newDiv_3.innerHTML = query["response"];
+          newDiv_3.innerHTML = "<img class=imessages-picture src=" + query["picture"] + "</img>"+query["response"];
           newDiv_3.className = "imessages-description";
           document.getElementById("imessages-description").appendChild(newDiv_3);
 
