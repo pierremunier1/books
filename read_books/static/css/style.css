@@ -9,28 +9,32 @@
     height: 100px;
 }
 
+.title{
+
+    font-size: 40pt;color: rgb(12, 63, 129);
+    font-family: "garamond";
+    
+}
+
 .imessages-title{
-
-
-    width: 500px;
-    height: 100px;
-    font-size: 20pt;
+   
+    font-size: 25pt;
+    font-family: "garamond";
     font-weight: bold;
 }
 
 .imessages-description{
 
-    width: 500px;
+    
     height: 500px;
+    font-family: "garamond";
 }
 
 .imessages-picture{
 
-    width: 200px;
-    height: 205px;
+    width: 50px;
+    height: 50px;
 }
-
-
 
 
 .form-control{

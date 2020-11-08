@@ -26,7 +26,7 @@ function inputForm() {
           let newDiv_2 = document.createElement("div");
             
           newDiv_2.innerHTML = query["title"];
-          newDiv_2.className = "imessages-title";
+          newDiv_2.className = "imessages-title text-align-center";
           document.getElementById("imessages-title").appendChild(newDiv_2);
           
 
