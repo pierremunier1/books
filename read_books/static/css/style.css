@@ -30,14 +30,47 @@
     font-family: "garamond";
 }
 
-.imessages-picture{
+.thumbnail{
 
-    margin: 10px;
-    float: right;
-    width: 150px;
-    height: 170px;
+    height: 250px;
 }
 
+.margin {
+   margin-top:100px;
+}
+
+.imessages-picture{
+
+    width: 128px;
+    height: 180px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow:6px 6px 6px gray;
+    float: right;
+}
+
+.response_box{
+
+    text-overflow: ellipsis;
+
+  /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.title_box{
+
+    font-family:"monospace";
+    font-weight: bold;
+    font-size: 15pt;color: rgb(12, 63, 129);
+    
+}
+
+.author_box{
+
+    font-family:"monospace";
+    font-weight: bold;
+}
 
 .form-control{
     

@@ -11,6 +11,7 @@ Books
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
 
+
 <div class="container">
 <div class="row h-50 justify-content-center">
 <h1 class="title">Books<h1>
@@ -25,7 +26,7 @@ Books
 	<form class="input" id="usertext-form" method='GET'>
 		{% csrf_token %}
 		<div class="input-group input-group-newsletter">
-			<input type="text" name="query" class="form-control auto" placeholder="enter category" aria-describedby="search" autocomplete="off">
+			<input type="text" name="query" class="form-control" placeholder="enter category" aria-describedby="search" autocomplete="off">
 			{% csrf_token %}
 			<div class="input-group-append">
 				<button class="btn btn-secondary"id="submit" onclick=myFunc()>Search!</button>
@@ -35,18 +36,20 @@ Books
 </div>
 </div>
 </div>
-<div class="container">
-<div class="row h-100 justify-content-center">
+</div>
 
-<div class="col-md-6 justify-content-center">
-	<div class="imessages-title text-center" id="imessages-title"></div>
-	<div class="imessages-description text-justify" id="imessages-description"></div>
- 
-  
+<div class="container">
+<div class="row">
+<div class="margin"></div>
 </div>
 </div>
+
+
+<div class="container">
+<div class="col-md-6" id="imessages-description">
 </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -54,7 +57,7 @@ Books
 	function myFunc() {
 		$('#imessages-title').empty()
     $('#imessages-description').empty()
-    $('#imessages-picture').empty()
+    
 	}
 </script>
 <script>

@@ -50,6 +50,10 @@ class GoogleApi:
         
         payload = {
             'q': self.query,
+            'subject:': self.query,
+            'inauthor:': self.query,
+            'intitle:':self.query,
+            'maxResults':20,
             'key': os.environ.get('API_KEY_BACK')}
             
         result = requests.get(
@@ -61,7 +65,7 @@ class GoogleApi:
         books_desc = []
         books_author = []
         books_date = []
-        books_pic = []
+        books_pic = list()
 
         for book in google_books['items']:
                    
@@ -71,15 +75,16 @@ class GoogleApi:
                     self.book_title = (book['volumeInfo']['title'])
                     self.book_author = book['volumeInfo']['authors'][0]
                     self.book_date = (book['volumeInfo']['publishedDate'])
-                    self.book_pic = (book['volumeInfo']['imageLinks']['thumbnail'])
-
+                    self.book_pic = '<div class=container><div class=col-md-6><div class=h-50><h7 class=title_box>'+'"'+self.book_title+'"'+'</h7><div class=container></div></div></div><div class=row><img class=imessages-picture src='+(book['volumeInfo']['imageLinks']['thumbnail'])+'></img><h7 class=author_box>'+self.book_author+'</h7><div class=col-md-4><h7 class=response_box>'+self.book+'</h7></div></div></div></div>'
+                    
                     books_title.append(self.book_title)
                     books_desc.append(self.book)
                     books_author.append(self.book_author)
                     books_date.append(self.book_date)
                     books_pic.append(self.book_pic)
+                    
         
-        return books_title,books_desc,books_author,books_date,books_pic
+        return books_title,books_desc,books_author,books_date,(str(books_pic).replace("'"," ").replace(","," "))
         
                    
 class Response:
@@ -94,7 +99,8 @@ class Response:
         result = {
             'title': books_title,
             'response': books_desc,
-            'picture': books_pic
+            'picture': books_pic,
+            'author': books_author
             }
 
 
