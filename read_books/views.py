@@ -21,7 +21,6 @@ def search_autocomplete(request):
                 )
         for book in qs:
             books.append(qs)
-            #print(books[0]['author'])
 
     return JsonResponse(books[0]['title'],safe=False)
 
@@ -34,20 +33,15 @@ def result(request):
         query = request.POST.get('query')
 
         qs = Response.response_front(query)
-        
-        
+    
         for book in qs:
             books.append(qs)
-        
-            #print(str(books[0]['picture'])[1:-1])
 
         result = {
                 'picture':(str(books[0]['picture'])[1:-1]),
-                'title':books[0]['title'],
-                'author':books[0]['author'],
-                'response':books[0]['response']
+                'title':books[0]['title']
         }
 
-        
     return JsonResponse(result,safe=False)
+
 

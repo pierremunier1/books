@@ -25,12 +25,9 @@ Books
 <div class="col-md-6">
 	<form class="input" id="usertext-form" method='GET'>
 		{% csrf_token %}
-		<div class="input-group input-group-newsletter">
-			<input type="text" name="query" class="form-control" placeholder="enter category" aria-describedby="search" autocomplete="off">
+		<div class="input-group input-group">
+			<input type="text" name="query" class="form-control" onkeyup=myFunc() placeholder="enter category" aria-describedby="search" autocomplete="off">
 			{% csrf_token %}
-			<div class="input-group-append">
-				<button class="btn btn-secondary"id="submit" onclick=myFunc()>Search!</button>
-			</div>
 		</div>
 	</form>
 </div>
@@ -39,16 +36,24 @@ Books
 </div>
 
 <div class="container">
-<div class="row">
-<div class="margin"></div>
+<div class="row justify-content-center">
+<div class="margin">
 </div>
 </div>
 
 
-<div class="container">
-<div class="col-md-6" id="imessages-description">
+<div class="col-md-12 justify-content-center" id="imessages-description"></div>
+
 </div>
-</div>
+
+
+
+
+
+
+
+
+
 
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -78,4 +83,7 @@ Books
 {% block content%}
  
 {% endblock content%}
+
+{% block social %}
+{% endblock social%}
 </body>

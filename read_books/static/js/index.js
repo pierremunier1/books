@@ -4,7 +4,7 @@ function inputForm() {
     
       form = document.querySelector("#usertext-form");
     
-      form.addEventListener("submit", function(event) {
+      form.addEventListener("keyup", function(event)  {
           event.preventDefault();
     
           fetch("/ajax", {
@@ -26,9 +26,8 @@ function inputForm() {
 
                 
               let newDiv_3 = document.createElement("div");
+              newDiv_3.innerHTML = query["picture"];
               
-              newDiv_3.innerHTML = query["picture"]
-              newDiv_3.className = "imessages-description align-items-center";
               document.getElementById("imessages-description").appendChild(newDiv_3);
 
               });
