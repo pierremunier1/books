@@ -27,21 +27,30 @@ def search_autocomplete(request):
 def result(request):
 
     books = list()
+    book_error = {'title':'incorrect'}
 
     if request.is_ajax:
 
-        query = request.POST.get('query')
+        try:
 
-        qs = Response.response_front(query)
-    
-        for book in qs:
-            books.append(qs)
+            query = request.POST.get('query')
+            
+            assert len(query)>=2
+            print(query)
+            qs = Response.response_front(query)
+        
+            for book in qs:
+                books.append(qs)
 
-        result = {
-                'picture':(str(books[0]['picture'])[1:-1]),
-                'title':books[0]['title']
-        }
+            result = {
+                    'picture':(str(books[0]['picture'])[1:-1]),
+                    'title':books[0]['title']
+            }
 
-    return JsonResponse(result,safe=False)
+            return JsonResponse(result,safe=False)
+
+        except AssertionError:
+            print('nombre de caracteres incorrect')
+            return JsonResponse(book_error,safe=False)
 
 

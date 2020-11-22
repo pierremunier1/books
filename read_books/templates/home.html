@@ -23,10 +23,10 @@ Books
 <div class="row h-50 justify-content-center">
 
 <div class="col-md-6">
-	<form class="input" id="usertext-form" method='GET'>
+	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
 		<div class="input-group input-group">
-			<input type="text" name="query" class="form-control" onkeyup=myFunc() placeholder="enter category" aria-describedby="search" autocomplete="off">
+			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="enter category" aria-describedby="search" autocomplete="off">
 			{% csrf_token %}
 		</div>
 	</form>

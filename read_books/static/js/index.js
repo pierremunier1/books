@@ -3,15 +3,16 @@ function inputForm() {
     // analyze the text into the form to the server
     
       form = document.querySelector("#usertext-form");
-    
-      form.addEventListener("keyup", function(event)  {
+      
+      form.addEventListener("submit", function(event)  {
           event.preventDefault();
-    
+
           fetch("/ajax", {
             method:"post",
             body: new FormData(form),
             dataType: "json",
             })
+          
           .then(response => response.json())
     
           .then(function (json) {console.log
@@ -24,7 +25,6 @@ function inputForm() {
                   
               };
 
-                
               let newDiv_3 = document.createElement("div");
               newDiv_3.innerHTML = query["picture"];
               
@@ -33,5 +33,3 @@ function inputForm() {
               });
 })
 }
-
-

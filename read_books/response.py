@@ -46,13 +46,13 @@ class GoogleApi:
     def get_books(self):
 
         """method retrieve books"""
-        
+       
         payload = {
             'q': self.query,
             'subject:': self.query,
             'inauthor:': self.query,
             'intitle:':self.query,
-            'maxResults':2,
+            'maxResults':10,
             'key': os.environ.get('API_KEY_BACK')}
             
         result = requests.get(
@@ -66,27 +66,28 @@ class GoogleApi:
         books_date = []
         books_pic = list()
         book_unavalaible = 'non disponible'
-
-        try:
+        
+        try: 
             for book in google_books['items']:
-
+                
                     if not all(tag in book['volumeInfo']for tag in config.FILTER):
                         continue
                     self.book_title = (book['volumeInfo']['title'])
                     self.book_author = book['volumeInfo']['authors'][0]
                     self.book_pic = (book['volumeInfo']['imageLinks']['thumbnail'])
+                    self.book_desc = (book['volumeInfo']['description'])
                     link = '<img class=imessages-picture src='+self.book_pic+'></img>'
 
                     books_title.append(self.book_title)
                     books_author.append(self.book_author)
                     books_pic.append(link)
+                    books_desc.append(self.book_desc)
                     
-                    return books_title,books_author,(str(books_pic).replace("'"," ").replace(","," ").replace('"'," "))
+            return books_title,books_author,(str(books_pic).replace("'"," ").replace(","," ").replace('"'," ")),books_desc
         except KeyError:
             return book_unavalaible
+
         
-
-
 class Response:
 
     def response_front(query):
@@ -94,12 +95,14 @@ class Response:
         analyse = Parser(query)
         userquery = analyse.parse()
         query_book = GoogleApi(userquery)
-        books_title,books_author,books_pic = query_book.get_books()
+        books_title,books_author,books_pic,books_desc = query_book.get_books()
 
         result = {
             'title': books_title,
             'picture': books_pic,
-            'author': books_author
+            'author': books_author,
+            'description': books_desc
             }
 
         return result
+        

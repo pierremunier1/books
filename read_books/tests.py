@@ -22,7 +22,10 @@ class TestGoogleApi(TestCase):
                         ],
                         'imageLinks':{
                             'thumbnail': "http://books.google.com/books/content?id=Y7sOAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+                        },
+                        'description':{ 'test'
                         }
+
                     }
                 }
                     ]
@@ -40,7 +43,7 @@ class TestGoogleApi(TestCase):
         query = query_book.get_books()
    
         self.assertEqual(query, 
-            (["Alice's Adventures in Wonderland"],['Lewis Carroll'],'[ <img class=imessages-picture src=http://books.google.com/books/content?id=Y7sOAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api></img> ]'), 
+            (["Alice's Adventures in Wonderland"],['Lewis Carroll'],'[ <img class=imessages-picture src=http://books.google.com/books/content?id=Y7sOAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api></img> ]',[{'test'}])
             
         )
         mock_get.assert_called_once_with('https://www.googleapis.com/books/v1/volumes?', params={
