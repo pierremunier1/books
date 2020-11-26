@@ -52,8 +52,6 @@ def detail(request,book_id):
     try:
         if book_id is not None:
             book = Response.response_front(book_id)
-            print(book)
-          
             
         return render(
         request,

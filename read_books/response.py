@@ -52,7 +52,7 @@ class GoogleApi:
             'subject:': self.query,
             'inauthor:': self.query,
             'intitle:':self.query,
-            'maxResults':12,
+            'maxResults':11,
             'key': os.environ.get('API_KEY_BACK')}
             
         result = requests.get(
