@@ -69,16 +69,3 @@ class Book(models.Model):
     def __str__(self):
         return self.book_name
 
-
-class Substitute(models.Model):
-    """substitute model"""
-
-    book_original = models.ForeignKey(Book,
-                                         on_delete=models.CASCADE, related_name='book_original')
-    book_substitute = models.ForeignKey(Book,
-                                           on_delete=models.CASCADE, related_name='book_substitute')
-    objects = BookManager()
-
-    def __str__(self):
-
-        return str(self.book_substitute)

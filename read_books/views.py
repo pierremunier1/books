@@ -1,14 +1,9 @@
 from django.shortcuts import render
 from read_books.response import GoogleApi, Response
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from read_books.models import Book
 
-# Create your views here.
 
-def search(request):
-    """showing the home page"""
-
-    return render(request, "home.html")
 
 def search_autocomplete(request):
     """autocomplete research in database"""
@@ -25,20 +20,18 @@ def search_autocomplete(request):
     return JsonResponse(books[0]['title'],safe=False)
 
 def result(request):
+    """display result of get_books function"""
 
     books = list()
-    book_error = {'title':'incorrect'}
-
-    if request.is_ajax:
+    book_error = 'incorrect'
+    
+    if request.is_ajax and request.method == "POST":
 
         try:
-
             query = request.POST.get('query')
-            
-            assert len(query)>=2
-            print(query)
-            qs = Response.response_front(query)
         
+            qs = Response.response_front(query)
+    
             for book in qs:
                 books.append(qs)
 
@@ -49,8 +42,34 @@ def result(request):
 
             return JsonResponse(result,safe=False)
 
+
         except AssertionError:
-            print('nombre de caracteres incorrect')
-            return JsonResponse(book_error,safe=False)
+            return HttpResponse(book_error)
+
+
+def detail(request,book_id):
+
+    try:
+        if book_id is not None:
+            book = Response.response_front(book_id)
+            print(book)
+          
+            
+        return render(
+        request,
+        "home.html",
+        {
+            "title":(str(book['title'][0])).replace("'"," "),
+            "desc": (str(book['description'][0])).replace("'"," "),
+            
+        }
+    )
+
+    except AssertionError:
+        return HttpResponse(book_error)
+
+
+
+
 
 
