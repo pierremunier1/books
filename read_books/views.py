@@ -29,7 +29,7 @@ def result(request):
 
         try:
             query = request.POST.get('query')
-        
+            
             qs = Response.response_front(query)
     
             for book in qs:
@@ -52,6 +52,7 @@ def detail(request,book_id):
     try:
         if book_id is not None:
             book = Response.response_front(book_id)
+            
             
         return render(
         request,

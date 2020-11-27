@@ -26,9 +26,9 @@
 .imessages-description{
 
     
-    height: 500px;
+    
     font-family: "garamond";
-    margin: right;
+   
 }
 
 .thumbnail{
@@ -46,9 +46,9 @@
 
 .imessages-picture{
 
-    width: 128px;
+    width: 135px;
     height: 180px;
-    margin: 10px;
+    margin: 5px;
     border-radius: 10px;
     box-shadow:6px 6px 6px gray;
     transition: transform .2s; /* Animation */
