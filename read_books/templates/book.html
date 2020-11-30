@@ -43,7 +43,16 @@ Books
 	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
 	<div class="imessages-description" id="imessages-description">{{picture}}
 	<div class="margin"></div>
-	<div class="response_box" id="imessages-text">{{ desc }}{{result}}</div>
+	<div class="response_box" id="imessages-text">{{ desc }}{{result}}
+	<form action="{% url  'save_book' id%}" method="POST">
+				{% csrf_token %}
+				<div class="col">
+					<button type="submit" style="border: 0; background: none;">
+						<i class="button far fa-save fa-1x"></i>
+						<a class="links text-white">Sauvegarder</a>
+					</button>
+				</div>
+	</div>
 </div>
 <div class="row justify-content-center">
 

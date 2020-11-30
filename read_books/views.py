@@ -42,7 +42,6 @@ def result(request):
 
             return JsonResponse(result,safe=False)
 
-
         except AssertionError:
             return HttpResponse(book_error)
 
@@ -52,23 +51,30 @@ def detail(request,book_id):
     try:
         if book_id is not None:
             book = Response.response_front(book_id)
-            
-            
+    
         return render(
         request,
-        "home.html",
+        "book.html",
         {
             "title":(str(book['title'][0])).replace("'"," "),
             "desc": (str(book['description'][0])).replace("'"," "),
-            
+            "id": book_id
         }
     )
-
     except AssertionError:
         return HttpResponse(book_error)
 
+def save_book(request,book_id):
+    """save substitute"""
 
+    print(book_id)
 
+    user = get_object_or_404(
+        CustomUser,
+        id=request.user.id
+    )
+    Book.objects.add_book(
+        book, user
+    )
 
-
-
+    return redirect("home")

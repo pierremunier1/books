@@ -23,7 +23,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('ajax', views.result, name='result'),
     path('search_autocomplete', views.search_autocomplete, name='search_autocomplete'),
-    #path('home.html', views.list_books, name='list_books'),
-    path('<str:book_id>', views.detail, name='result')
+    path('<str:book_id>', views.detail, name='result'),
+    path('<str:book_id>', views.save_book, name='save_book')
     
 ]

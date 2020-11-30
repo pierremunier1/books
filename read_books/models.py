@@ -4,9 +4,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django import forms
 
-#from .management.commands import config
-
-
 class Category(models.Model):
     """category models"""
     category_name = models.CharField(max_length=150, unique=True)
@@ -17,55 +14,34 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
-
 class BookManager(models.Manager):
-    """manager find product substitutes"""
+    """manager book function"""
 
-    def search_book(self, book_name):
-        """check if substitutes exists in database"""
+    def add_book(self, book_id, user):
+        """save book in favoris"""
 
-        book = Book.objects.filter(
-            Q(book_name__icontains=book_name) |
-            Q(author__icontains=book_name
-              ))[:1].get()
-
-        return book
-
-    def get_detail(self, book_id):
-        """get detail of product"""
-
-        try:
-            book = Book.objects.get(id=book_id)
-
-        except Book.DoesNotExist:
-            book = None
-
-        finally:
-            return book
-
-    def add_substitute(self, book_original_id, book_substitute_id, user):
-        """save substitute in favoris"""
-
-        Substitute.objects.update_or_create(
-            book_substitute_id=book_substitute_id,
-            book_original_id=book_original_id,
+        Book.objects.update_or_create(
+            id=book_id,
             customuser=user
         )
 
-
 class Book(models.Model):
-    """product model"""
+    """book model"""
     id = models.BigIntegerField(primary_key=True)
     book_name = models.CharField(max_length=150)
     author = models.CharField(max_length=150)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE
     )
+   
     objects = BookManager()
+
 
     class Meta:
         ordering = ['book_name']
 
     def __str__(self):
         return self.book_name
+
+
 

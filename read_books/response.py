@@ -52,13 +52,14 @@ class GoogleApi:
             'subject:': self.query,
             'inauthor:': self.query,
             'intitle:':self.query,
-            'maxResults':10,
+            'maxResults':5,
             'key': os.environ.get('API_KEY_BACK')}
             
         result = requests.get(
             'https://www.googleapis.com/books/v1/volumes?',
             params=payload)
         google_books = result.json()
+        
         
         books_title = []
         books_desc = []
@@ -78,14 +79,14 @@ class GoogleApi:
                     self.book_desc = (book['volumeInfo']['description'])
                     self.book_id = (book['volumeInfo']['industryIdentifiers'][0]['identifier'])
                     link = f"<div><a href=book_id={self.book_id}><img class=imessages-picture src={self.book_pic}></img></a></div>"
-
+                    
                     books_title.append(self.book_title)
                     books_author.append(self.book_author)
                     books_pic.append(link)
                     books_desc.append(self.book_desc)
             
             return books_title,books_author,(str(books_pic).replace("'"," ").replace(","," ").replace('"'," ")),books_desc
-        except KeyError:
+        except:
             return '','','',''
 
         

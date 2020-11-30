@@ -44,8 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'read_books',
+    'users.apps.UsersConfig'
     
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
+#AUTHENTICATION_BACKENDS = ['users.backend.EmailBackend']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
