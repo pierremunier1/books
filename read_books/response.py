@@ -78,14 +78,14 @@ class GoogleApi:
                     self.book_pic = (book['volumeInfo']['imageLinks']['thumbnail'])
                     self.book_desc = (book['volumeInfo']['description'])
                     self.book_id = (book['volumeInfo']['industryIdentifiers'][0]['identifier'])
-                    link = f"<div><a href=book_id={self.book_id}><img class=imessages-picture src={self.book_pic}></img></a></div>"
+                    link = f"<div><a href={self.book_id}><img class=imessages-picture src={self.book_pic}></img></a></div>"
                     
                     books_title.append(self.book_title)
                     books_author.append(self.book_author)
                     books_pic.append(link)
                     books_desc.append(self.book_desc)
             
-            return books_title,books_author,(str(books_pic).replace("'"," ").replace(","," ").replace('"'," ")),books_desc
+            return books_title,books_author,books_pic,books_desc
         except:
             return '','','',''
 

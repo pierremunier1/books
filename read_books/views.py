@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from read_books.response import GoogleApi, Response
 from django.http import JsonResponse, HttpResponse
 from read_books.models import Book
@@ -36,7 +36,7 @@ def result(request):
                 books.append(qs)
 
             result = {
-                    'picture':(str(books[0]['picture'])[1:-1]),
+                    'picture':(str(books[0]['picture'])[1:-1]).replace("'"," ").replace(","," ").replace('"'," "),
                     'title':books[0]['title']
             }
 
@@ -51,30 +51,24 @@ def detail(request,book_id):
     try:
         if book_id is not None:
             book = Response.response_front(book_id)
-    
+            
         return render(
         request,
         "book.html",
         {
             "title":(str(book['title'][0])).replace("'"," "),
             "desc": (str(book['description'][0])).replace("'"," "),
-            "id": book_id
+            "picture":(book['picture'][0]),
+            "book_id":book_id
         }
     )
     except AssertionError:
         return HttpResponse(book_error)
 
-def save_book(request,book_id):
-    """save substitute"""
+def save_book(request,book_id,title):
+    """add book for later"""
 
-    print(book_id)
-
-    user = get_object_or_404(
-        CustomUser,
-        id=request.user.id
-    )
-    Book.objects.add_book(
-        book, user
-    )
+    Book.objects.add_book(book_id,title)
 
     return redirect("home")
+

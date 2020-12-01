@@ -6,7 +6,7 @@ from django import forms
 
 class Category(models.Model):
     """category models"""
-    category_name = models.CharField(max_length=150, unique=True)
+    category_name = models.CharField(max_length=150, unique=True,null=True)
 
     class Meta:
         ordering = ['category_name']
@@ -17,12 +17,12 @@ class Category(models.Model):
 class BookManager(models.Manager):
     """manager book function"""
 
-    def add_book(self, book_id, user):
+    def add_book(self, book_id,title):
         """save book in favoris"""
 
         Book.objects.update_or_create(
             id=book_id,
-            customuser=user
+            book_name=title
         )
 
 class Book(models.Model):
@@ -30,12 +30,9 @@ class Book(models.Model):
     id = models.BigIntegerField(primary_key=True)
     book_name = models.CharField(max_length=150)
     author = models.CharField(max_length=150)
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE
-    )
-   
+    comment = models.CharField(max_length=150)
+    picture = models.CharField(max_length=350)
     objects = BookManager()
-
 
     class Meta:
         ordering = ['book_name']
