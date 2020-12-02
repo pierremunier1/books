@@ -2,5 +2,6 @@ FILTER = (
     "authors",
     "title",
     "imageLinks",
-    "description"
+    "description",
+    "categories"
     )

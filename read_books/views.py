@@ -5,20 +5,6 @@ from read_books.models import Book
 
 
 
-def search_autocomplete(request):
-    """autocomplete research in database"""
-    books = list()
-
-    if 'term' in request.GET:
-        qs = (
-            Response.response_front(
-                request.GET.get('term'))
-                )
-        for book in qs:
-            books.append(qs)
-
-    return JsonResponse(books[0]['title'],safe=False)
-
 def result(request):
     """display result of get_books function"""
 
@@ -36,13 +22,13 @@ def result(request):
                 books.append(qs)
 
             result = {
-                    'picture':(str(books[0]['picture'])[1:-1]).replace("'"," ").replace(","," ").replace('"'," "),
+                    'picture':Response.build(books[0]['picture']),
                     'title':books[0]['title']
             }
 
             return JsonResponse(result,safe=False)
 
-        except AssertionError:
+        except:
             return HttpResponse(book_error)
 
 
@@ -51,24 +37,38 @@ def detail(request,book_id):
     try:
         if book_id is not None:
             book = Response.response_front(book_id)
-            
+
         return render(
         request,
         "book.html",
         {
-            "title":(str(book['title'][0])).replace("'"," "),
-            "desc": (str(book['description'][0])).replace("'"," "),
-            "picture":(book['picture'][0]),
-            "book_id":book_id
+            "title":Response.build(book['title'][0]),
+            "desc": Response.build(book['description'][0]),
+            "picture":book['picture'][0],
+            "book_id":book_id,
+            "book_cat":book['categorie'][0]
         }
     )
-    except AssertionError:
+    except:
         return HttpResponse(book_error)
 
-def save_book(request,book_id,title):
+def save_book(request,book_id):
     """add book for later"""
 
-    Book.objects.add_book(book_id,title)
+    try:
+        if book_id is not None:
+            book = Response.response_front(book_id)
 
-    return redirect("home")
+            Book.objects.add_book(
+                book_id,
+                title=book['title'][0],
+                book_cat=Response.build(book['categorie'][0]),
+                picture=book['picture'][0]
+                )
+
+        return redirect("home")
+
+    except:
+        return HttpResponse(book_error)
+ 
 

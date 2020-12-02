@@ -25,7 +25,11 @@ class TestGoogleApi(TestCase):
                         },
                         'description':{ 'test'
                         },
-                        'industryIdentifiers': [{'identifier': 'Y7sOAAAAIAAJ'}]
+                        'industryIdentifiers': [{'identifier': 'Y7sOAAAAIAAJ'}
+                        ],
+                        'categories': [
+                            'Alice (Fictitious character : Carroll)'
+                        ]
 
                     }
                 }
@@ -44,7 +48,7 @@ class TestGoogleApi(TestCase):
         query = query_book.get_books()
    
         self.assertEqual(query, 
-            (["Alice's Adventures in Wonderland"],['Lewis Carroll'],[ '<div><a href=Y7sOAAAAIAAJ><img class=imessages-picture src=http://books.google.com/books/content?id=Y7sOAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api></img></a></div>'],[{'test'}])
+            (["Alice's Adventures in Wonderland"],['Lewis Carroll'],[ '<div><a href=Y7sOAAAAIAAJ><img class=imessages-picture src=http://books.google.com/books/content?id=Y7sOAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api></img></a></div>'],[{'test'}],['Alice (Fictitious character : Carroll)'])
             
         )
         mock_get.assert_called_once_with('https://www.googleapis.com/books/v1/volumes?', params={

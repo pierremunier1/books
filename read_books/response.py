@@ -6,41 +6,13 @@ import os
 from . import config
 
 
-class Parser:
-    """class contains method to parse the user text input form"""
-
-    def __init__(self, analyse):
-        """initialising attribute"""
-
-        self.analyse = analyse
-
-    def parse(self):
-        """method analyse the text and transform if necessary"""
-
-        # switch to lower case
-        self.analyse = self.analyse.lower()
-       
-        # remove accent
-        self.analyse = ''.join((c for c in unicodedata.normalize
-                                ('NFD', self.analyse)
-                                if unicodedata.category(c) != 'Mn')
-                               )
-
-        # remove punctuation
-        self.analyse = re.sub(r"[.!,;?\']", " ", self.analyse).split()
-
-        # to convert the list to string.
-        self.analyse = ' '.join(self.analyse)
-
-        return self.analyse
-
 
 class GoogleApi:
     """classe contains method for geocoding api"""
 
-    def __init__(self,userquery):
+    def __init__(self,query):
 
-        self.query = userquery
+        self.query = query
         
         
     def get_books(self):
@@ -65,7 +37,8 @@ class GoogleApi:
         books_desc = []
         books_author = []
         books_date = []
-        books_pic = list()
+        books_pic = []
+        books_cat = []
 
         try:
     
@@ -78,33 +51,53 @@ class GoogleApi:
                     self.book_pic = (book['volumeInfo']['imageLinks']['thumbnail'])
                     self.book_desc = (book['volumeInfo']['description'])
                     self.book_id = (book['volumeInfo']['industryIdentifiers'][0]['identifier'])
+                    self.categorie = (book['volumeInfo']['categories'][0])
                     link = f"<div><a href={self.book_id}><img class=imessages-picture src={self.book_pic}></img></a></div>"
-                    
                     books_title.append(self.book_title)
                     books_author.append(self.book_author)
                     books_pic.append(link)
+                    
                     books_desc.append(self.book_desc)
-            
-            return books_title,books_author,books_pic,books_desc
+                    books_cat.append(self.categorie)
+
+            return books_title,books_author,books_pic,books_desc,books_cat
         except:
-            return '','','',''
+            return '','','','',''
 
         
 class Response:
 
     def response_front(query):
 
-        analyse = Parser(query)
-        userquery = analyse.parse()
-        query_book = GoogleApi(userquery)
-        books_title,books_author,books_pic,books_desc = query_book.get_books()
+        """send data to the front"""
+
+        query_book = GoogleApi(query)
+        books_title,books_author,books_pic,books_desc,books_cat = query_book.get_books()
 
         result = {
             'title': books_title,
             'picture': books_pic,
             'author': books_author,
-            'description': books_desc
+            'description': books_desc,
+            'categorie':books_cat
+
             }
 
         return result
+
+    def build(result):
+
+        """modify structure of list"""
+        
+        result = (str(
+            result)
+            .replace("'",'')
+            .replace('[','')
+            .replace(']','')
+            .replace("'"," ")
+            .replace(","," ")
+            .replace('"'," "))
+
+        return result
+
         

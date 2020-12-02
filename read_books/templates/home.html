@@ -41,7 +41,7 @@ Books
 <div class="container col-md-6 text-center">
 
 	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
-	<div class="imessages-description" id="imessages-description">{{picture}}
+	<div class="imessages-description" id="imessages-description">
 	<div class="margin"></div>
 	<div class="response_box" id="imessages-text">{{ desc }}{{result}}</div>
 
@@ -64,13 +64,6 @@ Books
 </script>
 <script>
 	inputForm();
-</script>
-<script>
-	$(function () {
-		$(".auto").autocomplete({
-			source: '{% url 'search_autocomplete' %}',minLength: 3,dataType: "json",
-		});
-	});
 </script>
 
 
