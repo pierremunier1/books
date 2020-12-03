@@ -3,6 +3,8 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django import forms
+from users.models import CustomUser
+
 
 class Category(models.Model):
     """category models"""
@@ -17,18 +19,24 @@ class Category(models.Model):
 class BookManager(models.Manager):
     """manager book function"""
 
-    def add_book(self, book_id,title,book_cat,picture):
+    def add_book(self, book_id,title,book_cat,picture,user):
         """save book in favoris"""
 
         c1, created = Category.objects.get_or_create(
                             category_name=book_cat
                             )
 
+        c2, created = CustomUser.objects.get_or_create(
+                        username=user
+                        )
+
         Book.objects.update_or_create(
             id=book_id,
             book_name=title,
             category=c1,
-            picture=picture
+            picture=picture,
+            customuser=c2
+            
         )
 
 class Book(models.Model):
@@ -41,6 +49,8 @@ class Book(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE
     )
+    customuser = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE)
     objects = BookManager()
 
     class Meta:
@@ -48,6 +58,4 @@ class Book(models.Model):
 
     def __str__(self):
         return self.book_name
-
-
 

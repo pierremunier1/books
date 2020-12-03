@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
 from read_books.response import GoogleApi, Response
 from django.http import JsonResponse, HttpResponse
+from django.shortcuts import get_object_or_404
 from read_books.models import Book
-
+from users.models import CustomUser
+from django.contrib.auth.decorators import login_required
 
 
 def result(request):
@@ -34,6 +36,8 @@ def result(request):
 
 def detail(request,book_id):
 
+    book_error=('ko')
+
     try:
         if book_id is not None:
             book = Response.response_front(book_id)
@@ -52,23 +56,41 @@ def detail(request,book_id):
     except:
         return HttpResponse(book_error)
 
+@login_required(login_url='/users/login/', redirect_field_name='next')
 def save_book(request,book_id):
     """add book for later"""
-
+    
     try:
+
         if book_id is not None:
             book = Response.response_front(book_id)
 
+        if request.user.is_authenticated:
+            user = get_object_or_404(
+            CustomUser,
+            id=request.user.id
+        )
             Book.objects.add_book(
                 book_id,
-                title=book['title'][0],
+                title=(book['title'][0]),
                 book_cat=Response.build(book['categorie'][0]),
-                picture=book['picture'][0]
+                picture=book['picture'][0],
+                user=user
                 )
 
         return redirect("home")
-
     except:
-        return HttpResponse(book_error)
- 
+        return HttpResponse('error')
 
+
+#@login_required(login_url='/users/login/', redirect_field_name='next')
+def favorite(request):
+    """show favorite products"""
+
+    books = Book.objects.filter(
+        customuser=request.user)
+    
+    print(books)
+
+    return redirect("favorite")
+  

@@ -23,6 +23,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('ajax', views.result, name='result'),
     path('<book_id>', views.detail, name='book'),
-    path('book/<book_id>', views.save_book, name='save_book')
+    path('book/<book_id>', views.save_book, name='save_book'),
+    path('favorite', views.favorite, name='favorite')
     
 ]
