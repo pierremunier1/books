@@ -20,6 +20,7 @@ Books
 </div>
 
 
+
 <div class="container">
 <div class="row h-50 justify-content-center">
 
@@ -32,7 +33,7 @@ Books
 		</div>
 	</form>
 </div>
-
+<a  href="{% url "favorite" %}"><i class="fas fa-book fa-3x"></i></a>
 </div>
 </div>
 </div>
@@ -48,15 +49,6 @@ Books
 				<div class="col">
 					<button type="submit" style="border: 0; background: none;">
 						<i class="button far fa-save fa-1x"></i>
-						<a class="links text-white">Sauvegarder</a>
-					</button>
-				</div>
-
-	<form action="{% url  'favorite' %}" method="post">
-				{% csrf_token %}
-				<div class="col">
-					<button type="submit" style="border: 0; background: none;">
-						<i class="button far fa-save fa-2x"></i>
 						<a class="links text-white">Sauvegarder</a>
 					</button>
 				</div>

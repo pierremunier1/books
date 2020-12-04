@@ -60,37 +60,36 @@ def detail(request,book_id):
 def save_book(request,book_id):
     """add book for later"""
     
-    try:
+    if book_id is not None:
+        book = Response.response_front(book_id)
 
-        if book_id is not None:
-            book = Response.response_front(book_id)
+    if request.user.is_authenticated:
+        user = get_object_or_404(
+        CustomUser,
+        id=request.user.id
+    )
+        Book.objects.add_book(
+            book_id,
+            title=(book['title'][0]),
+            book_cat=Response.build(book['categorie'][0]),
+            picture=book['picture'][0],
+            user=user,
+            )
 
-        if request.user.is_authenticated:
-            user = get_object_or_404(
-            CustomUser,
-            id=request.user.id
-        )
-            Book.objects.add_book(
-                book_id,
-                title=(book['title'][0]),
-                book_cat=Response.build(book['categorie'][0]),
-                picture=book['picture'][0],
-                user=user
-                )
-
-        return redirect("home")
-    except:
-        return HttpResponse('error')
+    return redirect("home")
+   
 
 
 #@login_required(login_url='/users/login/', redirect_field_name='next')
 def favorite(request):
     """show favorite products"""
 
-    books = Book.objects.filter(
-        customuser=request.user)
-    
-    print(books)
 
-    return redirect("favorite")
-  
+    result=Book.objects.filter(customuser=request.user)
+
+    context = {
+        "books":result
+    }
+
+    return render(request, 'favorite.html', context)
+

@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django import forms
 from users.models import CustomUser
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 
 
 class Category(models.Model):
@@ -35,7 +37,8 @@ class BookManager(models.Manager):
             book_name=title,
             category=c1,
             picture=picture,
-            customuser=c2
+            customuser=c2,
+           
             
         )
 
@@ -51,11 +54,11 @@ class Book(models.Model):
     )
     customuser = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE)
+    ratings =  GenericRelation(Rating, related_query_name= 'books')
+    
     objects = BookManager()
 
     class Meta:
         ordering = ['book_name']
-
-    def __str__(self):
-        return self.book_name
-
+        verbose_name = 'book'
+      
