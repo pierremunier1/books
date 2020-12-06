@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load ratings%}
+
 
 <body>
 
@@ -46,13 +46,16 @@ Books
 
 <div class="container col-md-6 text-center">
 
-{% ratings book.picture %}
+	{% for book in books%}
 
-{% for book in books%}
-	
-	{{book.picture | safe}} 
-	
+	{{book.picture | safe}}
+
 	{% endfor %}
+
+
+
+<div class="overall_rating">{{ the_overall_rating }}</div>
+
 
 	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
 	<div class="imessages-description text-justify" id="imessages-description">

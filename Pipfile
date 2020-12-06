@@ -10,7 +10,6 @@ environ = "*"
 django-environ = "*"
 dj-database-url = "*"
 psycopg2 = "*"
-django-star-ratings = "*"
 
 [requires]
 python_version = "3.6"

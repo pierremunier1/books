@@ -84,12 +84,11 @@ def save_book(request,book_id):
 def favorite(request):
     """show favorite products"""
 
+    books = Book.objects.filter(customuser=request.user)
 
-    result=Book.objects.filter(customuser=request.user)
+    context={
 
-    context = {
-        "books":result
+        'books':books
     }
 
-    return render(request, 'favorite.html', context)
-
+    return render(request, "favorite.html",context)

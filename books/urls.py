@@ -22,6 +22,5 @@ urlpatterns = [
     path('', include('read_books.urls')),
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
-    path('ratings/', include('star_ratings.urls', namespace='ratings'), name='ratings'),
-
+    
 ]
