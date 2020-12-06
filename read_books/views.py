@@ -92,3 +92,4 @@ def favorite(request):
     }
 
     return render(request, "favorite.html",context)
+
