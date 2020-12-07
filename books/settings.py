@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'read_books',
     'users.apps.UsersConfig',
-    'star_ratings'
+    
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'

@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
+
 {% load static %}
+
+
 <body>
 {% block title %}
 Books
@@ -44,7 +47,8 @@ Books
 	<div class="imessages-description text-justify" id="imessages-description">{{ picture | safe }}
 	<div class="margin"></div>
 	<div class="response_box" id="imessages-text">{{ desc }}{{result}}
-	<form action="{% url  'save_book' book_id %}" method="post">
+	
+	<form action="{% url 'save_book' book_id%}" method="post">
 				{% csrf_token %}
 				<div class="col">
 					<button type="submit" style="border: 0; background: none;">

@@ -1,7 +1,5 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load ratings %}
 
+{% load static %}
 
 <body>
 
@@ -17,6 +15,7 @@ Books
 <script src="{% static '/js/index.js' %}"></script>
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
 
 
 
@@ -46,18 +45,6 @@ Books
 	<div class="margin"></div>
 
 <div class="container col-md-6 text-center">
-
-
-
-	{% for book in books%}
-
-	{{book.picture | safe}}
-
-	{% endfor %}
-
-
-
-<div class="overall_rating">{{ the_overall_rating }}</div>
 
 
 	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
