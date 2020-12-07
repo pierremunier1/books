@@ -19,13 +19,13 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('home', TemplateView.as_view(template_name='home.html'), name='home'),
     path('ajax', views.result, name='result'),
     path('<book_id>', views.detail, name='book'),
     path('book/<book_id>', views.save_book, name='save_book'),
     path('favorite/', views.favorite, name='favorite'),
-    path('favorite/<book_id>', views.favorite_detail, name='detail'),
-    path('rate/',views.rate_image,name='detail')
-   
+    path('favorite/<book_id>', views.favorite_detail, name='favorite'),
+    path('rate/',views.rate_image,name='detail'),
+    path('',views.best_book,name='home')
     
 ]

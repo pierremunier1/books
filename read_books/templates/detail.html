@@ -13,6 +13,7 @@ Books
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="{% static '/js/index.js' %}"></script>
 
 
 
@@ -45,12 +46,25 @@ Books
 
 <div class="container col-md-6 text-center">
 
-{% if object %}
-        <div class="row">
-            <div class="col text-center">
-            </div>
-            {{object.picture | safe}}
-            <div class="col text-center">
+	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
+	<div class="imessages-description" id="imessages-description">
+	<div class="margin"></div>
+	<div class="response_box" id="imessages-text">
+
+	{%for book in books%}
+
+	{{book.picture|safe}}
+
+	{% endfor %}
+	
+	</div>
+    
+	<div class="imessages-title"><div class="text-center" id="imessages-text">{{object.book_name}}</div></div>
+ 
+	<div class="imessages-description text-justify" id="imessages-description">
+	{% if object %}
+        <div class="col text-center">
+            
                 <form class="rate-form" action="" method="POST" id="{{object.id}}">
                     {% csrf_token %}
                     <button type="submit" class="fa fa-star fa-1x my-btn" id="first"></button>
@@ -62,15 +76,15 @@ Books
                 <br>
                 <div id="confirm-box"></div>
             </div>
+          
+            {{object.picture | safe}}{{object.description}}
+           
             
-        </div>
+       
     {% else %}
      <h1>No images to rate</h1>
     {% endif %}
 
-	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
-	<div class="imessages-description text-justify" id="imessages-description">
-	
 	<div class="margin"></div>
 	</div>
 </div>
@@ -91,6 +105,9 @@ Books
 </script>
 <script src="{% static '/js/main.js' %}" defer></script>
 
+<script>
+	inputForm();
+</script>
 
 
 {% endblock header %}

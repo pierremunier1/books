@@ -48,19 +48,13 @@ Books
 	<div class="margin"></div>
 	<div class="response_box" id="imessages-text">{{ desc }}{{result}}
 	
-	<form action="{% url 'save_book' book_id%}" method="post">
-				{% csrf_token %}
-				<div class="col">
-					<button type="submit" style="border: 0; background: none;">
-						<i class="button far fa-save fa-1x"></i>
-						<a class="links text-white">Sauvegarder</a>
-					</button>
-				</div>
+	
 	</div>
 </div>
+<div class="margin"></div>
 <div class="row justify-content-center">
 
-
+<a href="{% url "save_book" book_id %}" method="post"><i class="fas fa-book fa-3x"></i></a>
 </div>
 
 

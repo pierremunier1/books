@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from read_books.models import Book
 from users.models import CustomUser
 from django.contrib.auth.decorators import login_required
+from random import choice
 
 
 def result(request):
@@ -73,6 +74,7 @@ def save_book(request,book_id):
             title=(book['title'][0]),
             book_cat=Response.build(book['categorie'][0]),
             picture=book['picture'][0],
+            description=book['description'][0],
             user=user,
             )
 
@@ -84,7 +86,7 @@ def save_book(request,book_id):
 def favorite(request):
     """show favorite products"""
 
-    books = Book.objects.filter(customuser=request.user)
+    books = Book.objects.filter(customuser=request.user).order_by('score')
 
     context={
 
@@ -106,9 +108,29 @@ def rate_image(request):
     if request.method == 'POST':
         el_id = request.POST.get('el_id')
         val = request.POST.get('val')
-        print(val)
         obj = Book.objects.get(id=el_id)
         obj.score = val
         obj.save()
         return JsonResponse({'success':'true', 'score': val}, safe=False)
     return JsonResponse({'success':'false'})
+
+
+def best_book(request):
+
+    """show favorite products"""
+
+    category_name = ('Art','Music')
+
+    b1 = Book.objects.filter(
+        category__category_name__icontains=choice(category_name)
+        ).order_by('score')[:5]
+    b2 = Book.objects.filter(
+        score__gte=0).order_by('score')[:5]
+
+    context={
+
+        'best_books_1': b1,
+        'best_books_2': b2
+    }
+
+    return render(request, "home.html",context)
