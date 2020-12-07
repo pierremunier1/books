@@ -56,7 +56,7 @@ def detail(request,book_id):
     except:
         return HttpResponse(book_error)
 
-@login_required(login_url='/users/login/', redirect_field_name='next')
+#login_required(login_url='/users/login/', redirect_field_name='next')
 def save_book(request,book_id):
     """add book for later"""
     
@@ -80,15 +80,35 @@ def save_book(request,book_id):
    
 
 
-#@login_required(login_url='/users/login/', redirect_field_name='next')
+@login_required(login_url='/users/login/', redirect_field_name='next')
 def favorite(request):
     """show favorite products"""
 
-    books = Book.objects.filter(customuser=request.user).first()
+    books = Book.objects.filter(customuser=request.user)
 
     context={
 
-        'books':books
+        'books': books
     }
 
     return render(request, "favorite.html",context)
+
+def favorite_detail(request,book_id):
+    obj = Book.objects.filter(id=book_id).first()
+    
+    context ={
+        'object': obj
+    }
+    return render(request, 'detail.html', context)
+
+
+def rate_image(request):
+    if request.method == 'POST':
+        el_id = request.POST.get('el_id')
+        val = request.POST.get('val')
+        print(val)
+        obj = Book.objects.get(id=el_id)
+        obj.score = val
+        obj.save()
+        return JsonResponse({'success':'true', 'score': val}, safe=False)
+    return JsonResponse({'success':'false'})

@@ -24,6 +24,8 @@ urlpatterns = [
     path('<book_id>', views.detail, name='book'),
     path('book/<book_id>', views.save_book, name='save_book'),
     path('favorite/', views.favorite, name='favorite'),
+    path('favorite/<book_id>', views.favorite_detail, name='detail'),
+    path('rate/',views.rate_image,name='detail')
    
     
 ]

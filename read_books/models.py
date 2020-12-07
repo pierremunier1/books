@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django import forms
 from users.models import CustomUser
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 
@@ -54,6 +55,13 @@ class Book(models.Model):
     customuser = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE)
     
+    score = models.IntegerField(default=0,
+    validators=[
+        MaxValueValidator(5),
+        MinValueValidator(0),
+    ]
+    )
+
     objects = BookManager()
 
     class Meta:
@@ -63,3 +71,10 @@ class Book(models.Model):
 
     def __str__(self):
         return self.book_name
+
+
+    
+
+  
+
+   
