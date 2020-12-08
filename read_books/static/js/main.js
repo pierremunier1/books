@@ -118,7 +118,7 @@ if (one) {
                 },
                 error: function(error){
                     console.log(error)
-                    confirmBox.innerHTML = '<h1>something went wrong</h1>'
+                    confirmBox.innerHTML = '<h5>something went wrong</h5>'
                 }
             })
         })

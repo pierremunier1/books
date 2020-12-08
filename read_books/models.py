@@ -21,7 +21,7 @@ class Category(models.Model):
 class BookManager(models.Manager):
     """manager book function"""
 
-    def add_book(self, book_id,title,book_cat,picture,user,description):
+    def add_book(self, book_id,title,book_cat,picture,user,description,author):
         """save book in favoris"""
 
         c1, created = Category.objects.get_or_create(
@@ -38,9 +38,9 @@ class BookManager(models.Manager):
             category=c1,
             picture=picture,
             customuser=c2,
-            description=description
+            description=description,
+            author=author
            
-            
         )
 
 class Book(models.Model):

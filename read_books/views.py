@@ -42,6 +42,7 @@ def detail(request,book_id):
     try:
         if book_id is not None:
             book = Response.response_front(book_id)
+            
 
         return render(
         request,
@@ -51,7 +52,9 @@ def detail(request,book_id):
             "desc": Response.build(book['description'][0]),
             "picture":book['picture'][0],
             "book_id":book_id,
-            "book_cat":book['categorie'][0]
+            "book_cat":book['categorie'][0],
+            "book_author":(book['author'][0])
+            
         }
     )
     except:
@@ -76,12 +79,11 @@ def save_book(request,book_id):
             picture=book['picture'][0],
             description=book['description'][0],
             user=user,
+            author=book['author'][0]
             )
 
     return redirect("home")
    
-
-
 @login_required(login_url='/users/login/', redirect_field_name='next')
 def favorite(request):
     """show favorite products"""
@@ -104,7 +106,8 @@ def favorite_detail(request,book_id):
     return render(request, 'detail.html', context)
 
 
-def rate_image(request):
+def rate_book(request):
+
     if request.method == 'POST':
         el_id = request.POST.get('el_id')
         val = request.POST.get('val')
@@ -116,21 +119,24 @@ def rate_image(request):
 
 
 def best_book(request):
-
     """show favorite products"""
 
-    category_name = ('Art','Music')
+    category_name = ('Music')
 
     b1 = Book.objects.filter(
-        category__category_name__icontains=choice(category_name)
-        ).order_by('score')[:5]
+        category__category_name='Music').order_by('score')[:5]
+        
     b2 = Book.objects.filter(
-        score__gte=0).order_by('score')[:5]
+        score__gte=0)[:5]
+
+    b3 = Book.objects.filter(customuser=request.user).order_by('score')[:5]
 
     context={
 
         'best_books_1': b1,
-        'best_books_2': b2
+        'best_books_2': b2,
+        'best_books_3': b3
     }
 
     return render(request, "home.html",context)
+

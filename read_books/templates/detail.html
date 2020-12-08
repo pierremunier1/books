@@ -33,12 +33,12 @@ Books
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
 		<div class="input-group input-group">
-			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="enter category" aria-describedby="search" autocomplete="off">
+			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author." aria-describedby="search" autocomplete="off">
 			{% csrf_token %}
 		</div>
 	</form>
 </div>
-<a  href="{% url "favorite" %}"><i class="fas fa-book fa-3x"></i></a>
+<a  href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
 </div>
 </div>
 </div>
@@ -58,13 +58,13 @@ Books
 	{% endfor %}
 	
 	</div>
-    
+
 	<div class="imessages-title"><div class="text-center" id="imessages-text">{{object.book_name}}</div></div>
  
 	<div class="imessages-description text-justify" id="imessages-description">
 	{% if object %}
         <div class="col text-center">
-            
+            <h5 class="response_box">Note {{object.score}}/5</h5>
                 <form class="rate-form" action="" method="POST" id="{{object.id}}">
                     {% csrf_token %}
                     <button type="submit" class="fa fa-star fa-1x my-btn" id="first"></button>
@@ -78,11 +78,11 @@ Books
             </div>
           
             {{object.picture | safe}}{{object.description}}
-           
+            
             
        
     {% else %}
-     <h1>No images to rate</h1>
+
     {% endif %}
 
 	<div class="margin"></div>
@@ -101,6 +101,7 @@ Books
 		
     	$('#imessages-description').empty()
 		$('#imessages-text').empty()
+	
 	}
 </script>
 <script src="{% static '/js/main.js' %}" defer></script>

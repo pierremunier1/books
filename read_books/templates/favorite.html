@@ -19,7 +19,7 @@ Books
 
 <div class="container">
 <div class="row h-50 justify-content-center">
-<h1 class="title">Books<h1>
+<h1 class="title">MyLibrary<h1>
 </div>
 </div>
 
@@ -31,23 +31,24 @@ Books
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
 		<div class="input-group input-group">
-			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Un titre,un auteur,un mot.." aria-describedby="search" autocomplete="off">
+			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author." aria-describedby="search" autocomplete="off">
 			{% csrf_token %}
 		</div>
 	</form>
 </div>
-<a  href="{% url "favorite" %}"><i class="fas fa-book fa-3x"></i></a>
+<a  href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
 </div>
 </div>
 </div>
 	<div class="margin"></div>
 
-<div class="container col-md-6 text-center">
+<div class="container col-md-6">
 
-	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
+	<div class="imessages-title">
 	<div class="imessages-description" id="imessages-description">
 	<div class="margin"></div>
-	<div class="response_box" id="imessages-text">
+	<h2 class="title_cat">My Library</h2>
+	<div class="response_box bulle" id="imessages-text">
 
 	{%for book in books%}
 
