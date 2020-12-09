@@ -119,8 +119,9 @@ color: rgb(7, 7, 7);
     max-height: 650px;
     height: 200px;
     display: flex;
-    overflow-x: hidden;
+    overflow-x:scroll;
     overflow-y: hidden; 
+   
    
 }
 .response_box::-webkit-scrollbar{

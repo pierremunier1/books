@@ -23,7 +23,7 @@ Books
 <div class="container">
 <div class="row h-50 justify-content-center">
 
-<div class="col-md-8 justify-content-center">
+<div class="col-md-6 justify-content-center">
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
 		<div class="input-group input-group">
@@ -32,16 +32,17 @@ Books
 		</div>
 	</form>
 </div>
-<a  href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
+
+<a href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
 </div>
 </div>
 </div>
 	
-<div class="margin"></div>
+
 	
 
 <div class="container col-md-8">
-	<div class="margin"></div>
+	<div class="margin-mid"></div>
 	<div class="imessages-title">
 	<div class="imessages-description" id="imessages-description">
 	<div class="margin"></div>
@@ -75,14 +76,6 @@ Books
 </div>
 </div>
 
-<div class="margin"></div>
-	
-
-<div class="row justify-content-center">
-
-
-</div>
-
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -106,5 +99,7 @@ Books
 {% endblock content%}
 
 {% block social %}
+
 {% endblock social%}
+
 </body>
