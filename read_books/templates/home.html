@@ -40,22 +40,12 @@ Books
 <div class="margin"></div>
 	
 
-<div class="container col-md-6">
+<div class="container col-md-8">
 	<div class="margin"></div>
 	<div class="imessages-title">
 	<div class="imessages-description" id="imessages-description">
 	<div class="margin"></div>
 	<h2 class="title_cat "> New</h2>
-	<div class="response_box bulle " id="imessages-text">
-
-	{%for best_book_2 in best_books_2%}
-
-	{{best_book_2.picture|safe}}
-
-	{% endfor %}
-	</div>
-
-	<h2 class="title_cat "> Top Music</h2>
 	<div class="response_box bulle " id="imessages-text">
 
 	{%for best_book_1 in best_books_1%}
@@ -65,13 +55,15 @@ Books
 	{% endfor %}
 	</div>
 
-	<h2 class="title_cat" id="imessages-text">Users</h2>
+
+
+	<h2 class="title_cat" id="imessages-text">Top</h2>
 	
 	<div class="response_box bulle" id="imessages-text">
 
-	{%for best_book_3 in best_books_3%}
+	{%for best_book_2 in best_books_2%}
 
-	{{best_book_3.picture|safe}}
+	{{best_book_2.picture|safe}}
 
 	{% endfor %}
 	</div>

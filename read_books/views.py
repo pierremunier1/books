@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404
 from read_books.models import Book
 from users.models import CustomUser
 from django.contrib.auth.decorators import login_required
-from random import choice
 
 
 def result(request):
@@ -28,9 +27,7 @@ def result(request):
                     'picture':Response.build(books[0]['picture']),
                     'title':books[0]['title']
             }
-
             return JsonResponse(result,safe=False)
-
         except:
             return HttpResponse(book_error)
 
@@ -50,7 +47,7 @@ def detail(request,book_id):
         {
             "title":Response.build(book['title'][0]),
             "desc": Response.build(book['description'][0]),
-            "picture":book['picture'][0],
+            "picture_detail":book['picture_detail'][0],
             "book_id":book_id,
             "book_cat":book['categorie'][0],
             "book_author":(book['author'][0])
@@ -77,6 +74,7 @@ def save_book(request,book_id):
             title=(book['title'][0]),
             book_cat=Response.build(book['categorie'][0]),
             picture=book['picture'][0],
+            picture_detail=book['picture_detail'][0],
             description=book['description'][0],
             user=user,
             author=book['author'][0]
@@ -86,7 +84,7 @@ def save_book(request,book_id):
    
 @login_required(login_url='/users/login/', redirect_field_name='next')
 def favorite(request):
-    """show favorite products"""
+    """show favorite books"""
 
     books = Book.objects.filter(customuser=request.user).order_by('score')
 
@@ -98,6 +96,8 @@ def favorite(request):
     return render(request, "favorite.html",context)
 
 def favorite_detail(request,book_id):
+    """show book detail in favorite"""
+
     obj = Book.objects.filter(id=book_id).first()
     
     context ={
@@ -107,6 +107,7 @@ def favorite_detail(request,book_id):
 
 
 def rate_book(request):
+    """rate book"""
 
     if request.method == 'POST':
         el_id = request.POST.get('el_id')
@@ -123,20 +124,18 @@ def best_book(request):
 
     category_name = ('Music')
 
-    b1 = Book.objects.filter(
-        category__category_name='Music').order_by('score')[:5]
+    b1 = Book.objects.all()[:8]
         
     b2 = Book.objects.filter(
-        score__gte=0)[:5]
-
-    b3 = Book.objects.filter(customuser=request.user).order_by('score')[:5]
+        score__gte=3).order_by('score')[:8]
 
     context={
-
         'best_books_1': b1,
         'best_books_2': b2,
-        'best_books_3': b3
+        
     }
 
-    return render(request, "home.html",context)
+    return render(
+        request, "home.html",context
+        )
 

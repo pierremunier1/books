@@ -21,7 +21,7 @@ class Category(models.Model):
 class BookManager(models.Manager):
     """manager book function"""
 
-    def add_book(self, book_id,title,book_cat,picture,user,description,author):
+    def add_book(self, book_id,title,book_cat,picture,picture_detail,user,description,author):
         """save book in favoris"""
 
         c1, created = Category.objects.get_or_create(
@@ -37,6 +37,7 @@ class BookManager(models.Manager):
             book_name=title,
             category=c1,
             picture=picture,
+            picture_detail=picture_detail,
             customuser=c2,
             description=description,
             author=author
@@ -50,6 +51,7 @@ class Book(models.Model):
     author = models.CharField(max_length=150)
     description = models.CharField(max_length=10000)
     picture = models.CharField(max_length=350)
+    picture_detail = models.CharField(max_length=350)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE
     )

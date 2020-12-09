@@ -39,7 +39,7 @@ class GoogleApi:
         books_date = []
         books_pic = []
         books_cat = []
-
+        books_pic_detail = []
         try:
     
             for book in google_books['items']:
@@ -56,30 +56,31 @@ class GoogleApi:
                     books_title.append(self.book_title)
                     books_author.append(self.book_author)
                     books_pic.append(link)
-                    
+                    books_pic_detail.append(self.book_pic)
                     books_desc.append(self.book_desc)
                     books_cat.append(self.categorie)
 
-            return books_title,books_author,books_pic,books_desc,books_cat
+            return books_title,books_author,books_pic,books_desc,books_cat,books_pic_detail
         except:
-            return '','','','',''
+            return '','','','','',''
 
         
 class Response:
-
+    """return response to the front"""
     def response_front(query):
 
         """send data to the front"""
 
         query_book = GoogleApi(query)
-        books_title,books_author,books_pic,books_desc,books_cat = query_book.get_books()
+        books_title,books_author,books_pic,books_desc,books_cat,books_pic_detail = query_book.get_books()
 
         result = {
             'title': books_title,
             'picture': books_pic,
             'author': books_author,
             'description': books_desc,
-            'categorie':books_cat
+            'categorie':books_cat,
+            'picture_detail': books_pic_detail
 
             }
 
@@ -99,5 +100,15 @@ class Response:
             .replace('"'," "))
 
         return result
+
+    def build_link(result):
+
+        """create link"""
+
+        result = f'"<img class=picture_detail src={result}></img></a></div>"'
+
+        return result
+
+
 
         

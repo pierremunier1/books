@@ -47,7 +47,7 @@ Books
 	<div class="margin-mid"></div>
 	<div class="text-right"><a href="{% url "save_book" book_id %}" method="post" title="Enregistrer" id="icon"><i class="fas fa-book fa-2x icon"></i></a></div>
 	<div class="margin-mid"></div>
-	<div class="imessages-description text-justify" id="imessages-description">{{ picture | safe }}
+	<div class="imessages-description text-justify" id="imessages-description"><div><img class="picture_detail" src={{ picture_detail }}></img></a></div>
 	<div class="response_box" id="imessages-text">{{ desc }}
 	</div>
 	<div class="margin-mid"></div>
