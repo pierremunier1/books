@@ -117,7 +117,7 @@ color: rgb(7, 7, 7);
 
     font-family:"monospace";
     max-height: 650px;
-    height: 200px;
+    height: 220px;
     display: flex;
     overflow-x:scroll;
     overflow-y: hidden; 

@@ -7,78 +7,64 @@ from users.models import CustomUser
 from django.contrib.auth.decorators import login_required
 
 
+
 def result(request):
     """display result of get_books function"""
 
     books = list()
-    book_error = 'incorrect'
+
+    query = request.POST.get('query')
     
-    if request.is_ajax and request.method == "POST":
+    qs = Response.response_front(query)
 
-        try:
-            query = request.POST.get('query')
-            
-            qs = Response.response_front(query)
+    for book in qs:
+        books.append(qs)
+
+    result = {
+            'picture':Response.build(books[0]['picture']),
+            'title':books[0]['title']
+    }
+
+    return JsonResponse(result,safe=False)
     
-            for book in qs:
-                books.append(qs)
-
-            result = {
-                    'picture':Response.build(books[0]['picture']),
-                    'title':books[0]['title']
-            }
-            return JsonResponse(result,safe=False)
-        except:
-            return HttpResponse(book_error)
-
 
 def detail(request,book_id):
 
-    book_error=('ko')
+    if book_id is not None:
+        book = Response.response_front(book_id)
+        
+    context = {
+        "title":Response.build(book['title'][0]),
+        "desc": Response.build(book['description'][0]),
+        "picture_detail":book['picture_detail'][0],
+        "book_id":book_id,
+        "book_cat":book['categorie'][0],
+        "book_author":(book['author'][0])
+    }
+    return render(
+    request,
+    "book.html",context)
 
-    try:
-        if book_id is not None:
-            book = Response.response_front(book_id)
-            
-
-        return render(
-        request,
-        "book.html",
-        {
-            "title":Response.build(book['title'][0]),
-            "desc": Response.build(book['description'][0]),
-            "picture_detail":book['picture_detail'][0],
-            "book_id":book_id,
-            "book_cat":book['categorie'][0],
-            "book_author":(book['author'][0])
-            
-        }
-    )
-    except:
-        return HttpResponse(book_error)
-
-#login_required(login_url='/users/login/', redirect_field_name='next')
+@login_required(login_url='/users/login/', redirect_field_name='next')
 def save_book(request,book_id):
     """add book for later"""
     
-    if book_id is not None:
-        book = Response.response_front(book_id)
-
     if request.user.is_authenticated:
         user = get_object_or_404(
         CustomUser,
         id=request.user.id
-    )
+        )
+        book = Response.response_front(book_id)
         Book.objects.add_book(
-            book_id,
-            title=(book['title'][0]),
-            book_cat=Response.build(book['categorie'][0]),
-            picture=book['picture'][0],
-            picture_detail=book['picture_detail'][0],
-            description=book['description'][0],
-            user=user,
-            author=book['author'][0]
-            )
+        book_id,
+        user,
+        title=(book['title'][0]),
+        book_cat=Response.build(book['categorie'][0]),
+        picture=book['picture'][0],
+        picture_detail=book['picture_detail'][0],
+        description=book['description'][0],
+        author=book['author'][0]
+        )
 
     return redirect("home")
    
@@ -92,7 +78,6 @@ def favorite(request):
 
         'books': books
     }
-
     return render(request, "favorite.html",context)
 
 def favorite_detail(request,book_id):
@@ -104,7 +89,6 @@ def favorite_detail(request,book_id):
         'object': obj
     }
     return render(request, 'detail.html', context)
-
 
 def rate_book(request):
     """rate book"""
@@ -124,7 +108,7 @@ def best_book(request):
 
     category_name = ('Music')
 
-    b1 = Book.objects.all()[:8]
+    b1 = Book.objects.all()[:10]
         
     b2 = Book.objects.filter(
         score__gte=3).order_by('score')[:8]
@@ -134,7 +118,6 @@ def best_book(request):
         'best_books_2': b2,
         
     }
-
     return render(
         request, "home.html",context
         )

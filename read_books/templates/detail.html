@@ -42,14 +42,13 @@ Books
 </div>
 </div>
 </div>
-	<div class="margin"></div>
+	
 
-<div class="container col-md-6 text-center">
+<div class="container col-sd-8 text-center">
 
 	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
 	<div class="imessages-description" id="imessages-description">
 	<div class="margin"></div>
-	<div class="response_box" id="imessages-text">
 
 	{%for book in books%}
 
@@ -64,7 +63,7 @@ Books
 	<div class="imessages-description text-justify" id="imessages-description">
 	{% if object %}
         <div class="col text-center">
-            <h5 class="response_box">Note {{object.score}}/5</h5>
+            <h5 >Note {{object.score}}/5</h5>
                 <form class="rate-form" action="" method="POST" id="{{object.id}}">
                     {% csrf_token %}
                     <button type="submit" class="fa fa-star fa-1x my-btn" id="first"></button>
@@ -79,15 +78,12 @@ Books
 			<div class="picture-detail">
             <div><img class="picture_detail" src={{ object.picture_detail }}></img></a></div>{{object.description}}
 			</div>
-			
-            
-            
-       
     {% else %}
 
     {% endif %}
 
-	<div class="margin"></div>
+	</div>
+	</div>
 	</div>
 </div>
 <div class="row justify-content-center">

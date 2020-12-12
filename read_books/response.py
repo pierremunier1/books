@@ -5,15 +5,12 @@ from random import choice
 import os
 from . import config
 
-
-
 class GoogleApi:
     """classe contains method for geocoding api"""
 
     def __init__(self,query):
 
         self.query = query
-        
         
     def get_books(self):
 
@@ -101,13 +98,7 @@ class Response:
 
         return result
 
-    def build_link(result):
 
-        """create link"""
-
-        result = f'"<img class=picture_detail src={result}></img></a></div>"'
-
-        return result
 
 
 
