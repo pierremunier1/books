@@ -6,6 +6,7 @@ from django.urls import reverse
 from users.models import CustomUser
 from .models import Category, Book
 
+
 ###################################################################################
 #   Tests response.py
 #
@@ -128,6 +129,7 @@ class TestViews(TestCase):
         self.customuser = CustomUser.objects.create_user(
             self.username,self.email, self.password)
         self.customuser.save()
+        
 
     result = {
             'picture': "<div><a href=Y7sOAAAAIAAJ><img class=imessages-picture src=http://books.google.com/books/content?id=Y7sOAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api></img></a></div>",'title':"Alice's Adventures in Wonderland"
@@ -171,7 +173,7 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         response_1 = self.client.post(f'/book/{book_id}')
         self.assertEquals(response_1.status_code, 302)
-        self.assertRedirects(response,'/')
+        self.assertRedirects(response,'/home')
 
 
     def test_favorite(self):
@@ -188,7 +190,7 @@ class TestViews(TestCase):
     
     def test_favorite_detail(self):
         """obtain detail from favorite book"""
-        
+
         book_id = 'Y7sOAAAAIAAJ'
         response = self.client.post(f'/favorite/{book_id}')
         category = Category.objects.create(category_name='fiction')
@@ -209,7 +211,8 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response,'detail.html')
         
 
+    def test_best_books(self):
+        """show favorite books"""
 
-
-
-
+        response = self.client.get(reverse('best_book'))
+        self.assertTemplateUsed(response, 'home.html')

@@ -21,14 +21,13 @@ class GoogleApi:
             'subject:': self.query,
             'inauthor:': self.query,
             'intitle:':self.query,
-            'maxResults':5,
+            'maxResults':15,
             'key': os.environ.get('API_KEY_BACK')}
             
         result = requests.get(
             'https://www.googleapis.com/books/v1/volumes?',
             params=payload)
         google_books = result.json()
-        
         
         books_title = []
         books_desc = []

@@ -29,7 +29,8 @@ function inputForm() {
               newDiv_3.innerHTML = query["picture"];
               
               document.getElementById("imessages-description").appendChild(newDiv_3);
-
+              document.getElementById("title_cat_result").style.visibility="visible";
+              document.getElementById("imessages-description").style.visibility="visible";
               });
 })
 }

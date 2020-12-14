@@ -26,7 +26,7 @@
 .imessages-description{
     
     font-family: "monospace";
-   
+
 }
 .imessages-author{
 
@@ -60,11 +60,12 @@
 .title_cat{
 
 font-family:monospace;
+
 font-size: 25pt;
-color: rgb(7, 7, 7);
+color: white;
+background-color:rgb(80, 185, 255)
 
 }
-
 
 .thumbnail{
 
@@ -101,10 +102,11 @@ color: rgb(7, 7, 7);
     height: 180px;
     margin: 5px;
     border-radius: 7px;
-    box-shadow:3px 3px 3px gray;
+    box-shadow:3px 3px 3px rgb(196, 192, 192);
     transition: transform .2s; /* Animation */
-    float: left;
+    float:left;
     display: flex;
+    
 }
 
 .imessages-picture:hover{
@@ -115,27 +117,38 @@ color: rgb(7, 7, 7);
 
 .response_box{
 
+    border-radius: 7px;
     font-family:"monospace";
     max-height: 650px;
     height: 220px;
     display: flex;
     overflow-x:scroll;
     overflow-y: hidden; 
-   
+    
+    
    
 }
 .response_box::-webkit-scrollbar{
     width: 0;
+    
+}
+
+
+.response_box_1{
+
+    font-family:"monospace";
+    max-height: 650px;
+    
 }
 
 .picture_detail{
 
-  
     width: 145px;
     height: 180px;
     padding-right: 15px;
     border-radius: 7px;
     float: left;
+    
 }
 
 .title_box{
@@ -165,6 +178,8 @@ color: rgb(7, 7, 7);
     width: 129px;
 }
 
-
-
+  .dark-mode {
+    background-color: rgb(4, 6, 31);
+    color: rgb(119, 114, 114);
+  }
 

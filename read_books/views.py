@@ -107,15 +107,17 @@ def best_book(request):
     """show favorite products"""
 
     category_name = ('Music')
+    username='admin'
 
     b1 = Book.objects.all()[:10]
         
     b2 = Book.objects.filter(
-        score__gte=3).order_by('score')[:8]
+        score__gte=4).order_by('score')[:8]
 
     context={
         'best_books_1': b1,
         'best_books_2': b2,
+ 
         
     }
     return render(

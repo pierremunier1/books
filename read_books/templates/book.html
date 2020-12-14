@@ -43,12 +43,19 @@ Books
 	<div class="margin-mid"></div>
 
 <div class="container col-sd-8">
-	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
+<div class="margin"></div>
+<!-- Default checked -->
+<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
+  <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
+</div>
+<div class="text-right"><a href="{% url "save_book" book_id %}" method="post" title="Enregistrer" id="icon"><a href="{% url "favorite" %}"><i class="fas fa-book-medical fa-2x icon"></i></i></a></i></a></div>
+	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text">{{title}}</div></div>
 	<div class="margin-mid"></div>
-	<div class="text-right"><a href="{% url "save_book" book_id %}" method="post" title="Enregistrer" id="icon"><i class="fas fa-book fa-2x icon"></i></a></div>
-	<div class="margin-mid"></div>
+	
+
 	<div class="imessages-description text-justify" id="imessages-description"><div><img class="picture_detail" src={{ picture_detail }}></img></a></div>
-	<div class="response_box" id="imessages-text">{{ desc }}
+	<div class="response_boxe" id="imessages-text">{{ desc }}
 	</div>
 	<div class="margin-mid"></div>
 	<div class="imessages-author"><div class="text-right" id="imessages-text">{{book_author}}</div></div>
@@ -75,6 +82,12 @@ Books
 	inputForm();
 </script>
 
+<script>
+function myFunction() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+}
+</script>
 
 
 {% endblock header %}

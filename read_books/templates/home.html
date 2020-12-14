@@ -22,8 +22,7 @@ Books
 
 <div class="container">
 <div class="row h-50 justify-content-center">
-<a href="{% url "login" %}"><i class="fas fa-user fa-3x icon-title"></i></a>
-<a href="{% url "logout" %}"><i class="fas fa-user fa-3x icon-title"></i></a>}
+<a href="{% url "logout" %}"><i class="fas fa-user fa-3x icon-title"></i></a>
 <div class="col-md-6 justify-content-center">
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
@@ -39,17 +38,13 @@ Books
 </div>
 </div>
 </div>
-	
-
-	
-
 <div class="container col-sd-8">
 	<div class="margin-mid"></div>
 	<div class="imessages-title">
 	<div class="imessages-description" id="imessages-description">
 	<div class="margin"></div>
 	<h2 class="title_cat "> New</h2>
-	<div class="response_box bulle " id="imessages-text">
+	<div class="response_box " id="imessages-text">
 
 	{%for best_book_1 in best_books_1%}
 
@@ -57,12 +52,10 @@ Books
 
 	{% endfor %}
 	</div>
-
-
-
-	<h2 class="title_cat" id="imessages-text">Top</h2>
 	
-	<div class="response_box bulle" id="imessages-text">
+	<h2 class="title_cat " id="imessages-text">Top</h2>
+	
+	<div class="response_box" id="imessages-text">
 
 	{%for best_book_2 in best_books_2%}
 
@@ -70,7 +63,7 @@ Books
 
 	{% endfor %}
 	</div>
-
+	
 	
 	</div>
 	</div>
