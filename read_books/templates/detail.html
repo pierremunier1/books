@@ -44,11 +44,7 @@ Books
 </div>
 	
 
-<div class="container col-sd-8 text-left">
-<div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
-  <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
-</div>
+
 	<div class="imessages-title"><div class="text-center" id="imessages-text">{{title}}</div></div>
 	<div class="imessages-description" id="imessages-description">
 	<div class="margin"></div>
@@ -60,31 +56,36 @@ Books
 	{% endfor %}
 	
 	</div>
-
+<div class="container col-sd-8 text-left">
+<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
+  <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
+</div>
 	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text">{{object.book_name}}</div></div>
-	
-	{% if object %}
-        <div class="col text-center">
-            <h5 >Note {{object.score}}/5</h5>
+	<div>
+	  {% if object %}
+        <div class="row">
+            <div class="col text-center">
                 <form class="rate-form" action="" method="POST" id="{{object.id}}">
                     {% csrf_token %}
                     <button type="submit" class="fa fa-star fa-1x my-btn" id="first"></button>
                     <button type="submit" class="fa fa-star fa-1x my-btn" id="second"></button>
-                    <button type="submit" class="fa fa-star fa-1x my-btn" id="third"></button>
+                  	<button type="submit" class="fa fa-star fa-1x my-btn" id="third"></button>
                     <button type="submit" class="fa fa-star fa-1x my-btn" id="fourth"></button>
                     <button type="submit" class="fa fa-star fa-1x my-btn" id="fifth"></button>
                 </form>
                 <br>
                 <div id="confirm-box"></div>
             </div>
-			
+        </div>
+    {% endif %}
+	
+        </div>
 			<div class="imessages-description text-justify" id="imessages-description">
 			<div class="picture-detail">
             <div><img class="picture_detail" src={{ object.picture_detail }}></img></a></div>{{object.description}}
-			</div>
-    {% else %}
-
-    {% endif %}
+		</div>
+    
 
 	</div>
 	</div>
@@ -106,12 +107,12 @@ Books
 	
 	}
 </script>
-<script src="{% static '/js/main.js' %}" defer></script>
+
 
 <script>
 	inputForm();
 </script>
-<button onclick="myFunction()">Toggle dark mode</button>
+
 <script>
 function myFunction() {
   var element = document.body;

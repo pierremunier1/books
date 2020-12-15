@@ -54,6 +54,7 @@
 .icon-title:hover{
 
     transform: scale(1.1); 
+    
 
 }
 
@@ -63,7 +64,7 @@ font-family:monospace;
 
 font-size: 25pt;
 color: white;
-background-color:rgb(80, 185, 255)
+background-color:rgb(12, 63, 129);
 
 }
 
@@ -121,12 +122,11 @@ background-color:rgb(80, 185, 255)
     font-family:"monospace";
     max-height: 650px;
     height: 220px;
-    display: flex;
+   
     overflow-x:scroll;
     overflow-y: hidden; 
     
-    
-   
+
 }
 .response_box::-webkit-scrollbar{
     width: 0;
@@ -166,11 +166,6 @@ background-color:rgb(80, 185, 255)
 }
 
 
-.form-control{
-    
-    height: 50px;
-    
-}
 
 .box_title{
 
@@ -178,8 +173,18 @@ background-color:rgb(80, 185, 255)
     width: 129px;
 }
 
-  .dark-mode {
+.dark-mode {
     background-color: rgb(4, 6, 31);
-    color: rgb(119, 114, 114);
+    color: rgb(19, 3, 107);
   }
 
+button{
+  
+  z-index: 1;
+  right: 0;
+}
+
+img {
+  position: relative;
+  width: 100%;
+}

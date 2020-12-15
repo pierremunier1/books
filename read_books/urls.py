@@ -27,5 +27,6 @@ urlpatterns = [
     path('favorite/<book_id>', views.favorite_detail, name='favorite'),
     path('rate/',views.rate_book,name='detail'),
     path('',views.best_book,name='home'),
+    path('remove_book/<book_id>/',views.remove_book,name='remove_book')
    
 ]

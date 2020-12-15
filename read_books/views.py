@@ -124,3 +124,21 @@ def best_book(request):
         request, "home.html",context
         )
 
+@login_required(login_url='/users/login/?next=/favorite/', redirect_field_name='next')
+def remove_book(request, book_id):
+    """remove book"""
+
+    user = CustomUser.objects.get(
+        id=request.user.id
+    )
+    book_name = Book.objects.get(
+        id=book_id
+    )
+    book = get_object_or_404(
+        Book,
+        customuser=user,
+        book_name=book_name,
+    )
+    book.delete()
+
+    return redirect('favorite')
