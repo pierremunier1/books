@@ -15,7 +15,6 @@ Books
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
 
-
 <div class="container">
 <div class="row h-50 justify-content-center">
 <h1 class="title">Books<h1>
@@ -23,35 +22,39 @@ Books
 </div>
 
 
-
 <div class="container">
 <div class="row h-50 justify-content-center">
 
-<div class="col-md-8 justify-content-center">
+
+<div class="container">
+<div class="row h-50 justify-content-center">
+<a href="{% url "logout" %}"><i class="fas fa-user fa-3x icon-title"></i></a>
+<div class="col-md-6 justify-content-center">
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
 		<div class="input-group input-group">
-			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author." aria-describedby="search" autocomplete="off">
+			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
 			{% csrf_token %}
 		</div>
 	</form>
 </div>
-<a  href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
-</div>
-</div>
-</div>
-	<div class="margin-mid"></div>
 
-<div class="container col-sd-8">
+<a href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
+
+</div>
+</div>
+</div>
+	
+<div class="container col-sd-8 text-left">
 <div class="margin"></div>
-<!-- Default checked -->
-<div class="custom-control custom-switch">
+	
+	<div class="custom-control custom-switch">
   <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
   <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
 </div>
-<div class="text-right"><a href="{% url "save_book" book_id %}" method="post" title="Enregistrer" id="icon"><i class="fas fa-book-medical fa-2x icon"></i></i></a></i></a></div>
-	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text">{{title}}</div></div>
-	
+	<div class="imessages-title "><div class="title_cat mx-auto" id="imessages-text">{{title}}<a href="{% url "save_book" book_id %}" method="post" title="Enregistrer" id="icon"><i class="fas fa-book-medical fa-1x icon"></i></i></a></i></a></div></div>
+	<div class="margin-mid"></div>
+	<div class="margin-mid"></div>
 	
 
 	<div class="imessages-description text-justify" id="imessages-description"><div><img class="picture_detail" src={{ picture_detail }}></img></a></div>

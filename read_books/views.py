@@ -14,8 +14,9 @@ def result(request):
     books = list()
 
     query = request.POST.get('query')
-    
+   
     qs = Response.response_front(query)
+
 
     for book in qs:
         books.append(qs)
@@ -25,6 +26,7 @@ def result(request):
             'title':books[0]['title']
     }
 
+    
     return JsonResponse(result,safe=False)
     
 
@@ -124,7 +126,6 @@ def best_book(request):
         request, "home.html",context
         )
 
-@login_required(login_url='/users/login/?next=/favorite/', redirect_field_name='next')
 def remove_book(request, book_id):
     """remove book"""
 

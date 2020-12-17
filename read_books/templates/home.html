@@ -12,12 +12,15 @@ Books
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
 
-
 <div class="container">
 <div class="row h-50 justify-content-center">
 <h1 class="title">Books<h1>
 </div>
 </div>
+
+
+<div class="container">
+<div class="row h-50 justify-content-center">
 
 
 <div class="container">
@@ -38,12 +41,14 @@ Books
 </div>
 </div>
 </div>
-<div class="container col-sd-8">
+	
+<div class="container  col-sd-8 text-left">
+<div class="margin-mid"></div>
 	<div class="margin-mid"></div>
 	<div class="imessages-title">
-	<div class="imessages-description" id="imessages-description">
+	<div class="imessages-description  body" id="imessages-description">
 	<div class="margin"></div>
-	<h2 class="title_cat "> New</h2>
+	<div class="title_cat"><a>New</a></div>
 	<div class="response_box " id="imessages-text">
 
 	{%for best_book_1 in best_books_1%}
@@ -53,7 +58,7 @@ Books
 	{% endfor %}
 	</div>
 	
-	<h2 class="title_cat " id="imessages-text">Top</h2>
+	<div class="title_cat"><a>Top</a></div>
 	
 	<div class="response_box" id="imessages-text">
 
@@ -92,9 +97,5 @@ Books
 {% block content%}
  
 {% endblock content%}
-
-{% block social %}
-
-{% endblock social%}
 
 </body>

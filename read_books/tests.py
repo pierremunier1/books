@@ -173,7 +173,7 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         response_1 = self.client.post(f'/book/{book_id}')
         self.assertEquals(response_1.status_code, 302)
-        self.assertRedirects(response,'/home')
+        self.assertRedirects(response,'/')
 
 
     def test_favorite(self):
@@ -214,5 +214,25 @@ class TestViews(TestCase):
     def test_best_books(self):
         """show favorite books"""
 
-        response = self.client.get(reverse('best_book'))
+        response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'home.html')
+
+    def test_favorite_remove_book(self):
+        """test access to remove book"""
+
+        category = Category.objects.create(category_name='fiction')
+        book_alice = {
+            'id': 'Y7sOAAAAIAAJ',
+            'book_name': "Alice's Adventures in Wonderland",
+            'author':'Lewis Carroll',
+            'description': 'test',
+            'picture': 'https://test',
+            'picture_detail': 'https://test',
+            'category': Category.objects.get(category_name=category),
+            'customuser': CustomUser.objects.get(username=self.customuser),
+            'score': 0
+        }
+        self.book_alice = Book.objects.create(**book_alice)
+        self.client.login(username=self.username, password=self.password)
+        response = self.client.post(f'/remove_book/{self.book_alice.id}/')
+        self.assertEqual(response.status_code, 302)
