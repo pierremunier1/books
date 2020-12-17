@@ -18,6 +18,12 @@ import dj_database_url
 env = environ.Env()
 environ.Env.read_env()
 
+if os.environ.get('ENV') =='PRODUCTION':
+    DEBUG = False
+else:
+    DEBUG = True
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,9 +35,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['167.99.34.204']
 
 
 # Application definition
@@ -49,7 +55,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
-#AUTHENTICATION_BACKENDS = ['users.backend.EmailBackend']
+AUTHENTICATION_BACKENDS = ['users.backend.EmailBackend']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
