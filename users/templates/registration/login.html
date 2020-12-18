@@ -1,37 +1,57 @@
 {% extends 'base.html' %}
-
 {% load static %}
+<body>
+{% block title %}
+Books
+{% endblock title %}
 
-{% block nav %}
-
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
-
-<nav class="navbar navbar-expand-lg fixed-top py-3" id="mainNav">
-	<div class="container">
-		<a class="navbar-brand js-scroll-trigger" href={% url "home" %}><img src="\static\icons\logo_pb.png" width="50px" height="50px"> Pur Beurre </a>
-		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-		
-	</div>
-</div>
-<div class="collapse navbar-collapse" id="navbarResponsive">
-	<ul class="navbar-nav ml-auto my-2 my-lg-0">
-		<li class="nav-item"><a class="nav-link js-scroll-trigger" href={% url "signup"%}>Créer un compte  - <i class="fas fa-user fa-3x"></i></a></li>
-	</ul>
-</div>
-
-</nav>
-
-
-{% endblock nav %}
 
 {% block header %}
+<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="{% static '/js/index.js' %}"></script>
+
+<div class="container">
+<div class="row h-50 justify-content-center">
+<h1 class="title">Books<h1>
+</div>
+</div>
 
 
+<div class="container">
+<div class="row h-50 justify-content-center">
 
-<header class="masthead text-center text-white d-flex">
 
+<div class="container">
+<div class="row h-50 justify-content-center">
+<a href="{% url "login" %}"><i class="fas fa-user fa-3x icon-title"></i></a>
+<div class="col-md-6 justify-content-center">
+	<form class="input" id="usertext-form"  method='GET'>
+		{% csrf_token %}
+		<div class="input-group input-group">
+			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
+			{% csrf_token %}
+		</div>
+	</form>
+</div>
 
-<div class="container my-auto">
+<a href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
+
+</div>
+</div>
+</div>
+	
+<div class="container  col-sd-8 text-left">
+<div class="margin-mid"></div>
+	<div class="margin-mid"></div>
+	<div class="imessages-title">
+	<div class="imessages-description  body" id="imessages-description">
+	<div class="margin"></div>
+	<div class="title_cat"><a>Registration</a></div>
+	<div class="response_boxe" id="imessages-text">
+
+	<div class="container my-auto">
   <h3 class="text-center">Se connecter</h3>
 		  <div class="row justify-content-center text-align-center">
       
@@ -46,12 +66,35 @@
 'csrfmiddlewaretoken': $('csrfmiddlewaretoken').val()};
 </script>
 
-</header>
+	</div>
+	
+	
+	</div>
+	</div>
+	</div>
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	function myFunc() {
+		
+    	$('#imessages-description').empty()
+		$('#imessages-text').empty()
+	}
+</script>
+<script>
+	inputForm();
+</script>
+
+
 
 {% endblock header %}
 
-{% block content %}
-{% endblock content %}
+{% block content%}
+ 
+{% endblock content%}
 
-
-
+</body>
