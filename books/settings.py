@@ -18,10 +18,6 @@ import dj_database_url
 env = environ.Env()
 environ.Env.read_env()
 
-if os.environ.get('ENV') =='PRODUCTION':
-    DEBUG = False
-else:
-    DEBUG = True
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +33,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['167.99.34.204']
+ALLOWED_HOSTS = ['167.99.34.204','127.0.0.1']
 
 
 # Application definition
@@ -146,4 +142,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
