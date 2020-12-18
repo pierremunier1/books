@@ -133,7 +133,7 @@ background-color:rgb(48, 108, 163);
     font-family:"monospace";
     max-height: 650px;
     height: 220px;
-   
+    display: flex;
     overflow-x:scroll;
     overflow-y: hidden; 
     
