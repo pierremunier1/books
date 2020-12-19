@@ -13,24 +13,26 @@ def result(request):
 
     books = list()
 
-    query = request.POST.get('query')
-   
-    qs = Response.response_front(query)
-
-
-    for book in qs:
-        books.append(qs)
-
-    result = {
-            'picture':Response.build(books[0]['picture']),
-            'title':books[0]['title']
-    }
-
+    try:
+        query = request.POST.get('query')
     
-    return JsonResponse(result,safe=False)
+        qs = Response.response_front(query)
+
+        for book in qs:
+            books.append(qs)
+
+        result = {
+                'picture':Response.build(books[0]['picture']),
+                'title':books[0]['title']
+        }
+    
+        return JsonResponse(result,safe=False)
+    except:
+        print('error')
     
 
 def detail(request,book_id):
+    """detail of book"""
 
     if book_id is not None:
         book = Response.response_front(book_id)
@@ -119,12 +121,11 @@ def best_book(request):
     context={
         'best_books_1': b1,
         'best_books_2': b2,
- 
-        
     }
     return render(
         request, "home.html",context
         )
+
 
 def remove_book(request, book_id):
     """remove book"""

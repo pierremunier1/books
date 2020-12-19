@@ -29,4 +29,5 @@ urlpatterns = [
     path('',views.best_book,name='home'),
     path('remove_book/<book_id>/',views.remove_book,name='remove_book')
    
+   
 ]

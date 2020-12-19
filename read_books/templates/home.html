@@ -12,6 +12,7 @@ Books
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
 
+
 <div class="container">
 <div class="row h-50 justify-content-center">
 <h1 class="title">Books<h1>
@@ -45,9 +46,13 @@ Books
 <div class="container  col-sd-8 text-left">
 <div class="margin-mid"></div>
 	<div class="margin-mid"></div>
-	<div class="imessages-title">
-	<div class="imessages-description  body" id="imessages-description">
+	<div class="imessages-title" id="imessages-title">
 	<div class="margin"></div>
+	
+	
+	
+	</div>
+
 	<div class="title_cat"><a>New</a></div>
 	<div class="response_box " id="imessages-text">
 
@@ -56,8 +61,8 @@ Books
 	{{best_book_1.picture|safe}}
 
 	{% endfor %}
-	</div>
 	
+	</div>
 	<div class="title_cat"><a>Top</a></div>
 	
 	<div class="response_box" id="imessages-text">
@@ -67,12 +72,9 @@ Books
 	{{best_book_2.picture|safe}}
 
 	{% endfor %}
-	</div>
-	
 	
 	</div>
-	</div>
-	</div>
+	
 </div>
 </div>
 
@@ -82,8 +84,8 @@ Books
 <script>
 	function myFunc() {
 		
-    	$('#imessages-description').empty()
-		$('#imessages-text').empty()
+    	$('#imessages-title').empty()
+
 	}
 </script>
 <script>
