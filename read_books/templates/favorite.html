@@ -21,7 +21,7 @@ Books
 
 <div class="container">
 <div class="row h-50 justify-content-center">
-<h1 class="title">Books<h1>
+<div class="margin-mid"></div>
 </div>
 </div>
  
@@ -32,18 +32,14 @@ Books
 
 <div class="container">
 <div class="row h-50 justify-content-center">
-<a href="{% url "login" %}"><i class="fas fa-user fa-3x icon-title"></i></a>
-<div class="col-md-6 justify-content-center">
-	<form class="input" id="usertext-form"  method='GET'>
-		{% csrf_token %}
-		<div class="input-group input-group">
-			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
-			{% csrf_token %}
-		</div>
-	</form>
+
+<div class="col-md-6">
+<div class="row justify-content-center">
+
+<h1 class="title text-center"><a href="{% url "home" %}"><i class="fas fa-home fa-1x icon-title"></i></a>  MyLibrary<h1>
+</div>
 </div>
 
-<a href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
 
 </div>
 </div>
@@ -52,25 +48,25 @@ Books
 <div class="container col-sd-8 text-left">
 <div class="margin"></div>
 	<div class="imessages-title">
-	<div class="title_cat"><a>My Library</a></div>
+	<div class="title_cat"><a>My Books</a></div>
 	
 	<div class="response_boxe" id="imessages-text">
 	<div class="imessages-description" id="imessages-description">
 	
 	
 	{%for book in books%}
-	
-	<form action="{% url 'remove_book' book_id=book.id  %}" method="POST">
-	<div class="item">
-	<button type="submit" class="btn">
-	<span class="notify-badge">
-	<i class="far fa-times-circle fa-1x icon"></i>
-				{% csrf_token %}
-	</button>
-		{{book.picture|safe}} </span>
-	</div>
+	<form action="{% url 'remove_book' book_id=book.id  %}" id="myform" method="POST">
+	{% csrf_token %}
+</button type="submit" id="myform">
+
+</button><div class="img-wrap">
+  
+		{{book.picture|safe}}
+		<span class="close">&times;</span>
+		</form>
+		</div>
 		{% endfor %}
-	</div>
+	
 </div>
 <div class="row justify-content-center">
 
@@ -81,16 +77,19 @@ Books
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-	function myFunc() {
-		
-    	$('#imessages-description').empty()
-		$('#imessages-text').empty()
-	}
-</script>
-<script>
-	inputForm();
-</script>
 
+var closeBtns = document.querySelectorAll('.img-wrap .close')
+
+for (var i = 0, l = closeBtns.length; i < l; i++) {
+  closeBtns[i].addEventListener('click', function() {
+    var imgWrap = this.parentElement;
+    imgWrap.parentElement.removeChild(imgWrap);
+	document.getElementById('myform').submit()
+	
+  });
+}
+
+</script>
 
 
 {% endblock header %}

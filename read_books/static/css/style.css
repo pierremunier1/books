@@ -14,6 +14,7 @@
     font-size: 40pt;color: rgb(56, 117, 209);
     font-family:"monospace";
     
+    
 }
 
 .imessages-title{
@@ -52,6 +53,7 @@
 .icon-title {
     color:rgb(56, 117, 209); 
     transition: transform .2s; /* Animation */
+    
 }
 
 
@@ -206,21 +208,28 @@ img {
   width: 100%;
 }
 
-.item {
-    position:relative;
-    padding-top:20px;
-    display:inline-block;
+.img-wrap {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
 }
-.notify-badge{
-    position: absolute;
-    right:-19px;
-    top:50px;
-    
-    text-align: center;
-    border-radius: 30px 30px 30px 30px;
-    color:white;
-    padding:5px 10px;
-    font-size:20px;
+.img-wrap .close {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 100;
+  background-color: #FFF;
+  padding: 5px 2px 2px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: .2;
+  text-align: center;
+  font-size: 22px;
+  line-height: 10px;
+  border-radius: 50%;
 }
-
+.img-wrap:hover .close {
+  opacity: 1;
+}
  

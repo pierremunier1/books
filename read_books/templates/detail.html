@@ -36,6 +36,7 @@ Books
 		{% csrf_token %}
 		<div class="input-group input-group">
 			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
+			<button class="btn btn-primary" id="button_design" >Search</button>
 			{% csrf_token %}
 		</div>
 	</form>
@@ -95,8 +96,7 @@ Books
 <script>
 	function myFunc() {
 		
-    	$('#imessages-description').empty()
-		$('#imessages-text').empty()
+    	$('#imessages-title').html('');
 	
 	}
 </script>

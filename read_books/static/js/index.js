@@ -25,6 +25,10 @@ function inputForm() {
                   
               };
 
+              
+
+
+
               let newDiv_3 = document.createElement("div");
               newDiv_3.className = "title_cat";
               newDiv_3.innerHTML = "Result";
@@ -35,6 +39,10 @@ function inputForm() {
               newDiv_4.className = "row justify-content-center";
               newDiv_4.innerHTML = query["picture"];
               document.getElementById("imessages-title").appendChild(newDiv_4);
+
+
               });
+
+
 })
 }

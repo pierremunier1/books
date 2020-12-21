@@ -76,7 +76,7 @@ def save_book(request,book_id):
 def favorite(request):
     """show favorite books"""
 
-    books = Book.objects.filter(customuser=request.user).order_by('score')
+    books = Book.objects.filter(customuser=request.user)
 
     context={
 
