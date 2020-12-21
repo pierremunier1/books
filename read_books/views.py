@@ -72,7 +72,7 @@ def save_book(request,book_id):
 
     return redirect("home")
    
-@login_required(login_url='/users/login/', redirect_field_name='next')
+@login_required(login_url='/users/login/?next=/favorite/', redirect_field_name='next')
 def favorite(request):
     """show favorite books"""
 
