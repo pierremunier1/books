@@ -233,3 +233,19 @@ img {
   opacity: 1;
 }
  
+.comment{
+
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px 1px rgba(22, 5, 95, 0.2);
+    font-family: monospace;
+    font-size: 12pt;
+    font-style: italic;
+
+}
+
+.auth_comment{
+
+    font-family: monospace;
+    font-size: 9pt;
+
+}

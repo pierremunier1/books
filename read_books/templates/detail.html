@@ -62,6 +62,7 @@ Books
 </div>
 	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text">{{object.book_name}}</div></div>
 	<div>
+	
 	  {% if object %}
         <div class="row">
             <div class="col text-center">
@@ -86,30 +87,30 @@ Books
 			
 			<div class="margin-mid"></div>
 						
+<!--Comment section-->
 
 			<form method="POST"> 
 				{% csrf_token %} 
 				{{comment_form.as_p}} 
 				<input type="submit" name="comment" class="btn btn-warning">
 			</form> 
-			<div class="container">{{comments.count}} 
-			Comment{{comments|pluralize}}
-			<div class="row justify-content-center">
+			<div class="container text-center"> 
+			
+			<b>{{comments.count}} Comment{{comments|pluralize}}</b>
+			<div class="col text-left">
 			<div class="margin-mid"></div>
 
-			
-  				
-		
-
 			{% for comment in comments %}
-			<footer class="blockquote-footer">
-      		
-  			<blockquote class="blockquote">
-    		<a class="imessages-description ">{{ comment.content}}</a>
-			 <b> By {{comment.user|capfirst}}</b> {{comment.timestamp}}
-			  {% endfor %}
+      		<div class="comment">
+    		<a>{{ comment.content|capfirst}}</a></div>
+			<div class="auth_comment">
+			<b> By {{comment.user|capfirst}}</b> {{comment.timestamp}}
+			<div class="margin-mid"></div>
 			</div>
+			{% endfor %}
 			</div>
+			
+<!--End of comment section-->
 		</div>
     
 

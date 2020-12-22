@@ -101,13 +101,14 @@ def favorite_detail(request,book_id):
     """show book detail in favorite"""
 
     obj = Book.objects.filter(id=book_id).first()
-    comments=Comment.objects.filter(book=obj)
+    comments=Comment.objects.filter(book=obj).order_by('-pk')
 
     if request.method == 'POST': 
         cf = CommentForm(request.POST or None) 
         if cf.is_valid(): 
             content = request.POST.get('content') 
-            comment = Comment.objects.create(book = obj, user = request.user, content = content) 
+            comment = Comment.objects.create(
+                book = obj, user = request.user, content = content) 
             comment.save() 
             return redirect(obj.get_absolute_url()) 
     else: 
@@ -116,7 +117,7 @@ def favorite_detail(request,book_id):
     context ={
         'object': obj,
         'comment_form':cf,
-        'comments':comments
+        'comments':comments,
     }
     return render(request, 'detail.html', context)
     

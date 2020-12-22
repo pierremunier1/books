@@ -58,7 +58,7 @@ class Book(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE
     )
-   
+    likes=models.ManyToManyField(CustomUser,related_name='likes',blank=True)
     
     score = models.IntegerField(default=0,
     validators=[
@@ -71,10 +71,12 @@ class Book(models.Model):
     class Meta:
         ordering = ['book_name']
         verbose_name = 'book'
-      
 
     def __str__(self):
         return self.book_name
+
+    def likecount(self):
+        return self.likes.count()
 
     def get_absolute_url(self):
         return reverse('favorite',kwargs={'book_id': self.id})
@@ -93,8 +95,12 @@ class Favorite(models.Model):
         return str(self.book_fav)
     
 
-class Comment(models.Model): 
-  book = models.ForeignKey(Book, on_delete = models.CASCADE) 
-  user = models.ForeignKey(CustomUser, on_delete = models.CASCADE) 
-  content = models.TextField() 
-  timestamp = models.DateTimeField(auto_now_add=True)
+class Comment(models.Model):
+
+    book = models.ForeignKey(Book, on_delete = models.CASCADE) 
+    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE) 
+    content = models.TextField() 
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return 'comment on {} by {}'.format(self.book.book_name,self.user.username)
