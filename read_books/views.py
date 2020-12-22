@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from read_books.response import GoogleApi, Response
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404
-from read_books.models import Book
+from read_books.models import Book,Favorite
 from users.models import CustomUser
 from django.contrib.auth.decorators import login_required
 
@@ -59,6 +59,7 @@ def save_book(request,book_id):
         id=request.user.id
         )
         book = Response.response_front(book_id)
+        
         Book.objects.add_book(
         book_id,
         user,
@@ -69,6 +70,18 @@ def save_book(request,book_id):
         description=book['description'][0],
         author=book['author'][0]
         )
+
+        Favorite.objects.add_book(
+        book_id,
+        user,
+        title=(book['title'][0]),
+        book_cat=Response.build(book['categorie'][0]),
+        picture=book['picture'][0],
+        picture_detail=book['picture_detail'][0],
+        description=book['description'][0],
+        author=book['author'][0]
+        )
+        
 
     return redirect("home")
    
@@ -118,9 +131,13 @@ def best_book(request):
     b2 = Book.objects.filter(
         score__gte=4).order_by('score')[:8]
 
+    b3 = Book.objects.filter(
+            category__category_name=category_name)
+
     context={
         'best_books_1': b1,
         'best_books_2': b2,
+        'best_books_3': b3,
     }
     return render(
         request, "home.html",context

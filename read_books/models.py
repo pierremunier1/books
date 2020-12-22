@@ -10,7 +10,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Category(models.Model):
     """category models"""
-    category_name = models.CharField(max_length=150, unique=True)
+    category_name = models.CharField(max_length=150, unique=True,null=True)
 
     class Meta:
         ordering = ['category_name']
@@ -24,24 +24,26 @@ class BookManager(models.Manager):
     def add_book(self,book_id,user,title,book_cat,picture,picture_detail,description,author):
         """save book in favoris"""
 
+        self.book_id = book_id
+
         c1, created = Category.objects.get_or_create(
                             category_name=book_cat
                             )
-
-        c2, created = CustomUser.objects.get_or_create(
-                        username=user
-                        )
-
+        
         Book.objects.get_or_create(
-            id=book_id,
+            id=self.book_id,
             book_name=title,
             category=c1,
             picture=picture,
             picture_detail=picture_detail,
-            customuser=c2,
             description=description,
             author=author
            
+        )
+        
+        Favorite.objects.get_or_create(
+            book_fav_id=self.book_id,
+            customuser=user
         )
 
 class Book(models.Model):
@@ -55,8 +57,7 @@ class Book(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE
     )
-    customuser = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE)
+   
     
     score = models.IntegerField(default=0,
     validators=[
@@ -75,7 +76,18 @@ class Book(models.Model):
     def __str__(self):
         return self.book_name
 
+class Favorite(models.Model):
+    """substitute model"""
 
+    customuser = models.ForeignKey(
+        'users.CustomUser', on_delete=models.CASCADE)
+    book_fav = models.ForeignKey(Book,on_delete=models.CASCADE, related_name='book_fav')
+                                         
+    objects = BookManager()
+
+    def __str__(self):
+
+        return str(self.book_fav)
     
 
   
