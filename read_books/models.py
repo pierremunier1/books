@@ -3,9 +3,10 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django import forms
+from django.utils import timezone
 from users.models import CustomUser
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -65,7 +66,6 @@ class Book(models.Model):
         MinValueValidator(0),
     ]
     )
-
     objects = BookManager()
 
     class Meta:
@@ -75,6 +75,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.book_name
+
+    def get_absolute_url(self):
+        return reverse('favorite',kwargs={'book_id': self.id})
 
 class Favorite(models.Model):
     """substitute model"""
@@ -90,6 +93,8 @@ class Favorite(models.Model):
         return str(self.book_fav)
     
 
-  
-
-   
+class Comment(models.Model): 
+  book = models.ForeignKey(Book, on_delete = models.CASCADE) 
+  user = models.ForeignKey(CustomUser, on_delete = models.CASCADE) 
+  content = models.TextField() 
+  timestamp = models.DateTimeField(auto_now_add=True)

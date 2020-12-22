@@ -2,11 +2,11 @@ from django.shortcuts import render,redirect
 from read_books.response import GoogleApi, Response
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404
-from read_books.models import Book,Favorite
+from read_books.models import Book,Favorite,Comment
 from users.models import CustomUser
 from django.contrib.auth.decorators import login_required
-
-
+from .forms import CommentForm
+from django.views.generic.detail import DetailView
 
 def result(request):
     """display result of get_books function"""
@@ -101,11 +101,25 @@ def favorite_detail(request,book_id):
     """show book detail in favorite"""
 
     obj = Book.objects.filter(id=book_id).first()
-    
+    comments=Comment.objects.filter(book=obj)
+
+    if request.method == 'POST': 
+        cf = CommentForm(request.POST or None) 
+        if cf.is_valid(): 
+            content = request.POST.get('content') 
+            comment = Comment.objects.create(book = obj, user = request.user, content = content) 
+            comment.save() 
+            return redirect(obj.get_absolute_url()) 
+    else: 
+      cf = CommentForm() 
+        
     context ={
-        'object': obj
+        'object': obj,
+        'comment_form':cf,
+        'comments':comments
     }
     return render(request, 'detail.html', context)
+    
 
 def rate_book(request):
     """rate book"""
@@ -161,3 +175,4 @@ def remove_book(request, book_id):
     book.delete()
 
     return redirect('favorite')
+

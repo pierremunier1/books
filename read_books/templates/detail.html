@@ -1,6 +1,7 @@
 
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %} 
 
 <body>
 
@@ -82,6 +83,33 @@ Books
 			<div class="imessages-description text-justify" id="imessages-description">
 			<div class="picture-detail">
             <div><img class="picture_detail" src={{ object.picture_detail }}></img></a></div>{{object.description}}
+			
+			<div class="margin-mid"></div>
+						
+
+			<form method="POST"> 
+				{% csrf_token %} 
+				{{comment_form.as_p}} 
+				<input type="submit" name="comment" class="btn btn-warning">
+			</form> 
+			<div class="container">{{comments.count}} 
+			Comment{{comments|pluralize}}
+			<div class="row justify-content-center">
+			<div class="margin-mid"></div>
+
+			
+  				
+		
+
+			{% for comment in comments %}
+			<footer class="blockquote-footer">
+      		
+  			<blockquote class="blockquote">
+    		<a class="imessages-description ">{{ comment.content}}</a>
+			 <b> By {{comment.user|capfirst}}</b> {{comment.timestamp}}
+			  {% endfor %}
+			</div>
+			</div>
 		</div>
     
 
@@ -89,10 +117,7 @@ Books
 	</div>
 	</div>
 </div>
-<div class="row justify-content-center">
 
-
-</div>
 
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
