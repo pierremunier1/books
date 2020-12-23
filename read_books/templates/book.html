@@ -72,7 +72,23 @@ Books
 <div class="margin-mid"></div>
 <div class="row justify-content-center">
 
+<!--Comment section-->
+			
+			<b>{{comments.count}} Comment{{comments|pluralize}}</b>
+			<div class="col text-left">
+			<div class="margin-mid"></div>
 
+			{% for comment in comments %}
+      		<div class="comment">
+    		<a>{{ comment.content|capfirst}}</a></div>
+			<div class="auth_comment">
+			<b> By {{comment.user|capfirst}}</b> {{comment.timestamp}}
+			<div class="margin-mid"></div>
+			</div>
+			{% endfor %}
+			</div>
+			
+<!--End of comment section-->
 </div>
 
 

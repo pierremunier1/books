@@ -36,6 +36,8 @@ def detail(request,book_id):
 
     if book_id is not None:
         book = Response.response_front(book_id)
+    
+    comments=Comment.objects.filter(book=book_id).order_by('-pk')
         
     context = {
         "title":Response.build(book['title'][0]),
@@ -43,7 +45,8 @@ def detail(request,book_id):
         "picture_detail":book['picture_detail'][0],
         "book_id":book_id,
         "book_cat":book['categorie'][0],
-        "book_author":(book['author'][0])
+        "book_author":(book['author'][0]),
+        "comments":comments
     }
     return render(
     request,
