@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'read_books',
     'users.apps.UsersConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'taggit'
     
 ]
 

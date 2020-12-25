@@ -18,6 +18,7 @@ Books
 <script src="{% static '/js/main.js' %}" defer></script>
 
 
+
 <div class="container">
 {% if user.is_authenticated %}
 <a href="{% url "logout" %}"><i class="fas fa-sign-out-alt"></i></a></b><b> Logged as
@@ -87,7 +88,18 @@ Books
             <div><img class="picture_detail" src={{ object.picture_detail }}></img></a></div>{{object.description}}
 			
 			<div class="margin-mid"></div>
-						
+
+<!--Tag section-->
+
+	<form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Tags</label>
+                    <input type="text" data-role="tagsinput" class="form-control" name="tags">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            	
 <!--Comment section-->
 
 			<form method="POST"> 

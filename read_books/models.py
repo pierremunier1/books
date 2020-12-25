@@ -7,6 +7,7 @@ from django.utils import timezone
 from users.models import CustomUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class Category(models.Model):
@@ -58,7 +59,6 @@ class Book(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE
     )
-    likes=models.ManyToManyField(CustomUser,related_name='likes',blank=True)
     
     score = models.IntegerField(default=0,
     validators=[
@@ -67,6 +67,7 @@ class Book(models.Model):
     ]
     )
     objects = BookManager()
+    tags = TaggableManager()
 
     class Meta:
         ordering = ['book_name']

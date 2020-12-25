@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from read_books.models import Book,Favorite,Comment
 from users.models import CustomUser
 from django.contrib.auth.decorators import login_required
-from .forms import CommentForm
+from .forms import CommentForm,PostForm
 from django.views.generic.detail import DetailView
 
 def result(request):
@@ -47,6 +47,7 @@ def detail(request,book_id):
         "book_cat":book['categorie'][0],
         "book_author":(book['author'][0]),
         "comments":comments
+        
     }
     return render(
     request,
@@ -114,9 +115,10 @@ def favorite_detail(request,book_id):
                 book = obj, user = request.user, content = content) 
             comment.save() 
             return redirect(obj.get_absolute_url()) 
+    
     else: 
       cf = CommentForm() 
-        
+
     context ={
         'object': obj,
         'comment_form':cf,
