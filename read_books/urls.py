@@ -26,10 +26,12 @@ urlpatterns = [
     path('<book_id>', views.detail, name='book'),
     path('book/<book_id>', views.save_book, name='save_book'),
     path('favorite/', views.favorite, name='favorite'),
-    path('favorite/<book_id>', views.favorite_detail, name='favorite'),
+    path('favorite/<slug:slug>/', views.favorite_detail, name='favorite'),
     path('rate/',views.rate_book,name='detail'),
     path('',views.best_book,name='home'),
-    path('remove_book/<book_id>/',views.remove_book,name='remove_book'),
+    path('remove_book/<slug:slug>/',views.remove_book,name='remove_book'),
+    path('tag/<slug:slug>/', views.tagged, name="tagged"),
+    
     
    
    

@@ -8,6 +8,7 @@ from users.models import CustomUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 from taggit.managers import TaggableManager
+from django.template.defaultfilters import slugify
 
 
 class Category(models.Model):
@@ -33,8 +34,9 @@ class BookManager(models.Manager):
                             )
         
         Book.objects.get_or_create(
-            id=self.book_id,
+            google_id=self.book_id,
             book_name=title,
+            slug=slugify(title),
             category=c1,
             picture=picture,
             picture_detail=picture_detail,
@@ -42,22 +44,25 @@ class BookManager(models.Manager):
             author=author
            
         )
+
+        book=Book.objects.filter(google_id=self.book_id).first()
         
         Favorite.objects.get_or_create(
-            book_fav_id=self.book_id,
+            book_fav_id=book.id,
             customuser=user
         )
 
 class Book(models.Model):
     """book model"""
-    id = models.CharField(max_length=20,primary_key=True)
+    google_id = models.CharField(max_length=30)
+    slug = models.SlugField(unique=True)
     book_name = models.CharField(max_length=150)
     author = models.CharField(max_length=150)
     description = models.CharField(max_length=10000)
     picture = models.CharField(max_length=350)
     picture_detail = models.CharField(max_length=350)
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE
+        Category, on_delete=models.CASCADE,null=True
     )
     
     score = models.IntegerField(default=0,
@@ -75,9 +80,6 @@ class Book(models.Model):
 
     def __str__(self):
         return self.book_name
-
-    def likecount(self):
-        return self.likes.count()
 
     def get_absolute_url(self):
         return reverse('favorite',kwargs={'book_id': self.id})

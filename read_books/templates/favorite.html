@@ -61,13 +61,14 @@ Books
 	
 	
 	{%for book in books%}
-	<form action="{% url 'remove_book' book_id=book.id  %}" id="myform" method="POST">
+	<form action="{% url 'remove_book' slug=book.slug%}" id="myform" method="POST">
 	{% csrf_token %}
 </button type="submit" id="myform">
 
 </button><div class="img-wrap">
-  
-		{{book.picture|safe}}
+		<a href="{% url "favorite" slug=book.slug %}">
+		<img class="imessages-picture" src={{ book.picture_detail }}></img>
+		</a>
 		<span class="close">&times;</span>
 		</form>
 		</div>

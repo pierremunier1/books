@@ -7,6 +7,8 @@ from users.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm,PostForm
 from django.views.generic.detail import DetailView
+from django.template.defaultfilters import slugify
+from taggit.models import Tag
 
 def result(request):
     """display result of get_books function"""
@@ -85,8 +87,7 @@ def save_book(request,book_id):
         description=book['description'][0],
         author=book['author'][0]
         )
-        
-
+    
     return redirect("home")
    
 @login_required(login_url='/users/login/?next=/favorite/', redirect_field_name='next')
@@ -101,11 +102,13 @@ def favorite(request):
     }
     return render(request, "favorite.html",context)
 
-def favorite_detail(request,book_id):
+def favorite_detail(request,slug):
     """show book detail in favorite"""
 
-    obj = Book.objects.filter(id=book_id).first()
+    obj = Book.objects.filter(slug=slug).first()
     comments=Comment.objects.filter(book=obj).order_by('-pk')
+    common_tags = Book.tags.most_common()[:4]
+    
 
     if request.method == 'POST': 
         cf = CommentForm(request.POST or None) 
@@ -115,17 +118,46 @@ def favorite_detail(request,book_id):
                 book = obj, user = request.user, content = content) 
             comment.save() 
             return redirect(obj.get_absolute_url()) 
-    
     else: 
       cf = CommentForm() 
+
+    form = PostForm(request.POST)
+    if form.is_valid():
+        newpost = form.save(commit=False)
+        newpost.id = obj.id
+        newpost.slug = slugify(obj.book_name)
+        # Without this next line the tags won't be saved.
+        form.save_m2m()
 
     context ={
         'object': obj,
         'comment_form':cf,
         'comments':comments,
+        
     }
     return render(request, 'detail.html', context)
+
+
+
+def tagged(request,slug):
+
+    print(slug)
+    tag = get_object_or_404(Tag, slug=slug)
+    print(tag)
+    # Filter posts by tag name  
+    books = Book.objects.filter(tags=tag)
     
+    for book in books:
+        book
+    
+    print(books)
+
+    context = {
+        'tag':tag,
+        'books':books,
+    }
+    return render(request, 'favorite.html', context)
+
 
 def rate_book(request):
     """rate book"""
@@ -164,14 +196,14 @@ def best_book(request):
         )
 
 
-def remove_book(request, book_id):
+def remove_book(request, slug):
     """remove book"""
 
     user = CustomUser.objects.get(
         id=request.user.id
     )
     book_name = Book.objects.get(
-        id=book_id
+        slug=slug
     )
     book = get_object_or_404(
         Book,

@@ -23,10 +23,14 @@ Books
 {% if user.is_authenticated %}
 <a href="{% url "logout" %}"><i class="fas fa-sign-out-alt"></i></a></b><b> Logged as
 {{ user.username }}
-{% endif %}
+{% endif %}<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
+  <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
+</div>
 <div class="row h-50 justify-content-center">
 <div class="title_2"></div>
 <h2 class="title">Books</h2>
+
 </div>
 </div>
 
@@ -58,13 +62,14 @@ Books
 <div class="container col-sd-8 text-left">
 <div class="margin"></div>
 
-<div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
-  <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
-</div>
+
 	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text">{{object.book_name}}</div></div>
 	<div>
-	
+	<div style="display:flex">
+					{% for tag in object.tags.all %}
+					<a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+					{% endfor %}
+	</div>
 	  {% if object %}
         <div class="row">
             <div class="col text-center">
@@ -91,6 +96,8 @@ Books
 
 <!--Tag section-->
 
+	<div class="container">
+
 	<form method="POST">
                 {% csrf_token %}
                 <div class="form-group">
@@ -99,7 +106,8 @@ Books
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            	
+	</div>
+
 <!--Comment section-->
 
 			<form method="POST"> 
@@ -144,6 +152,8 @@ Books
 	}
 </script>
 
+     
+</body>
 
 <script>
 	inputForm();
@@ -156,7 +166,10 @@ function myFunction() {
 }
 </script>
 
-
+ <script>
+    $("#post-form").submit(function(e){
+        e.preventDefault();
+        });</script>
 
 {% endblock header %}
 

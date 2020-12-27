@@ -18,5 +18,6 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = [
-            'tags'
+            'tags',
+            
         ]
