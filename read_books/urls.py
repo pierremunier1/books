@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import path,include
 from . import views
 from django.views.generic.base import TemplateView
 
@@ -27,10 +27,10 @@ urlpatterns = [
     path('book/<book_id>', views.save_book, name='save_book'),
     path('favorite/', views.favorite, name='favorite'),
     path('favorite/<slug:slug>/', views.favorite_detail, name='favorite'),
-    path('rate/',views.rate_book,name='detail'),
     path('',views.best_book,name='home'),
     path('remove_book/<slug:slug>/',views.remove_book,name='remove_book'),
     path('tag/<slug:slug>/', views.tagged, name="tagged"),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
     
     
    

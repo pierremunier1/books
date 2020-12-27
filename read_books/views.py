@@ -159,18 +159,6 @@ def tagged(request,slug):
     return render(request, 'favorite.html', context)
 
 
-def rate_book(request):
-    """rate book"""
-
-    if request.method == 'POST':
-        el_id = request.POST.get('el_id')
-        val = request.POST.get('val')
-        obj = Book.objects.get(id=el_id)
-        obj.score = val
-        obj.save()
-        return JsonResponse({'success':'true', 'score': val}, safe=False)
-    return JsonResponse({'success':'false'})
-
 
 def best_book(request):
     """show favorite products"""
@@ -180,8 +168,7 @@ def best_book(request):
 
     b1 = Book.objects.all()[:10]
         
-    b2 = Book.objects.filter(
-        score__gte=4).order_by('score')[:8]
+    b2 = Book.objects.all()
 
     b3 = Book.objects.filter(
             category__category_name=category_name)

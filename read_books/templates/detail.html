@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %} 
-
+{% load ratings %}
 <body>
 
 {% block title %}
@@ -16,6 +16,8 @@ Books
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
 <script src="{% static '/js/main.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
 
 
@@ -63,58 +65,40 @@ Books
 <div class="margin"></div>
 
 
-	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text">{{object.book_name}}</div></div>
-	<div>
+	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text"></div>{{object.book_name}}</div></div>
+	<div class="margin-mid"></div>
+	<div class="imessages-description text-justify" id="imessages-description">
+			<div class="picture-detail">
+            <div><img class="picture_detail" src={{ object.picture_detail }}></img></a></div>{{object.description}}
+			
+			<div class="margin"></div>
 	<div style="display:flex">
 					{% for tag in object.tags.all %}
 					<a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
 					{% endfor %}
-	</div>
-	  {% if object %}
-        <div class="row">
+</div>
+	 <div class="row">
             <div class="col text-center">
-                <form class="rate-form" action="" method="POST" id="{{object.id}}">
-                    {% csrf_token %}
-                    <button type="submit" class="fa fa-star fa-1x my-btn" id="first"></button>
-                    <button type="submit" class="fa fa-star fa-1x my-btn" id="second"></button>
-                  	<button type="submit" class="fa fa-star fa-1x my-btn" id="third"></button>
-                    <button type="submit" class="fa fa-star fa-1x my-btn" id="fourth"></button>
-                    <button type="submit" class="fa fa-star fa-1x my-btn" id="fifth"></button>
-                </form>
-                <br>
-                <div id="confirm-box"></div>
-            </div>
+	{% ratings object %}
+	<div class="margin-mid"></div>
         </div>
-    {% endif %}
-	
-        </div>
-			<div class="imessages-description text-justify" id="imessages-description">
-			<div class="picture-detail">
-            <div><img class="picture_detail" src={{ object.picture_detail }}></img></a></div>{{object.description}}
 			
-			<div class="margin-mid"></div>
 
 <!--Tag section-->
 
 	<div class="container">
-
 	<form method="POST">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label>Tags</label>
+                <div class="form-group"
+                    <label>Set tags</label>
                     <input type="text" data-role="tagsinput" class="form-control" name="tags">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 	</div>
 
 <!--Comment section-->
 
-			<form method="POST"> 
-				{% csrf_token %} 
-				{{comment_form.as_p}} 
-				<input type="submit" name="comment" class="btn btn-warning">
-			</form> 
 			<div class="container text-center"> 
 			
 			<b>{{comments.count}} Comment{{comments|pluralize}}</b>
@@ -129,17 +113,21 @@ Books
 			<div class="margin-mid"></div>
 			</div>
 			{% endfor %}
+
+			<form method="POST"> 
+				{% csrf_token %} 
+				{{comment_form.as_p}} 
+				<input type="submit" name="comment" class="btn btn-warning">
+			</form> 
 			</div>
 			
 <!--End of comment section-->
 		</div>
-    
-
 	</div>
 	</div>
 	</div>
 </div>
-
+</div>
 
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

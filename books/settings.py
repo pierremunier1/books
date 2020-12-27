@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'read_books',
     'users.apps.UsersConfig',
     'crispy_forms',
-    'taggit'
+    'taggit',
+    'star_ratings'
     
 ]
 
@@ -147,3 +148,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+#### RATING SETTING ####
+STAR_RATINGS_STAR_HEIGHT = 20

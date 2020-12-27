@@ -64,13 +64,6 @@ class Book(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE,null=True
     )
-    
-    score = models.IntegerField(default=0,
-    validators=[
-        MaxValueValidator(5),
-        MinValueValidator(0),
-    ]
-    )
     objects = BookManager()
     tags = TaggableManager()
 
@@ -82,7 +75,7 @@ class Book(models.Model):
         return self.book_name
 
     def get_absolute_url(self):
-        return reverse('favorite',kwargs={'book_id': self.id})
+        return reverse('favorite',kwargs={'slug': self.slug})
 
 class Favorite(models.Model):
     """substitute model"""

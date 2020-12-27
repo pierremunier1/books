@@ -8,10 +8,6 @@ django-braces==1.14.0
 django-environ==0.4.5
 django-generic-aggregation==0.4.0
 django-model-utils==4.1.1
-django-ratings==0.3.7
-django-simple-ratings==0.3.3
-django-star-ratings==0.9.1
-django-starfield==1.0.post1
 environ==1.0
 idna==2.10
 Pillow==8.0.1
