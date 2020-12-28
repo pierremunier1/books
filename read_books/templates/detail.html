@@ -18,7 +18,6 @@ Books
 <link href="{% static 'css/menu.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
-<script src="{% static '/js/main.js' %}" defer></script>
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
@@ -67,7 +66,9 @@ Books
 			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
 			<button class="btn btn-primary button_home" id="button_design" >Search</button>
 			{% csrf_token %}
-
+		<div class="fav">
+			<a href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
+		</div>
 		</div>	
 	</form>
 	
@@ -79,6 +80,9 @@ Books
 
 <div class="margin"></div>
 
+	<div class="imessages-title" id="imessages-title">
+	
+	</div>
 
 	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text">{{object.book_name}}</div></div>
 	<div class="margin-mid_2"></div>

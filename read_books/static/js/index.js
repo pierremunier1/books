@@ -36,7 +36,7 @@ function inputForm() {
     
 
               let newDiv_4 = document.createElement("div");
-              newDiv_4.className = "row justify-content-center";
+              newDiv_4.className = "row justify-content-center pic";
               newDiv_4.innerHTML = query["picture"];
               document.getElementById("imessages-title").appendChild(newDiv_4);
 

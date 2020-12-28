@@ -81,6 +81,19 @@ body{
     
 }
 
+.fav{
+    padding-left: 12pt;
+}
+
+.pic{
+    padding-top: 8pt;
+    padding-bottom: 8pt;
+}
+
+
+.pic-l{
+    padding-left: 5pt;
+}
 .title_cat{
 
 font-family:monospace;
@@ -145,6 +158,7 @@ box-shadow:3px 3px 3px rgb(194, 192, 196);
 
 .imessages-picture:hover{
 
+    
     transform: scale(1.1); 
 
 }
