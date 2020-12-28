@@ -84,7 +84,7 @@ body{
 .title_cat{
 
 font-family:monospace;
-
+padding-left: 12pt;
 font-size: 17pt;
 color: rgb(255, 255, 255);
 background-color:rgb(56, 117, 209);

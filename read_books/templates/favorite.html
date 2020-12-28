@@ -11,44 +11,46 @@ Books
 
 {% block header %}
 
-
+<!--Links Section-->
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/menu.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
+<script src="{% static '/js/main.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
 
-
+<!--Menu Section-->
 <div class="container">
+<div class="col-md-3">
 {% if user.is_authenticated %}
 <a href="{% url "logout" %}"><i class="fas fa-sign-out-alt"></i></a></b><b> Logged as
 {{ user.username }}
 {% endif %}
-<div class="row h-50 justify-content-center">
-<div class="margin-mid"></div>
 </div>
+<div class="col-md-3">
+<nav>
+  <div class="navicon">
+    <div></div>
+  </div>
+  <a href="{% url "login" %}"><ab>Account</ab></a>
+  <a href="{% url "login" %}"><ab>Login</ab></a>
+  <a href="{% url "signup" %}"><ab>Sign-up</ab></a>
+</nav>
 </div>
- 
 
-<div class="container">
+
+
+<!--title section-->
 <div class="row h-50 justify-content-center">
-
-
-<div class="container">
-<div class="row h-50 justify-content-center">
-
-<div class="col-md-6">
-<div class="row justify-content-center">
-<div class="title_2"></div>
+<a href="{% url "home" %}">
+<div class="title_2"></div></a>
 <h2 class="title">MyBooks</h2>
 </div>
-</div>
 
-
-</div>
-</div>
-</div>
-	
+<!--content section-->
 <div class="container col-sd-8 text-left">
 <div class="margin"></div>
 
@@ -63,9 +65,9 @@ Books
 	{%for book in books%}
 	<form action="{% url 'remove_book' slug=book.slug%}" id="myform" method="POST">
 	{% csrf_token %}
-</button type="submit" id="myform">
+	</button type="submit" id="myform">
 
-</button><div class="img-wrap">
+	</button><div class="img-wrap">
 		<a href="{% url "favorite" slug=book.slug %}">
 		<img class="imessages-picture" src={{ book.picture_detail }}></img>
 		</a>
@@ -75,10 +77,9 @@ Books
 		{% endfor %}
 	
 </div>
-<div class="row justify-content-center">
 
 
-</div>
+<!--scripts section-->
 
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

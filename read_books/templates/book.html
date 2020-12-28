@@ -10,32 +10,52 @@ Books
 
 
 {% block header %}
+<!--Links Section-->
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/menu.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
+<script src="{% static '/js/main.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
+
+<!--Menu Section-->
 <div class="container">
+<div class="col-md-3">
 {% if user.is_authenticated %}
 <a href="{% url "logout" %}"><i class="fas fa-sign-out-alt"></i></a></b><b> Logged as
 {{ user.username }}
 {% endif %}
-<div class="row h-50 justify-content-center">
-<div class="title_2"></div>
+</div>
+<div class="col-md-3">
+<nav>
+  <div class="navicon">
+    <div></div>
+  </div>
+  <a href="{% url "login" %}"><ab>Account</ab></a>
+  <a href="{% url "login" %}"><ab>Login</ab></a>
+  <a href="{% url "signup" %}"><ab>Sign-up</ab></a>
+</nav>
+</div>
 
+
+<!--title section-->
+<div class="row h-50 justify-content-center">
+<a href="{% url "home" %}">
+<div class="title_2"></div></a>
 <h2 class="title">Books</h2>
 </div>
-</div>
-</div>
 
 
+
+<!--search section-->
+<div class="container">
+<div class="row h-50 justify-content-center">
 <div class="container">
 <div class="row h-50 justify-content-center">
 
-
-<div class="container">
-<div class="row h-50 justify-content-center">
-<a href="{% url "login" %}"><i class="fas fa-user fa-3x icon-title"></i></a>
 <div class="col-md-6 justify-content-center">
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
@@ -46,22 +66,15 @@ Books
 		</div>
 	</form>
 </div>
+</div>
+</div>
+</div>
 
-<a href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
+<!--content section-->
 
-</div>
-</div>
-</div>
-	
 <div class="container col-sd-8 text-left">
 <div class="margin"></div>
 	
-	<div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
-  <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
-
-  
-</div>
 	<div class="imessages-title "><div class="title_cat mx-auto" id="imessages-text">{{title}}</div></div>
 	
 	<div class="margin-mid"></div>
@@ -75,8 +88,8 @@ Books
 <div class="margin-mid"></div>
 <div class="row justify-content-center">
 
-<!--Comment section-->
-			
+<!--comment section-->
+			<div class="container text-center"> 
 			<b>{{comments.count}} Comment{{comments|pluralize}}</b>
 			<div class="col text-left">
 			<div class="margin-mid"></div>
@@ -90,10 +103,11 @@ Books
 			</div>
 			{% endfor %}
 			</div>
-			
-<!--End of comment section-->
-</div>
+			</div>
+			</div>
+<!--end of comment section-->
 
+<!--script section-->
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -116,11 +130,7 @@ function myFunction() {
 
 
 {% endblock header %}
-
 {% block content%}
- 
 {% endblock content%}
 
-{% block social %}
-{% endblock social%}
 </body>

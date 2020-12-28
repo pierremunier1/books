@@ -11,6 +11,8 @@ Books
 
 
 {% block header %}
+
+<!--Links Section-->
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
 <link href="{% static 'css/menu.css' %}" rel="stylesheet">
@@ -21,42 +23,41 @@ Books
 <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
 
-
+<!--Menu Section-->
 <div class="container">
-<div class="row h-50 justify-content-right">
 <div class="col-md-3">
-							<nav>
+{% if user.is_authenticated %}
+<a href="{% url "logout" %}"><i class="fas fa-sign-out-alt"></i></a></b><b> Logged as
+{{ user.username }}
+{% endif %}
+</div>
+<div class="col-md-3">
+<nav>
   <div class="navicon">
     <div></div>
   </div>
   <a href="{% url "login" %}"><ab>Account</ab></a>
   <a href="{% url "login" %}"><ab>Login</ab></a>
-  <a href="{% url "login" %}"><ab>Sign-in</ab></a>
+  <a href="{% url "signup" %}"><ab>Sign-up</ab></a>
 </nav>
 </div>
 
-</div>
+
 
 <!--Title section-->
 <div class="row h-50 justify-content-center">
-
 <a href="{% url "home" %}">
 <div class="title_2"></div></a>
 <h2 class="title">Books</h2>
-
 </div>
 
 
 <!--Search section-->
 
 <div class="container">
-
 <div class="row h-50 justify-content-left">
-
 <div class="container">
-
 <div class="row h-50 justify-content-center">
-
 <div class="col-md-6">
 
 	<form class="input" id="usertext-form"  method='GET'>
