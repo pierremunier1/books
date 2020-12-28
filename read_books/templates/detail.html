@@ -13,6 +13,7 @@ Books
 {% block header %}
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/menu.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{% static '/js/index.js' %}"></script>
 <script src="{% static '/js/main.js' %}" defer></script>
@@ -22,79 +23,94 @@ Books
 
 
 <div class="container">
-{% if user.is_authenticated %}
-<a href="{% url "logout" %}"><i class="fas fa-sign-out-alt"></i></a></b><b> Logged as
-{{ user.username }}
-{% endif %}<div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
-  <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
+<div class="row h-50 justify-content-right">
+<div class="col-md-3">
+							<nav>
+  <div class="navicon">
+    <div></div>
+  </div>
+  <a href="{% url "login" %}"><ab>Account</ab></a>
+  <a href="{% url "login" %}"><ab>Login</ab></a>
+  <a href="{% url "login" %}"><ab>Sign-in</ab></a>
+</nav>
 </div>
+
+</div>
+
+<!--Title section-->
 <div class="row h-50 justify-content-center">
-<div class="title_2"></div>
+
+<a href="{% url "home" %}">
+<div class="title_2"></div></a>
 <h2 class="title">Books</h2>
 
 </div>
-</div>
 
 
-<div class="container">
-<div class="row h-50 justify-content-center">
-
+<!--Search section-->
 
 <div class="container">
+
+<div class="row h-50 justify-content-left">
+
+<div class="container">
+
 <div class="row h-50 justify-content-center">
-<a href="{% url "login" %}"><i class="fas fa-user fa-3x icon-title"></i></a>
-<div class="col-md-6 justify-content-center">
+
+<div class="col-md-6">
+
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
+		
 		<div class="input-group input-group">
 			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
 			<button class="btn btn-primary button_home" id="button_design" >Search</button>
 			{% csrf_token %}
-		</div>
+
+		</div>	
 	</form>
-</div>
-
-<a href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
-
-</div>
-</div>
-</div>
 	
+</div>
+
+
+<!-- Description section -->
 <div class="container col-sd-8 text-left">
+
 <div class="margin"></div>
 
 
-	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text"></div>{{object.book_name}}</div></div>
-	<div class="margin-mid"></div>
-	<div class="imessages-description text-justify" id="imessages-description">
-			<div class="picture-detail">
-            <div><img class="picture_detail" src={{ object.picture_detail }}></img></a></div>{{object.description}}
-			
-			<div class="margin"></div>
+	<div class="imessages-title"><div class="title_cat text-left" id="imessages-text">{{object.book_name}}</div></div>
+	<div class="margin-mid_2"></div>
 	<div style="display:flex">
 					{% for tag in object.tags.all %}
 					<a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
 					{% endfor %}
-</div>
+	</div>
+	<div class="margin-mid"></div>
+	<div class="imessages-description text-justify" id="imessages-description">
+			<div class="picture-detail">
+            <div><img class="picture_detail" src={{ object.picture_detail }}></img></a></div>{{object.description}}</div>
+	</div>
+	<div class="margin-mid"></div>
 	 <div class="row">
             <div class="col text-center">
 	{% ratings object %}
 	<div class="margin-mid"></div>
         </div>
-			
+
 
 <!--Tag section-->
 
 	<div class="container">
 	<form method="POST">
                 {% csrf_token %}
-                <div class="form-group"
-                    <label>Set tags</label>
+                <div class="form-group">
+                    <label>Set tags :</label>
                     <input type="text" data-role="tagsinput" class="form-control" name="tags">
+					<button type="submit" class="btn btn-primary btn-sm">save</button>
                 </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+	
 	</div>
 
 <!--Comment section-->
@@ -126,12 +142,16 @@ Books
 	</div>
 	</div>
 	</div>
+	</div>
 </div>
 </div>
+
 
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--Script clean div-->
+
 <script>
 	function myFunc() {
 		
@@ -140,12 +160,13 @@ Books
 	}
 </script>
 
-     
-</body>
+<!--Script input form-->
 
 <script>
 	inputForm();
 </script>
+
+<!--Script darkmode-->
 
 <script>
 function myFunction() {
@@ -154,6 +175,7 @@ function myFunction() {
 }
 </script>
 
+<!--Script tagsinput-->
  <script>
     $("#post-form").submit(function(e){
         e.preventDefault();
@@ -165,6 +187,4 @@ function myFunction() {
  
 {% endblock content%}
 
-{% block social %}
-{% endblock social%}
 </body>

@@ -133,6 +133,7 @@ def favorite_detail(request,slug):
         'object': obj,
         'comment_form':cf,
         'comments':comments,
+        'common_tags':common_tags
         
     }
     return render(request, 'detail.html', context)

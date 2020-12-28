@@ -1,0 +1,77 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
+
+nav {
+  z-index: 2;
+  height: 10px;
+ 
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-clip-path: circle(24px at 30px 24px);
+  clip-path: circle(24px at 32px 24px);
+  -webkit-transition: -webkit-clip-path 0.5625s, clip-path 0.375s;
+  transition: -webkit-clip-path 0.5625s, clip-path 0.375s;
+}
+
+nav:hover {
+ 
+  
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  -webkit-transition-duration: 0.75s;
+  transition-duration: 0.75s;
+  -webkit-clip-path: circle(190px at 125px 24px);
+  clip-path: circle(390px at 150px 24px);
+}
+
+ab {
+  z-index: 2;
+  display:flex;
+  font-weight: bold;
+  
+  line-height: 30px;
+  padding: 0 20px;
+  color: inherit;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+ab:hover { 
+ 
+  z-index: 1;
+  
+}
+
+.navicon {
+  z-index: 1;
+  padding: 23px 20px;
+  width: 100px;
+  cursor: pointer;
+  -webkit-transform-origin: 32px 24px;
+  -ms-transform-origin: 32px 24px;
+  transform-origin: 32px 24px;
+}
+
+.navicon div {
+  z-index: 1;
+  position: relative;
+  width: 30px;
+  height: 3px;
+  background: rgb(56, 117, 209)
+}
+
+.navicon div:before,
+.navicon div:after {
+  display: block;
+  content: "";
+  width: 30px;
+  height: 3px;
+  background: rgb(56, 117, 209);
+  position: absolute;
+}
+
+.navicon div:before { top: -7px; }
+
+.navicon div:after { top: 7px; }
