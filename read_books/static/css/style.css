@@ -12,12 +12,13 @@
 
 body{
 
-    background-color: rgb(245, 233, 222);
+    background:rgb(218, 214, 214);
 }
 .title{
 
-    font-size: 40pt;color: rgb(56, 117, 209);
+    font-size: 40pt;color: rgb(69, 115, 158);;
     width: 170px;
+    
     font-family:"monospace";
    
     
@@ -34,6 +35,7 @@ body{
     font-size: 25pt;color: rgb(56, 117, 209);
     font-family: "monospace";
     font-weight: bold;
+   
     
 }
 
@@ -47,7 +49,7 @@ body{
 .imessages-author{
 
 
-    font-size: 10pt;color: rgb(56, 117, 209);
+    font-size: 10pt;color: rgb(69, 115, 158);
     font-family: "monospace";
     font-weight: bold;
 }
@@ -62,7 +64,7 @@ body{
 
 }
 .icon-title {
-    color:rgb(56, 117, 209); 
+    color:rgb(69, 115, 158); 
     transition: transform .2s; /* Animation */
 }
 
@@ -97,12 +99,23 @@ body{
 .title_cat{
 
 font-family:monospace;
+background: rgb(69, 115, 158);
 padding-left: 12pt;
 font-size: 17pt;
 color: rgb(255, 255, 255);
-background-color:rgb(56, 117, 209);
-border-radius: 5px;
-box-shadow:3px 3px 3px rgb(194, 192, 196);
+backdrop-filter: blur(20px) saturate(100%) contrast(45%) brightness(130%);
+
+}
+
+.title_cat_home{
+
+font-family:monospace;
+background: rgb(69, 115, 158);
+padding-left: 12pt;
+font-size: 17pt;
+color: rgb(255, 255, 255);
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
 }
 
 .thumbnail{
@@ -147,7 +160,6 @@ box-shadow:3px 3px 3px rgb(194, 192, 196);
     margin: 5px;
     align-items: center;
     border-radius: 7px;
-    border: solid;color: rgb(56, 117, 209);
     box-shadow:3px 3px 3px rgb(196, 192, 192);
     transition: transform .2s; /* Animation */
     float:left;
@@ -165,13 +177,16 @@ box-shadow:3px 3px 3px rgb(194, 192, 196);
 
 .response_box{
 
-    border-radius: 7px;
+    
     font-family:"monospace";
+    
     max-height: 650px;
     height: 220px;
+    background: transparent;
     display: flex;
     overflow-x:scroll;
     overflow-y: hidden; 
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
     
 
 }
@@ -181,11 +196,22 @@ box-shadow:3px 3px 3px rgb(194, 192, 196);
 }
 
 
+
 .response_box_1{
 
     font-family:"monospace";
     max-height: 650px;
     
+}
+
+.box{
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    padding-bottom: 12pt;
+    padding-left: 12pt;
+    padding-right: 12pt;
+    background:rgb(202, 199, 199);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .picture_detail{
@@ -212,7 +238,11 @@ box-shadow:3px 3px 3px rgb(194, 192, 196);
     font-weight: bold;
 }
 
+.tags{
 
+    padding-top: 12pt;
+
+}
 
 .box_title{
 
@@ -230,6 +260,7 @@ box-shadow:3px 3px 3px rgb(194, 192, 196);
   box-shadow: 2px 2px 2px 1px rgba(22, 5, 95, 0.2);
   z-index: 1;
   right: 0;
+  background:rgb(69, 115, 158);
 }
 
 img {
@@ -265,9 +296,17 @@ img {
 .comment{
 
     border-radius: 3px;
-    box-shadow: 2px 2px 2px 1px rgba(22, 5, 95, 0.2);
     font-family: monospace;
+    background:rgb(218, 214, 214);
     font-size: 12pt;
     font-style: italic;
+    box-shadow: 2px 2px 2px 1px rgba(15, 15, 15, 0.2);
+
+}
+
+.download{
+
+    padding-right: 12pt;
+    color:rgb(69, 115, 158);
 
 }

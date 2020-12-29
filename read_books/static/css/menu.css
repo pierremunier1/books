@@ -59,7 +59,7 @@ ab:hover {
   position: relative;
   width: 30px;
   height: 3px;
-  background: rgb(56, 117, 209)
+  background:rgb(69, 115, 158);
 }
 
 .navicon div:before,
@@ -68,7 +68,7 @@ ab:hover {
   content: "";
   width: 30px;
   height: 3px;
-  background: rgb(56, 117, 209);
+  background:rgb(69, 115, 158);
   position: absolute;
 }
 

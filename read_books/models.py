@@ -5,11 +5,11 @@ from django.contrib import messages
 from django import forms
 from django.utils import timezone
 from users.models import CustomUser
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 from taggit.managers import TaggableManager
 from django.template.defaultfilters import slugify
-
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 
 class Category(models.Model):
     """category models"""
@@ -46,6 +46,7 @@ class BookManager(models.Manager):
         )
 
         book=Book.objects.filter(google_id=self.book_id).first()
+        print(book.id)
         
         Favorite.objects.get_or_create(
             book_fav_id=book.id,
@@ -54,6 +55,7 @@ class BookManager(models.Manager):
 
 class Book(models.Model):
     """book model"""
+    
     google_id = models.CharField(max_length=30)
     slug = models.SlugField(unique=True)
     book_name = models.CharField(max_length=150)
@@ -66,6 +68,7 @@ class Book(models.Model):
     )
     objects = BookManager()
     tags = TaggableManager()
+    ratings = GenericRelation(Rating, related_query_name='books')
 
     class Meta:
         ordering = ['book_name']

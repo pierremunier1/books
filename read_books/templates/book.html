@@ -74,41 +74,31 @@ Books
 <!--content section-->
 
 <div class="container col-sd-8 text-left">
+
 <div class="margin"></div>
 	<div class="imessages-title" id="imessages-title">
 	
 	</div>
-	<div class="imessages-title "><div class="title_cat mx-auto" id="imessages-text">{{title}}</div></div>
 	
-	<div class="margin-mid"></div>
-	
-	<div class="imessages-description text-justify" id="imessages-description"><div><img class="picture_detail" src={{ picture_detail }}></img></a></div>
-	<div class="response_boxe" id="imessages-text">{{ desc }}<a href="{% url "save_book" book_id %}" method="post" title="Enregistrer" id="icon"><i class="fas fa-save fa-1x icon"></i></i></a></i></a>
-	
-	<div class="margin-mid"></div>
-	<div class="imessages-author"><div class="text-right" id="imessages-text">{{book_author}}</div></div>
-</div></div>
-<div class="margin-mid"></div>
-<div class="row justify-content-center">
-
-<!--comment section-->
-			<div class="container text-center"> 
-			<b>{{comments.count}} Comment{{comments|pluralize}}</b>
-			<div class="col text-left">
-			<div class="margin-mid"></div>
-
-			{% for comment in comments %}
-      		<div class="comment">
-    		<a>{{ comment.content|capfirst}}</a></div>
-			<div class="auth_comment">
-			<b> By {{comment.user|capfirst}}</b> {{comment.timestamp}}
-			<div class="margin-mid"></div>
-			</div>
+	<div class="title_cat_home text-left" id="imessages-text">{{title}}</div>
+	<div class="box">
+	<div class="tags" style="display:flex">
+			{% for tag in object.tags.all %}
+			<a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
 			{% endfor %}
+	</div>
+	<div class="margin-mid"></div>
+	<div class="imessages-description text-justify" id="imessages-description">
+			<div class="picture-detail">
+            <div><img class="picture_detail" src={{ picture_detail }}>
+			</img></a></div>{{desc}}
+			<div class="margin-mid"></div>
+			
+			<div class="imessages-author"><div class="text-right" id="imessages-text"><a href="{% url "save_book" book_id %}" method="post" title="Enregistrer" id="icon"><i class="fas fa-download download"></i></a></a>{{book_author}}</div></div>
 			</div>
-			</div>
-			</div>
-<!--end of comment section-->
+			
+	</div>
+
 
 <!--script section-->
 

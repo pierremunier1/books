@@ -38,8 +38,6 @@ def detail(request,book_id):
 
     if book_id is not None:
         book = Response.response_front(book_id)
-    
-    comments=Comment.objects.filter(book=book_id).order_by('-pk')
         
     context = {
         "title":Response.build(book['title'][0]),
@@ -48,8 +46,7 @@ def detail(request,book_id):
         "book_id":book_id,
         "book_cat":book['categorie'][0],
         "book_author":(book['author'][0]),
-        "comments":comments
-        
+     
     }
     return render(
     request,
@@ -171,8 +168,7 @@ def best_book(request):
         
     b2 = Book.objects.all()
 
-    b3 = Book.objects.filter(
-            category__category_name=category_name)
+    b3 = Book.objects.filter(ratings__isnull=False).order_by('ratings__average')
 
     context={
         'best_books_1': b1,
