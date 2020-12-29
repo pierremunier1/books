@@ -30,7 +30,7 @@ function inputForm() {
 
 
               let newDiv_3 = document.createElement("div");
-              newDiv_3.className = "title_cat";
+              newDiv_3.className = "title_cat_home";
               newDiv_3.innerHTML = "Result";
               document.getElementById("imessages-title").appendChild(newDiv_3);
     

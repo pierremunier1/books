@@ -20,12 +20,7 @@ Books
 <!--Menu Section-->
 
 <div class="container">
-<div class="col-md-3">
-{% if user.is_authenticated %}
-<a href="{% url "logout" %}"><i class="fas fa-sign-out-alt"></i></a></b><b> Logged as
-{{ user.username }}
-{% endif %}
-</div>
+
 <div class="col-md-3">
 <nav>
   <div class="navicon">
@@ -37,8 +32,14 @@ Books
 </nav>
 </div>
 
-<!--Title section-->
 
+<!--Title section-->
+<div class="col-md-3 text-right">
+{% if user.is_authenticated %}
+<a href="{% url "logout" %}"><i class="fas fa-sign-out-alt"></i></a></b><b> Logged as
+{{ user.username }}
+{% endif %}
+</div>
 <div class="row h-50 justify-content-center">
 
 <a href="{% url "home" %}">

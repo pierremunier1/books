@@ -13,6 +13,7 @@
 body{
 
     background:rgb(218, 214, 214);
+    background:url("wall.jpg")
 }
 .title{
 
@@ -66,6 +67,7 @@ body{
 .icon-title {
     color:rgb(69, 115, 158); 
     transition: transform .2s; /* Animation */
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 
@@ -79,7 +81,7 @@ body{
 .form-control{
     
     height: 50px;
-    box-shadow: 1px 1px 1px 1px rgba(22, 5, 95, 0.2);
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
     
 }
 
@@ -99,23 +101,24 @@ body{
 .title_cat{
 
 font-family:monospace;
-background: rgb(69, 115, 158);
+background:url("wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
 color: rgb(255, 255, 255);
 backdrop-filter: blur(20px) saturate(100%) contrast(45%) brightness(130%);
-
+box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .title_cat_home{
 
 font-family:monospace;
-background: rgb(69, 115, 158);
+background:url("wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
 color: rgb(255, 255, 255);
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;
+box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .thumbnail{
@@ -179,7 +182,6 @@ border-top-right-radius: 5px;
 
     
     font-family:"monospace";
-    
     max-height: 650px;
     height: 220px;
     background: transparent;
@@ -187,6 +189,7 @@ border-top-right-radius: 5px;
     overflow-x:scroll;
     overflow-y: hidden; 
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    
     
 
 }
@@ -209,9 +212,10 @@ border-top-right-radius: 5px;
     padding-bottom: 12pt;
     padding-left: 12pt;
     padding-right: 12pt;
-    background:rgb(202, 199, 199);
+    background-color: rgb(216, 213, 213);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    
 }
 
 .picture_detail{
@@ -257,7 +261,7 @@ border-top-right-radius: 5px;
 
   
 .button_home{
-  box-shadow: 2px 2px 2px 1px rgba(22, 5, 95, 0.2);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
   right: 0;
   background:rgb(69, 115, 158);
