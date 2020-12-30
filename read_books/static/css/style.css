@@ -353,5 +353,9 @@ and (max-device-width : 667px)
     width: 315px;
 }
 
+.search_section{
+
+    align-items: center;
+}
 
 }
