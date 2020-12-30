@@ -12,8 +12,8 @@
 
 body{
 
-    background:rgb(218, 214, 214);
-    background:url("wall.jpg")
+    background:rgb(233, 230, 230);
+   
 }
 .title{
 
@@ -104,6 +104,7 @@ font-family:monospace;
 background:url("wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
+font-weight: bold;
 color: rgb(255, 255, 255);
 backdrop-filter: blur(20px) saturate(100%) contrast(45%) brightness(130%);
 box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
@@ -115,6 +116,7 @@ font-family:monospace;
 background:url("wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
+font-weight: bold;
 color: rgb(255, 255, 255);
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;

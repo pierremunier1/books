@@ -40,14 +40,10 @@ Books
 {{ user.username }}
 {% endif %}
 </div>
+
 <div class="row h-50 justify-content-center">
-
-<a href="{% url "home" %}">
-<div class="title_2"></div></a>
 <h2 class="title">Books</h2>
-
 </div>
-
 <!--Search section-->
 
 <div class="container">
@@ -61,9 +57,7 @@ Books
 			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
 			<button class="btn btn-primary button_home" id="button_design" >Search</button>
 			{% csrf_token %}
-			<div class="fav">
-			<a href="{% url "favorite" %}"><i class="fas fa-book fa-3x icon-title"></i></a>
-			</div>
+			
 		</div>
 	</form>
 </div>
@@ -74,7 +68,7 @@ Books
 
 <!--content section-->
 
-<div class="container col-sd-8 text-left">
+<div class="container col-md-12 text-left">
 <div class="margin"></div>
 	<div class="margin-mid"></div>
 	<div class="imessages-title" id="imessages-title">
