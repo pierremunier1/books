@@ -49,17 +49,19 @@ Books
 <div class="container">
 <div class="row h-50 justify-content-center">
 <div class="container">
-<div class="row h-50 justify-content-center">
-<div class="col-md-6 justify-content-center">
+<div class="row h-50 justify-content-center align-items-center">
+<div class="col-md-6 justify-content-center search">
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
 		<div class="input-group input-group">
 			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
 			<button class="btn btn-primary button_home" id="button_design" >Search</button>
 			{% csrf_token %}
-			
 		</div>
 	</form>
+</div>
+<div>
+<a href="{% url "favorite" %}"><i class="far fa-heart fa-2x icon-title"></i></a>
 </div>
 
 </div>
@@ -75,7 +77,7 @@ Books
 	
 	</div>
 
-	<div class="title_cat_home"><a>New</a><a href="{% url "favorite" %}"></a></div>
+	<div class="title_cat_home"><a>New</a></div>
 	<div class="response_box pic pic-l" id="imessages-text">
 	
 	{%for best_book_1 in best_books_1%}

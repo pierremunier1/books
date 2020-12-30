@@ -17,7 +17,7 @@ body{
 }
 .title{
 
-    font-size: 40pt;color: rgb(69, 115, 158);;
+    font-size: 40pt;color: rgb(69, 115, 158);
     width: 170px;
     
     font-family:"monospace";
@@ -65,9 +65,14 @@ body{
 
 }
 .icon-title {
-    color:rgb(245, 246, 248); 
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-    padding-left: 720pt;
+    color:rgb(69, 115, 158);
+    transition: transform .2s; /* Animation */
+    
+}
+.icon-title:hover{
+
+    transform: scale(1.1); 
+
 }
 
 
@@ -75,7 +80,7 @@ body{
     
     height: 50px;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-    
+    z-index: 2;
 }
 
 .fav{
@@ -99,7 +104,6 @@ padding-left: 12pt;
 font-size: 17pt;
 font-weight: bold;
 color: rgb(255, 255, 255);
-backdrop-filter: blur(20px) saturate(100%) contrast(45%) brightness(130%);
 box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -113,6 +117,21 @@ font-weight: bold;
 color: rgb(255, 255, 255);
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;
+box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.title_cat_2{
+
+font-family:monospace;
+background:url("wood.jpg");
+padding-left: 12pt;
+font-size: 17pt;
+font-weight: bold;
+color: rgb(255, 255, 255);
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
 box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -184,6 +203,9 @@ box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
     overflow-x:scroll;
     overflow-y: hidden; 
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    padding-top: 10pt;
+    padding-left: 12pt;
+    
     
     
 
@@ -257,7 +279,6 @@ box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   
 .button_home{
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-  z-index: 1;
   right: 0;
   background:rgb(69, 115, 158);
 }
@@ -307,5 +328,30 @@ img {
 
     padding-right: 12pt;
     color:rgb(69, 115, 158);
+
+}
+
+/*media query mobile device  */
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px)
+{
+
+.icon-title {
+    color:rgb(69, 115, 158);
+    transition: transform .2s; /* Animation */
+    padding-top: 12pt;
+}
+.icon-title:hover{
+
+    transform: scale(1.1); 
+
+}
+
+.search{
+    width: 315px;
+}
+
 
 }

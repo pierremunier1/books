@@ -55,7 +55,7 @@ Books
 <div class="container">
 <div class="row h-50 justify-content-left">
 <div class="container">
-<div class="row h-50 justify-content-center">
+<div class="row h-50 justify-content-center align-items-center">
 <div class="col-md-6">
 
 	<form class="input" id="usertext-form"  method='GET'>
@@ -65,12 +65,12 @@ Books
 			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
 			<button class="btn btn-primary button_home" id="button_design" >Search</button>
 			{% csrf_token %}
-		
 		</div>	
-	</form>
-	
+	</form>	
 </div>
-
+<div>
+<a href="{% url "favorite" %}"><i class="far fa-heart fa-2x icon-title"></i></a>
+</div>
 
 <!-- Description section -->
 <div class="container col-sd-8 text-left">
@@ -116,7 +116,7 @@ Books
 	 <div class="row">
             <div class="col text-center">
 	{% ratings object %}
-	<div class="margin-mid"></div>
+	<div class="margin-mid_2"></div>
         </div>
 	</div>
 
@@ -128,7 +128,7 @@ Books
 	</div>
 
 <!--Comment section-->
-{% if user.is_authenticated %}
+
 			<div class="container text-center"> 
 			
 			<b>{{comments.count}} Comment{{comments|pluralize}}</b>
@@ -144,6 +144,7 @@ Books
 			</div>
 			{% endfor %}
 
+{% if user.is_authenticated %}
 			<form method="POST"> 
 				{% csrf_token %} 
 				{{comment_form.as_p}} 

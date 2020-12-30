@@ -2,7 +2,7 @@
 
 
 nav {
-  z-index: 2;
+  z-index: 1;
   height: 10px;
  
   color: rgba(0, 0, 0, 0.87);
@@ -24,7 +24,7 @@ nav:hover {
 }
 
 ab {
-  z-index: 2;
+  z-index: 1;
   display:flex;
   font-weight: bold;
   
@@ -58,7 +58,7 @@ ab:hover {
   z-index: 1;
   position: relative;
   width: 30px;
-  height: 3px;
+  height: 4px;
   background:rgb(69, 115, 158);
 }
 
@@ -67,7 +67,7 @@ ab:hover {
   display: block;
   content: "";
   width: 30px;
-  height: 3px;
+  height: 4px;
   background:rgb(69, 115, 158);
   position: absolute;
 }

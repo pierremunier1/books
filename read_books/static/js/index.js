@@ -25,21 +25,17 @@ function inputForm() {
                   
               };
 
-              
-
-
-
               let newDiv_3 = document.createElement("div");
               newDiv_3.className = "title_cat_home";
               newDiv_3.innerHTML = "Result";
+              let newDiv_5 = document.createElement("div");
+              newDiv_5.className = "response_box";
+              newDiv_5.id = "imessages-text_2";
+              newDiv_5.innerHTML = query["picture"];
               document.getElementById("imessages-title").appendChild(newDiv_3);
-    
+              document.getElementById("imessages-title").appendChild(newDiv_5);
 
-              let newDiv_4 = document.createElement("div");
-              newDiv_4.className = "row justify-content-center pic";
-              newDiv_4.innerHTML = query["picture"];
-              document.getElementById("imessages-title").appendChild(newDiv_4);
-
+              
 
               });
 
