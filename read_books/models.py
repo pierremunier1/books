@@ -4,12 +4,14 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django import forms
 from django.utils import timezone
-from users.models import CustomUser
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from taggit.managers import TaggableManager
 from django.template.defaultfilters import slugify
 from django.contrib.contenttypes.fields import GenericRelation
 from star_ratings.models import Rating
+
+UserModel = get_user_model()
 
 class Category(models.Model):
     """category models"""
@@ -46,7 +48,6 @@ class BookManager(models.Manager):
         )
 
         book=Book.objects.filter(google_id=self.book_id).first()
-        print(book.id)
         
         Favorite.objects.get_or_create(
             book_fav_id=book.id,
@@ -84,7 +85,7 @@ class Favorite(models.Model):
     """substitute model"""
 
     customuser = models.ForeignKey(
-        'users.CustomUser', on_delete=models.CASCADE)
+        UserModel, on_delete=models.CASCADE)
     book_fav = models.ForeignKey(Book,on_delete=models.CASCADE, related_name='book_fav')
                                          
     objects = BookManager()
@@ -97,7 +98,7 @@ class Favorite(models.Model):
 class Comment(models.Model):
 
     book = models.ForeignKey(Book, on_delete = models.CASCADE) 
-    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE) 
+    user = models.ForeignKey(UserModel, on_delete = models.CASCADE) 
     content = models.TextField() 
     timestamp = models.DateTimeField(auto_now_add=True)
 
