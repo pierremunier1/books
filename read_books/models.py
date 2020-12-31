@@ -14,7 +14,7 @@ from star_ratings.models import Rating
 UserModel = get_user_model()
 
 class Category(models.Model):
-    """category models"""
+    """contains all fields of category model"""
     category_name = models.CharField(max_length=150, unique=True,null=True)
 
     class Meta:
@@ -27,14 +27,15 @@ class BookManager(models.Manager):
     """manager book function"""
 
     def add_book(self,book_id,user,title,book_cat,picture,picture_detail,description,author):
-        """save book in favoris"""
+        """save book in favorite"""
 
         self.book_id = book_id
 
+        # create category for book
         c1, created = Category.objects.get_or_create(
                             category_name=book_cat
                             )
-        
+        # add book into the table
         Book.objects.get_or_create(
             google_id=self.book_id,
             book_name=title,
@@ -46,16 +47,18 @@ class BookManager(models.Manager):
             author=author
            
         )
-
+        
+        #create an id for favorite and django-taggit
         book=Book.objects.filter(google_id=self.book_id).first()
         
+        #add book into the favorite
         Favorite.objects.get_or_create(
-            book_fav_id=book.id,
+            book_favorites_id=book.id,
             customuser=user
         )
 
 class Book(models.Model):
-    """book model"""
+    """contain all fields of book model"""
     
     google_id = models.CharField(max_length=30)
     slug = models.SlugField(unique=True)
@@ -82,20 +85,21 @@ class Book(models.Model):
         return reverse('favorite',kwargs={'slug': self.slug})
 
 class Favorite(models.Model):
-    """substitute model"""
+    """contains all field of favorite model"""
 
     customuser = models.ForeignKey(
         UserModel, on_delete=models.CASCADE)
-    book_fav = models.ForeignKey(Book,on_delete=models.CASCADE, related_name='book_fav')
+    book_favorites = models.ForeignKey(Book,on_delete=models.CASCADE, related_name='book_favorites')
                                          
     objects = BookManager()
 
     def __str__(self):
 
-        return str(self.book_fav)
+        return str(self.book_favorites)
     
 
 class Comment(models.Model):
+    """contains all fields of comment model"""
 
     book = models.ForeignKey(Book, on_delete = models.CASCADE) 
     user = models.ForeignKey(UserModel, on_delete = models.CASCADE) 

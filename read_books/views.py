@@ -5,13 +5,17 @@ from django.shortcuts import get_object_or_404
 from read_books.models import Book,Favorite,Comment
 from users.models import CustomUser
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from .forms import CommentForm,PostForm
 from django.views.generic.detail import DetailView
 from django.template.defaultfilters import slugify
 from taggit.models import Tag
 
+
+UserModel = get_user_model()
+
 def result(request):
-    """display result of get_books function"""
+    """display result of get_books function located on response.py"""
 
     books = list()
 
@@ -34,8 +38,9 @@ def result(request):
     
 
 def detail(request,book_id):
-    """detail of book"""
+    """detail of book from research function"""
 
+    #prodive all informations of book by GoogleBooksApi function
     if book_id is not None:
         book = Response.response_front(book_id)
         
@@ -54,14 +59,16 @@ def detail(request,book_id):
 
 @login_required(login_url='/users/login/', redirect_field_name='next')
 def save_book(request,book_id):
-    """add book for later"""
+    """add book for later in favorite"""
     
     if request.user.is_authenticated:
         user = get_object_or_404(
-        CustomUser,
+        UserModel,
         id=request.user.id
         )
         book = Response.response_front(book_id)
+
+        #save book with all informations on table Book
         
         Book.objects.add_book(
         book_id,
@@ -74,17 +81,6 @@ def save_book(request,book_id):
         author=book['author'][0]
         )
 
-        Favorite.objects.add_book(
-        book_id,
-        user,
-        title=(book['title'][0]),
-        book_cat=Response.build(book['categorie'][0]),
-        picture=book['picture'][0],
-        picture_detail=book['picture_detail'][0],
-        description=book['description'][0],
-        author=book['author'][0]
-        )
-    
     return redirect("home")
    
 @login_required(login_url='/users/login/?next=/favorite/', redirect_field_name='next')
@@ -100,13 +96,15 @@ def favorite(request):
     return render(request, "favorite.html",context)
 
 def favorite_detail(request,slug):
-    """show book detail in favorite"""
+    """show book detail saved in favorite"""
 
     obj = Book.objects.filter(slug=slug).first()
+    #display comments of book details
     comments=Comment.objects.filter(book=obj).order_by('-pk')
+    #display tags of book details.
     common_tags = Book.tags.most_common()[:4]
     
-
+    #show form comments
     if request.method == 'POST': 
         cf = CommentForm(request.POST or None) 
         if cf.is_valid(): 
@@ -116,14 +114,14 @@ def favorite_detail(request,slug):
             comment.save() 
             return redirect(obj.get_absolute_url()) 
     else: 
-      cf = CommentForm() 
+      cf = CommentForm()
 
+    #show form tags
     form = PostForm(request.POST)
     if form.is_valid():
         newpost = form.save(commit=False)
         newpost.id = obj.id
         newpost.slug = slugify(obj.book_name)
-        # Without this next line the tags won't be saved.
         form.save_m2m()
 
     context ={
@@ -136,19 +134,14 @@ def favorite_detail(request,slug):
     return render(request, 'detail.html', context)
 
 
-
 def tagged(request,slug):
+    """show tags from books"""
 
-    print(slug)
     tag = get_object_or_404(Tag, slug=slug)
-    print(tag)
-    # Filter posts by tag name  
     books = Book.objects.filter(tags=tag)
     
     for book in books:
         book
-    
-    print(books)
 
     context = {
         'tag':tag,
@@ -157,13 +150,10 @@ def tagged(request,slug):
     return render(request, 'favorite.html', context)
 
 
-
 def best_book(request):
-    """show favorite products"""
+    """show best books from category"""
 
     tag_list_music = ['music','musique']
-    
-    username='admin'
 
     b1 = Book.objects.all()[:10]
         
@@ -182,7 +172,7 @@ def best_book(request):
 
 
 def remove_book(request, slug):
-    """remove book"""
+    """remove book from favorite"""
 
     user = CustomUser.objects.get(
         id=request.user.id

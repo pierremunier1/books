@@ -14,6 +14,6 @@ class CustomUser(AbstractUser):
     saved = models.ManyToManyField(
         'read_books.Book',
         through='read_books.Favorite',
-        through_fields=('customuser', 'book_fav'),
+        through_fields=('customuser', 'book_favorites'),
         ) 
     

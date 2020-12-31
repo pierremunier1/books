@@ -67,7 +67,7 @@ Books
 
 	</button><div class="img-wrap">
 		<a href="{% url "favorite" slug=book.slug %}">
-		<img class="imessages-picture" src={{ book.picture_detail }}></img>
+		<img class="picture_detail" src={{ book.picture_detail }}></img>
 		</a>
 		<span class="close">&times;</span>
 		</form>
@@ -104,6 +104,4 @@ for (var i = 0, l = closeBtns.length; i < l; i++) {
  
 {% endblock content%}
 
-{% block social %}
-{% endblock social%}
 </body>
