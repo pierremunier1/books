@@ -161,14 +161,15 @@ def tagged(request,slug):
 def best_book(request):
     """show favorite products"""
 
-    category_name = ('Music')
+    tag_list_music = ['music','musique']
+    
     username='admin'
 
     b1 = Book.objects.all()[:10]
         
-    b2 = Book.objects.all()
+    b2 = Book.objects.filter(ratings__isnull=False).order_by('ratings__average')
 
-    b3 = Book.objects.filter(ratings__isnull=False).order_by('ratings__average')
+    b3 = Book.objects.filter(tags__name__in=tag_list_music)
 
     context={
         'best_books_1': b1,
