@@ -129,7 +129,22 @@ class TestViews(TestCase):
         self.customuser = CustomUser.objects.create_user(
             self.username,self.email, self.password)
         self.customuser.save()
+
+        category = Category.objects.create(category_name='fiction')
+        book_alice = {
+            'google_id':'Y7sOAAAAIAAJ',
+            'slug': 'alice',
+            'book_name': "Alice's Adventures in Wonderland",
+            'author':'Lewis Carroll',
+            'description': 'test',
+            'picture': 'https://test',
+            'picture_detail': 'https://test',
+            'category': Category.objects.get(category_name=category),
+            'customuser': CustomUser.objects.get(username=self.customuser),
         
+        }
+        self.book_alice_obj = Book.objects.create(**book_alice)
+       
 
     result = {
             'picture': "<div><a href=Y7sOAAAAIAAJ><img class=imessages-picture src=http://books.google.com/books/content?id=Y7sOAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api></img></a></div>",'title':"Alice's Adventures in Wonderland"
@@ -169,7 +184,6 @@ class TestViews(TestCase):
             username=self.username, password=self.password)
         self.assertTrue(login)
         response = self.client.get(reverse('save_book',args=[book_id]),follow=True)
-        category = Category.objects.create(category_name="Music")
         self.assertEquals(response.status_code, 200)
         response_1 = self.client.post(f'/book/{book_id}')
         self.assertEquals(response_1.status_code, 302)
@@ -193,20 +207,7 @@ class TestViews(TestCase):
 
         book_id = 'Y7sOAAAAIAAJ'
         response = self.client.post(f'/favorite/{book_id}')
-        category = Category.objects.create(category_name='fiction')
-        book_alice = {
-            'id': 'Y7sOAAAAIAAJ',
-            'book_name': "Alice's Adventures in Wonderland",
-            'author':'Lewis Carroll',
-            'description': 'test',
-            'picture': 'https://test',
-            'picture_detail': 'https://test',
-            'category': Category.objects.get(category_name=category),
-            'customuser': CustomUser.objects.get(username=self.customuser),
-            'score': 0
-        }
-        self.book_alice = Book.objects.create(**book_alice)
-        book = Book.objects.filter(id='Y7sOAAAAIAAJ').first()
+        book = Book.objects.filter(google_id='Y7sOAAAAIAAJ').first()
         self.assertEqual(book.book_name,"Alice's Adventures in Wonderland")
         self.assertTemplateUsed(response,'detail.html')
         
@@ -219,20 +220,9 @@ class TestViews(TestCase):
 
     def test_favorite_remove_book(self):
         """test access to remove book"""
-
-        category = Category.objects.create(category_name='fiction')
-        book_alice = {
-            'id': 'Y7sOAAAAIAAJ',
-            'book_name': "Alice's Adventures in Wonderland",
-            'author':'Lewis Carroll',
-            'description': 'test',
-            'picture': 'https://test',
-            'picture_detail': 'https://test',
-            'category': Category.objects.get(category_name=category),
-            'customuser': CustomUser.objects.get(username=self.customuser),
-            'score': 0
-        }
-        self.book_alice = Book.objects.create(**book_alice)
-        self.client.login(username=self.username, password=self.password)
-        response = self.client.post(f'/remove_book/{self.book_alice.id}/')
+      
+        login = self.client.login(username=self.username, password=self.password)
+        response = self.client.get(reverse('remove_book', kwargs={'slug':self.book_alice_obj.slug}),follow=True)
+        print(response.content)
         self.assertEqual(response.status_code, 302)
+    
