@@ -61,7 +61,7 @@ Books
 	
 	
 	{%for book in books%}
-	<form action="{% url 'remove_book' slug=book.slug%}" id="myform" method="POST">
+	<form action="{% url 'remove_book' book.slug%}" id="myform" method="POST">
 	{% csrf_token %}
 	</button type="submit" id="myform">
 

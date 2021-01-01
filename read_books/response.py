@@ -21,7 +21,7 @@ class GoogleApi:
             'subject:': self.query,
             'inauthor:': self.query,
             'intitle:':self.query,
-            'maxResults':10,
+            'maxResults':1,
             'key': os.environ.get('API_KEY_BACK')}
             
         result = requests.get(

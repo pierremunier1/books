@@ -133,7 +133,7 @@ class TestViews(TestCase):
         category = Category.objects.create(category_name='fiction')
         book_alice = {
             'google_id':'Y7sOAAAAIAAJ',
-            'slug': 'alice',
+            'slug': "alice",
             'book_name': "Alice's Adventures in Wonderland",
             'author':'Lewis Carroll',
             'description': 'test',
@@ -205,10 +205,10 @@ class TestViews(TestCase):
     def test_favorite_detail(self):
         """obtain detail from favorite book"""
 
-        book_id = 'Y7sOAAAAIAAJ'
-        response = self.client.post(f'/favorite/{book_id}')
-        book = Book.objects.filter(google_id='Y7sOAAAAIAAJ').first()
-        self.assertEqual(book.book_name,"Alice's Adventures in Wonderland")
+        
+        response = self.client.get(reverse('favorite',args=[self.book_alice_obj.slug]),follow=True)
+        book = Book.objects.filter(slug=self.book_alice_obj.slug).first()
+        self.assertEqual(book.slug,"alice")
         self.assertTemplateUsed(response,'detail.html')
         
 
@@ -220,9 +220,11 @@ class TestViews(TestCase):
 
     def test_favorite_remove_book(self):
         """test access to remove book"""
-      
+
+        book_id = 'Y7sOAAAAIAAJ'
         login = self.client.login(username=self.username, password=self.password)
-        response = self.client.get(reverse('remove_book', kwargs={'slug':self.book_alice_obj.slug}),follow=True)
-        print(response.content)
-        self.assertEqual(response.status_code, 302)
+        response = self.client.get(reverse('save_book',args=[book_id]),follow=True)
+        response_1 = self.client.get(reverse('remove_book',args=[self.book_alice_obj.slug]),follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response_1.status_code, 200)
     
