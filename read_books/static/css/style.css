@@ -243,9 +243,6 @@ box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
     border-radius: 7px;
     box-shadow:3px 3px 3px rgb(196, 192, 192);
     
-    
-
-    
 }
 
 .picture-book_detail{
@@ -324,7 +321,20 @@ img {
 .img-wrap:hover .close {
   opacity: 1;
 }
- 
+
+.dark-mode {
+    filter: invert(100%);
+}
+button{
+  z-index: 1;
+  right: 0;
+  color:rgb(69, 115, 158);
+}
+
+.custom-switch{
+    padding-bottom: 10pt;
+    color:rgb(69, 115, 158);
+}
 .comment{
 
     border-radius: 3px;

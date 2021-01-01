@@ -58,10 +58,12 @@ Books
 			<button class="btn btn-primary button_home" id="button_design" >Search</button>
 			{% csrf_token %}
 		</div>
+		
 	</form>
 </div>
 <div>
 <a href="{% url "favorite" %}"><i class="far fa-heart fa-2x icon-title"></i></a>
+
 </div>
 
 </div>
@@ -70,9 +72,15 @@ Books
 
 <!--content section-->
 
-<div class="container col-md-12 text-left">
-<div class="margin"></div>
+<div class="container col-md-12 text-left justify-content-right">
+
+
+	<div class="margin"></div>
 	<div class="margin-mid"></div>
+	<div class="custom-control custom-switch">
+  		<input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="myFunction()" check>
+  		<label class="custom-control-label" for="customSwitch1">n/m</label>
+	</div>
 	<div class="imessages-title" id="imessages-title">
 	
 	</div>
@@ -134,7 +142,12 @@ Books
 <script>
 	inputForm();
 </script>
-
+<script>
+function myFunction() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+}
+</script>
 
 {% endblock header %}
 
