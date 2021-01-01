@@ -51,7 +51,6 @@ def detail(request,book_id):
         "book_id":book_id,
         "book_cat":book['categorie'][0],
         "book_author":(book['author'][0]),
-     
     }
     return render(
     request,

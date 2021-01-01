@@ -28,7 +28,6 @@ class GoogleApi:
             'https://www.googleapis.com/books/v1/volumes?',
             params=payload)
         google_books = result.json()
-        
         books_title = []
         books_desc = []
         books_author = []
@@ -77,7 +76,6 @@ class Response:
             'description': books_desc,
             'categorie':books_cat,
             'picture_detail': books_pic_detail
-
             }
 
         return result
