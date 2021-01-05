@@ -26,11 +26,7 @@ body{
    
 }
 
-.title_2{
-    width: 90px;
-    height: 65px;
-    background: url("book_1.png");
-}
+
 .imessages-title{
    
     font-size: 25pt;color: rgb(56, 117, 209);
@@ -99,7 +95,7 @@ body{
 .title_cat{
 
 font-family:Open Sans;
-background:url("wood.jpg");
+background:url("/read_books/static/img/wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
 font-weight: bold;
@@ -110,7 +106,7 @@ box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 .title_cat_home{
 
 font-family:"Open Sans";
-background:url("wood.jpg");
+background:url("/read_books/static/img/wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
 font-weight: bold;
@@ -123,7 +119,7 @@ box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 .title_cat_2{
 
 font-family:"Open Sans";
-background:url("wood.jpg");
+background:url("/read_books/static/img/wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
 font-weight: bold;
