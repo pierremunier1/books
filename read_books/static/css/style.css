@@ -95,7 +95,7 @@ body{
 .title_cat{
 
 font-family:Open Sans;
-background:url("/read_books/static/img/wood.jpg");
+background:url("/static/img/wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
 font-weight: bold;
@@ -106,7 +106,7 @@ box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 .title_cat_home{
 
 font-family:"Open Sans";
-background:url("/read_books/static/img/wood.jpg");
+background:url("/static/img/wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
 font-weight: bold;
@@ -119,7 +119,7 @@ box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 .title_cat_2{
 
 font-family:"Open Sans";
-background:url("/read_books/static/img/wood.jpg");
+background:url("/static/img/wood.jpg");
 padding-left: 12pt;
 font-size: 17pt;
 font-weight: bold;
