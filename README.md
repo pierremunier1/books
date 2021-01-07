@@ -3,7 +3,7 @@
   <img alt="Version" src="https://img.shields.io/badge/version-0.1-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> Suggest to the users the good books by comments and ratings, this app is based on the google books API.
+> Suggest to the users the good books by comments and ratings and give a selection for the others user of this app, this app is based on the google books API.
 
 ## Functionnality
 
@@ -13,7 +13,7 @@
  - Tag book.
  - Comment book.
 
- And give a selection for the others user of this app.
+ 
 
 ## Install
 
