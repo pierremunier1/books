@@ -5,6 +5,16 @@
 
 > Suggest to the users the good books by comments and ratings, this app is based on the google books API.
 
+## Functionnality
+
+ - Search a book in google books library.
+ - Add book in your library.
+ - Rate book.
+ - Tag book.
+ - Comment book.
+
+ And give a selection for the others user of this app.
+
 ## Install
 
 ```sh
