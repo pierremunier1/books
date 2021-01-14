@@ -21,7 +21,7 @@ branch:
     - main
 
 env:
-  - DJANGO_SETTINGS_MODULE="read_books.settings.travis"
+  - DJANGO_SETTINGS_MODULE="books.settings.travis"
 
 services:
   - postgresql
