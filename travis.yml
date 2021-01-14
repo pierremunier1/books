@@ -1,0 +1,30 @@
+dist: bionic
+language: python
+
+python:
+  - '3.8'
+
+addons:
+ 
+  firefox: latest
+
+install:
+  - pip install pipenv
+  - pipenv install --dev
+
+before_script:
+ 
+  - install-webdrivers
+
+branch:
+   only:
+    - dev
+
+env:
+  - DJANGO_SETTINGS_MODULE="settings.travis"
+
+services:
+  - postgresql
+
+script:
+  - python manage.py test read_books
