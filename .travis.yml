@@ -19,10 +19,7 @@ before_script:
 branch:
    only:
     - main
-
-env:
-  - DJANGO_SETTINGS_MODULE="books.settings.travis"
-
+    
 services:
   - postgresql
 
