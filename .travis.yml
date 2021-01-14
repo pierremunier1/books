@@ -18,7 +18,7 @@ before_script:
 
 branch:
    only:
-    - dev
+    - main
 
 env:
   - DJANGO_SETTINGS_MODULE="settings.travis"
