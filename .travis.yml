@@ -16,10 +16,15 @@ before_script:
  
   - install-webdrivers
 
+
 branch:
    only:
     - main
-    
+  
+env:
+  - DJANGO_SETTINGS_MODULE="books.settings.travis"
+
+
 services:
   - postgresql
 
