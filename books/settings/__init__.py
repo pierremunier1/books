@@ -95,23 +95,7 @@ WSGI_APPLICATION = 'books.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-
-if 'TRAVIS' in os.environ:
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'travisci',
-            'USER': 'postgres',
-            'PASSWORD': '',
-            'HOST': 'localhost',
-            'PORT': '',
-        },
-    }
-
-else:
-
-    DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': env('DATABASE_NAME'),
@@ -121,6 +105,8 @@ else:
 
     }
 }
+
+
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
