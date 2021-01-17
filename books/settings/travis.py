@@ -1,7 +1,7 @@
-import os 
 
 
-if 'TRAVIS' in os.environ:
+
+if 'TRAVIS' = True:
 
     DATABASES = {
         'default': {
