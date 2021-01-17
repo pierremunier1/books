@@ -20,7 +20,7 @@ install:
 
 branch:
    only:
-    - main
+    - dev
   
 
 services:
