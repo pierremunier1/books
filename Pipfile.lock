@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c244034eb330864faa4f8d1fd43bda40b75d2e196c2007118478c5d678408fd5"
+            "sha256": "83b4380661c19eb11ac595af9b6de3197ce9f7c72f9947baa3bf51907ac3adf5"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,13 @@
             ],
             "index": "pypi",
             "version": "==3.0.4"
+        },
+        "click": {
+            "hashes": [
+                "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a",
+                "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"
+            ],
+            "version": "==7.1.2"
         },
         "coverage": {
             "hashes": [
@@ -290,6 +297,14 @@
             "index": "pypi",
             "version": "==1.1.2.post1"
         },
+        "tchappui-webdrivers": {
+            "hashes": [
+                "sha256:41c747d1d9f61cdf04b381d39cfec45e2711a4fec79497fa3e82cb4b02b92a18",
+                "sha256:ccc8d5d9619b8ec6fd84e03ba28c6d151166eadd2ece8a23c9d8fb554de88bda"
+            ],
+            "index": "pypi",
+            "version": "==0.3.7"
+        },
         "urllib3": {
             "hashes": [
                 "sha256:8d7eaa5a82a1cac232164990f04874c594c9453ec55eef02eab885aa02fc17a2",
@@ -297,6 +312,14 @@
             ],
             "index": "pypi",
             "version": "==1.25.11"
+        },
+        "whitenoise": {
+            "hashes": [
+                "sha256:05ce0be39ad85740a78750c86a93485c40f08ad8c62a6006de0233765996e5c7",
+                "sha256:05d00198c777028d72d8b0bbd234db605ef6d60e9410125124002518a48e515d"
+            ],
+            "index": "pypi",
+            "version": "==5.2.0"
         }
     },
     "develop": {}
