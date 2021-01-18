@@ -21,6 +21,7 @@ def result(request):
 
     try:
         query = request.POST.get('query')
+        
     
         qs = Response.response_front(query)
 
@@ -43,7 +44,7 @@ def detail(request,book_id):
     #prodive all informations of book by GoogleBooksApi function
     if book_id is not None:
         book = Response.response_front(book_id)
-        
+   
     context = {
         "title":Response.build(book['title'][0]),
         "desc": Response.build(book['description'][0]),
@@ -160,10 +161,16 @@ def best_book(request):
 
     b3 = Book.objects.filter(tags__name__in=tag_list_music)
 
+    b4 = Book.objects.all()[:1]
+    b5 = Book.objects.filter(ratings__isnull=False).order_by('ratings__average')[:1]
+    b6 = Book.objects.filter(tags__name__in=tag_list_music)[:1]
     context={
         'best_books_1': b1,
         'best_books_2': b2,
         'best_books_3': b3,
+        'best_books_4': b4,
+        'best_books_5': b5,
+        'best_books_6': b6,
     }
     return render(
         request, "home.html",context

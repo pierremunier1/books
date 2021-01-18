@@ -54,7 +54,7 @@ Books
 	<form class="input" id="usertext-form"  method='GET'>
 		{% csrf_token %}
 		<div class="input-group input-group">
-			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="Search a book,an author.." aria-describedby="search" autocomplete="off">
+			<input type="text" name="query" class="form-control" onkeydown=myFunc() id="submit" placeholder="stay home and find your favorite book here !" aria-describedby="search" autocomplete="off">
 			<button class="btn btn-primary button_home" id="button_design" >Search</button>
 			{% csrf_token %}
 		</div>
@@ -63,16 +63,17 @@ Books
 </div>
 <div>
 <a href="{% url "favorite" %}"><i class="far fa-heart fa-2x icon-title"></i></a>
-
 </div>
 
 </div>
 </div>
+
 </div>
+
 
 <!--content section-->
 
-<div class="container col-md-12 text-left justify-content-right">
+<div class="container col-md-12 text-left">
 
 
 	<div class="margin"></div>
@@ -83,7 +84,55 @@ Books
 	</div>
 	<div class="imessages-title" id="imessages-title">
 	
-	</div>	
+	</div>
+
+	<div class="title_cat_home"><a>Trends</a></div>
+	<div class="response_box pic pic-l" id="imessages-text">
+	
+	
+
+	<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      {%for best_book_4 in best_books_4%}
+		<div class="picture-book_detail"><img class="picture_detail" src={{ best_book_4.picture_detail }}>
+			</img></a></div><div>{{best_book_4.description|truncatechars:350}}<a href="{% url "favorite" slug=best_book_4.slug %}"> read more</a></div>
+		{% endfor %}
+    </div>
+    <div class="carousel-item">
+   {%for best_book_5 in best_books_5%}
+		<div class="picture-book_detail"><img class="picture_detail" src={{ best_book_5.picture_detail }}>
+			</img></a></div><div>{{best_book_5.description|truncatechars:350}}<a href="{% url "favorite" slug=best_book_5.slug %}"> read more</a></div>
+		{% endfor %}
+    </div>
+    <div class="carousel-item">
+{%for best_book_6 in best_books_6%}
+		<div class="picture-book_detail"><img class="picture_detail" src={{ best_book_6.picture_detail }}>
+			</img></a></div><div>{{best_book_6.description|truncatechars:350}}<a href="{% url "favorite" slug=best_book_6.slug %}"> read more</a></div>
+		{% endfor %}
+    </div>
+  
+</div>
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+	
+	</div>
 	<div class="title_cat_home"><a>New</a></div>
 	<div class="response_box pic pic-l" id="imessages-text">
 	
