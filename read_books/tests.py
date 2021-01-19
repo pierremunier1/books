@@ -69,7 +69,7 @@ class TestGoogleApi(TestCase):
             'subject:': self.query,
             'inauthor:': self.query,
             'intitle:':self.query,
-            'maxResults':1,
+            'maxResults':12,
         })
       
 
